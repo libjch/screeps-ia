@@ -77,7 +77,7 @@ module.exports.loop = function () {
             }
         }
 
-        console.log('-'+creep.name+' '+(creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+creep.memory.number + ' ' +creep.memory.role +' '+creep.carry.energy +'/'+creep.carryCapacity +' '+creep.pos );
+        logger.log('-'+creep.name+' '+(creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+creep.memory.number + ' ' +creep.memory.role +' '+creep.carry.energy +'/'+creep.carryCapacity +' '+creep.pos ,2);
 
         //run roles
         try{
