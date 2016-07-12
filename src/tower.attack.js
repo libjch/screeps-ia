@@ -60,7 +60,8 @@ module.exports = {
                 return;
             }else{
 
-                for(var creep of Game.creeps) {
+                for(var i of Game.creeps) {
+                    var creep = Game.creeps[i];
                     if (creep.my && creep.hits < creep.hitsMax && creep.room.name == tower.room.name) {
                         tower.heal(creep);
                     }
