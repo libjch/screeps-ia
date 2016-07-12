@@ -1,4 +1,5 @@
 var constants = require('global.variables');
+var direction = require('direction.util');
 
 
 var roleHarvester = {
@@ -6,12 +7,12 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        if(creep.room.name == constants.rooms().main){
+        /*if(creep.room.name == constants.rooms().main){
             //Detect if must add road here
-            if(creep.room.createConstructionSite(creep.pos.x,creep.pos.y, STRUCTURE_ROAD) == 0){
+            /if(creep.room.createConstructionSite(creep.pos.x,creep.pos.y, STRUCTURE_ROAD) == 0){
                 console.log('Added road');
             }
-        }
+        }*/
 
         if(creep.memory.harvesting && creep.carry.energy == 0) {
             creep.memory.harvesting = false;
@@ -85,10 +86,7 @@ var roleHarvester = {
             });
             var target = targets[0];
 
-//var containers = creep.pos.findInRange(FIND_STRUCTURES, 1, {filter: {structureType: STRUCTURE_CONTAINER}});
-//containers[0].transfer(creep, RESOURCE_ENERGY);
-
-            console.log(target);
+            console.log('Container targers:'+ target);
             if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
