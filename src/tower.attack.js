@@ -57,8 +57,17 @@ module.exports = {
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {
                 tower.attack(closestHostile);
+                return;
             }else{
+
+                for(var creep of Game.creeps) {
+                    if (creep.my && creep.hits < creep.hitsMax && creep.room.name == tower.room.name) {
+                        tower.heal(creep);
+                    }
+                }
+
                 repair(tower);
+                return;
             }
 
         }
