@@ -1,5 +1,6 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
+var logger = require('logger');
 
 
 var roleHarvester = {
@@ -79,14 +80,18 @@ var roleHarvester = {
             }
         }
         else{
+            logger.log("Not harvesting",1);
+
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 50)
                 }
             });
+            logger.log("Targets: "+targets,1);
+
             var target = targets[0];
 
-            console.log('Container targers:'+ target);
+            console.log('Target target:'+ target);
             if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
