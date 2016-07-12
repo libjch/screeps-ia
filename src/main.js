@@ -22,6 +22,7 @@ module.exports.loop = function () {
 
     }
 
+
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
@@ -29,8 +30,6 @@ module.exports.loop = function () {
     }
     spawnDecider.spawn();
     towerAttack.attack();
-
-    var count = 0;
 
     var creeps = [];
 
@@ -42,10 +41,9 @@ module.exports.loop = function () {
         if(a.memory.role < b.memory.role) return -1;
         if(a.memory.role > b.memory.role) return 1;
         return 0;
-    })
+    });
 
     for(let creep of creeps) {
-        var roles = ['harvester','builder','upgrader','repairer'];
 
         //pickup dropped enery;
         if (creep.carry.energy < creep.carryCapacity)
@@ -110,4 +108,4 @@ module.exports.loop = function () {
     }
 
     recorder.record();
-}
+};

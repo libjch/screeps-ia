@@ -83,7 +83,7 @@ var roleHarvester = {
                     return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 50)
                 }
             });
-            target = targets[0];
+            var target = targets[0];
 
 //var containers = creep.pos.findInRange(FIND_STRUCTURES, 1, {filter: {structureType: STRUCTURE_CONTAINER}});
 //containers[0].transfer(creep, RESOURCE_ENERGY);

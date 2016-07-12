@@ -108,7 +108,7 @@ function run (creep) {
 }
 
 function containsEnnemyStructure(creep){
-    targets = creep.room.find(FIND_STRUCTURES, {
+    var targets = creep.room.find(FIND_STRUCTURES, {
         filter: function(object) {
             if (object.my) {
                 return false;
