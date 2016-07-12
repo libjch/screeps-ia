@@ -16,7 +16,7 @@ function record() {
     }
 
     for(var room of rooms){
-        console.log(roomName+' '+Game.rooms[roomName]);
+        //console.log(roomName+' '+Game.rooms[roomName]);
         if(room){
             Memory.stats["room." + room.name + ".energyAvailable"] = room.energyAvailable;
             Memory.stats["room." + room.name + ".energyCapacityAvailable"] = room.energyCapacityAvailable;
