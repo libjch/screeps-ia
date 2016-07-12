@@ -16,7 +16,7 @@ var roadPlanner = require('road.planner');
 var logger = require('logger');
 
 module.exports.loop = function () {
-    logger.highlightz('========== NEW TURN ============',1);
+    logger.highlight('========== NEW TURN ============',1);
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
     if(Game.time % 100 == 0){
 
