@@ -16,7 +16,7 @@ var roadPlanner = require('road.planner');
 var logger = require('logger');
 
 module.exports.loop = function () {
-    logger.log('========== NEW TURN ============',1);
+    logger.highlightz('========== NEW TURN ============',1);
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
     if(Game.time % 100 == 0){
 
@@ -44,7 +44,7 @@ module.exports.loop = function () {
         return 0;
     })
 
-    for(var creep of creeps) {
+    for(let creep of creeps) {
         var roles = ['harvester','builder','upgrader','repairer'];
 
         //pickup dropped enery;
@@ -77,7 +77,7 @@ module.exports.loop = function () {
             }
         }
 
-        logger.log('-'+creep.name+' '+(creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+creep.memory.number + ' ' +creep.memory.role +' '+creep.carry.energy +'/'+creep.carryCapacity +' '+creep.pos ,2);
+        logger.log('-'+creep.name+' '+(creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+creep.memory.number + ' ' +creep.memory.role +' '+creep.carry.energy +'/'+creep.carryCapacity +' '+creep.pos ,4);
 
         //run roles
         try{

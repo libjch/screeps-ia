@@ -39,12 +39,12 @@ var roleUpgrader = {
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.externRoom]);
             }else{
                 var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
-            if(creep.harvest(sources[creep.memory.number % sources.length]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[creep.memory.number % sources.length]);
+                if(creep.harvest(sources[creep.memory.number % sources.length]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(sources[creep.memory.number % sources.length]);
+                }
             }
         }
     }
-}
 };
 
 module.exports = roleUpgrader;
