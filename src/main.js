@@ -13,9 +13,10 @@ var constants = require('global.variables');
 var recorder = require('stats.record');
 
 var roadPlanner = require('road.planner');
+var logger = require('logger');
 
 module.exports.loop = function () {
-    console.log('========== NEW TURN  3============');
+    logger.log('========== NEW TURN ============',1);
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
     if(Game.time % 100 == 0){
 
