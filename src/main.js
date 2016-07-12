@@ -15,7 +15,7 @@ var recorder = require('stats.record');
 var roadPlanner = require('road.planner');
 
 module.exports.loop = function () {
-    console.log('========== NEW TURN ============');
+    console.log('========== NEW TURN  3============');
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
     if(Game.time % 100 == 0){
 
