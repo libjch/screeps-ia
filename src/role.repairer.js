@@ -15,28 +15,33 @@ function contains(list, obj) {
     return false;
 }
 
-function repairRoads(creep){
+function repairRoads(creep,filterTops){
     var targets = [];
     var targetRoads = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return (structure.structureType == STRUCTURE_ROAD && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
         }
     });
-    var topRoads = getSortedKeys(Memory.roadPlaces);
 
-    /*for(var i = 0; i< topRoads.length ; i+=100){
-     console.log(i+' '+Memory.roadPlaces[topRoads[i]]);
-     }*/
-    if(topRoads.length > 400){
-        topRoads = topRoads.slice(0,400);
-    }
+    if(filterTops) {
+        var topRoads = getSortedKeys(Memory.roadPlaces);
 
-
-    for(var target of targetRoads){
-        var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
-        if(contains(topRoads,place)){
-            targets.push(target);
+        /*for(var i = 0; i< topRoads.length ; i+=100){
+         console.log(i+' '+Memory.roadPlaces[topRoads[i]]);
+         }*/
+        if (topRoads.length > 400) {
+            topRoads = topRoads.slice(0, 400);
         }
+
+
+        for (var target of targetRoads) {
+            var place = target.room.name + '-' + target.pos.x + '-' + target.pos.y;
+            if (contains(topRoads, place)) {
+                targets.push(target);
+            }
+        }
+    }else{
+        targets = targetRoads;
     }
 
     if(targets.length != 0){
@@ -95,7 +100,7 @@ var roleRepairer = {
 
                 if(targets.length == 0){
                     //2 fix top roads with less than 50%
-                    if(!repairRoads(creep)){
+                    if(!repairRoads(creep,true)){
                         //3 Fix structures according to priority and hitpoints %
                         targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
@@ -138,7 +143,7 @@ var roleRepairer = {
                 }
             }else{
                 //NOT in current room
-                if(!repairRoads(creep)){
+                if(!repairRoads(creep,false)){
                     direction.moveToRoom(creep,constants.rooms().main);
                 }
             }
