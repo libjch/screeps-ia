@@ -1,5 +1,8 @@
 var constants = require('global.variables');
 var directionUtil = require('direction.util');
+var logger = require('logger');
+
+
 
 module.exports = {
     run: run
@@ -93,12 +96,13 @@ function findEnemy (creep) {
 
 function run (creep) {
     var target = undefined;
-    if(creep.room.name == constants.rooms().main){
+    if(creep.room.name == constants.rooms().main);
         target = findEnemyCreep(creep);
         if(!target){
             var exitDir = creep.room.findExitTo(constants.rooms().targets[0]);
             var exit = creep.pos.findClosestByRange(exitDir);
-            console.log(creep.moveTo(exit));
+            creep.moveTo(exit);
+            logger.log("No creep main room");
             return;
         }
     }
@@ -107,25 +111,30 @@ function run (creep) {
         if(!target){
             var exitDir = creep.room.findExitTo(constants.rooms().targets[1]);
             var exit = creep.pos.findClosestByRange(exitDir);
-            console.log(creep.moveTo(exit));
+            logger.log("No creep interm room");
+            creep.moveTo(exit);
             return;
         }
     }
     if(creep.room.name == constants.rooms().targets[1]){
         target = findEnemyStructure(creep);
+        logger.log("Enemy structure: "+target,1);
         if(!target){
             target = findEnemyCreep(creep);
+            logger.log("Enemy creep: "+target,1);
         }
         if(!target){
             target = findWall(creep);
+            logger.log("Enemy wall: "+target,1);
         }
     }
+    logger.log("Target : "+target,2);
 
     if (!creep.pos.isNearTo(target)) {
-        creep.moveTo(target);
-        creep.attack(target);
+        logger.log("Move "+creep.moveTo(target),1);
+        logger.log("Attack "+creep.attack(target),1);
     } else {
-        creep.attack(target);
+        logger.log("Atack "+creep.attack(target),1);
     }
 }
 
