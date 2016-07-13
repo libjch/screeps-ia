@@ -8,13 +8,6 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        /*if(creep.room.name == constants.rooms().main){
-         //Detect if must add road here
-         //var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;
-         if(creep.room.createConstructionSite(creep.pos.x,creep.pos.y, STRUCTURE_ROAD) == 0){
-         console.log('Added road');
-         }
-         }*/
 
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
@@ -25,7 +18,7 @@ var roleUpgrader = {
         }
 
         if(creep.memory.upgrading) {
-            if(creep.room.name == 'E42S38'){
+            if(creep.room.controller.my){
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
                 }
