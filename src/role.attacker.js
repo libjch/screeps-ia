@@ -96,7 +96,7 @@ function findEnemy (creep) {
 
 function run (creep) {
     var target = undefined;
-    if(creep.room.name == constants.rooms().main);
+    if(creep.room.name == constants.rooms().main){
         target = findEnemyCreep(creep);
         if(!target){
             var exitDir = creep.room.findExitTo(constants.rooms().targets[0]);
