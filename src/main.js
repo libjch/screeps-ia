@@ -59,12 +59,14 @@ module.exports.loop = function () {
         //}
 
         if(creep.memory.extern){
-            if(creep.memory.number % 4 <= 1){
+            if(creep.memory.number % 4 < 1){
                 creep.memory.externRoom = 0;
-            }else if(creep.memory.number % 4 == 2){
+            }else if(creep.memory.number % 4 < 2){
                 creep.memory.externRoom = 1;
-            }else if(creep.memory.number % 4 == 3){
+            }else if(creep.memory.number % 4 < 3){
                 creep.memory.externRoom = 2;
+            }else if(creep.memory.number % 4 < 4){
+                creep.memory.externRoom = 3;
             }
         }else{
             var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;

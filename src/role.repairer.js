@@ -73,7 +73,7 @@ var roleRepairer = {
 
         if(creep.memory.repairing) {
             //1 Fix strucures with less than 10k
-            if(creep.room.name == constants.rooms().main){
+            if(creep.room.controller && creep.room.controller.my){
                 if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0){
                     creep.moveTo(30+(creep.memory.number%15),6);
                     return;

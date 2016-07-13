@@ -22,7 +22,7 @@ var roleBuilder = {
 
         if(creep.memory.building) {
 
-            if(creep.room.name == constants.rooms().main){
+            if(creep.room.controller && creep.room.controller.my){
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES,{filter: (constructionSite) => { return constructionSite.my > 0}});
                 var priorities = {tower:1,extension:2,constructedWall:3,rampart:4,road:5,container:6};
 
