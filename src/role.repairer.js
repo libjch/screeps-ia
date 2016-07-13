@@ -81,13 +81,17 @@ var roleRepairer = {
 
                 if(creep.memory.lastRepairId){
                     var target = Game.getObjectById(creep.memory.lastRepairId);
-                    if(target && target.hits < target.hitsMax){
-                        if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                            creep.memory.lastRepairId = undefined;
-                        }else{
-                            console.log('Continue repairing : '+target);
-                            return ;
+                    if(target){
+                        if(target && target.hits < target.hitsMax){
+                            if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                                creep.memory.lastRepairId = undefined;
+                            }else{
+                                console.log('Continue repairing : '+target);
+                                return ;
+                            }
                         }
+                    }else{
+                        creep.memory.lastRepairId = undefined;
                     }
 
                 }
