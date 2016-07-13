@@ -7,7 +7,6 @@ module.exports = {
 function record() {
     var room = Game.rooms[constants.rooms().main];
 
-    Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
 
     var rooms = [];
     rooms.push(room);
@@ -18,6 +17,9 @@ function record() {
     for(var room of rooms){
         //console.log(roomName+' '+Game.rooms[roomName]);
         if(room){
+            if(room.controller.my){
+                Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
+            }
             Memory.stats["room." + room.name + ".energyAvailable"] = room.energyAvailable;
             Memory.stats["room." + room.name + ".energyCapacityAvailable"] = room.energyCapacityAvailable;
 
