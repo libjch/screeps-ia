@@ -54,49 +54,39 @@ function run (creep) {
             return;
         }
     }
-    if(target == undefined){
-        target = findEnemy(creep);
-        console.log('a '+target);
-    }
 
     if(!target){
-        if(false && creep.room.controller && !creep.room.controller.my) {
-            console.log('b '+creep.attackController(creep.room.controller))
-            if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
+        if(containsEnnemyStructure(creep)){
+            target = findWall(creep);
+            if (!target) {
+                return false;
             }
-        }
-        else{
-            if(containsEnnemyStructure(creep)){
-                target = findWall(creep);
+            // getDirectionTo
+            if (!creep.pos.isNearTo(target)) {
+                return creep.moveTo(target);
+            } else {
+                creep.attack(target);
+            }
+            var direction = creep.pos.getDirectionTo(target);
+            creep.memory.wallDirection = direction;
+            return true;
+        }else if(target == undefined){
+            target = findEnemy(creep);
+            console.log('a '+target);
+        }else {
+            console.log('no structure');
 
-                if (!target) {
-                    return false;
-                }
-                // getDirectionTo
-                if (!creep.pos.isNearTo(target)) {
-                    return creep.moveTo(target);
-                } else {
-                    creep.attack(target);
-                }
-                var direction = creep.pos.getDirectionTo(target);
-                creep.memory.wallDirection = direction;
-                return true;
-            }else{
-                console.log('no structure');
+            target = findWall(creep);
 
-                target = findWall(creep);
-
-                if (!target) {
-                    directionUtil.moveToRoom(creep,constants.rooms().targets[0]);
-                    return;
-                }
-                // getDirectionTo
-                if (!creep.pos.isNearTo(target)) {
-                    return creep.moveTo(target);
-                } else {
-                    creep.attack(target);
-                }
+            if (!target) {
+                directionUtil.moveToRoom(creep,constants.rooms().targets[0]);
+                return;
+            }
+            // getDirectionTo
+            if (!creep.pos.isNearTo(target)) {
+                return creep.moveTo(target);
+            } else {
+                creep.attack(target);
             }
         }
     } else {
