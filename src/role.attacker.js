@@ -116,6 +116,7 @@ function run (creep) {
             return;
         }
     }
+    logger.log(creep.room.name+" "+constants.rooms().targets[1]);
     if(creep.room.name == constants.rooms().targets[1]){
         logger.log("Target room",1);
         target = findEnemyStructure(creep);
