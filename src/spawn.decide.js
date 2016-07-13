@@ -38,6 +38,7 @@ module.exports = {
 
         var role = undefined;
         var extern = false;
+        var roomnumber = undefined;
         if(harvesters.length < 2) {
             role = 'harvester';
         }else if(harvestersOut.length < 4){ //+2
@@ -57,6 +58,7 @@ module.exports = {
             extern = true;
         }else if(buildersOut.length < 1){ //+1
             role = 'builder';
+            roomnumber = 0;
             extern = true;
         }else if(repairersOut.length < 2) { //+1
             role = 'repairer';
@@ -130,7 +132,7 @@ module.exports = {
                 }
             }
             var number = Memory.global_id;
-            var res =  Game.spawns.Spawn1.createCreep(body, undefined, {role: role, extern: extern ,number:number});
+            var res =  Game.spawns.Spawn1.createCreep(body, undefined, {role: role, extern: extern ,number:number, roomnumber: roomnumber});
             if(_.isString(res)){
                 console.log(res);
                 Memory.global_id = number+1;

@@ -57,6 +57,9 @@ module.exports.loop = function () {
         //if(creep.ticksToLive < 300){
         //    creep.memory.extern = false;
         //}
+        if(creep.memory.roomnumber){
+            creep.memory.externRoom = creep.memory.roomnumber;
+        }
 
         if(creep.memory.extern){
             if(creep.memory.number % 4 < 1){
