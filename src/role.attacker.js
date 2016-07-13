@@ -2,7 +2,6 @@ var constants = require('global.variables');
 var directionUtil = require('direction.util');
 
 module.exports = {
-    findEnemy: findEnemy,
     run: run
 };
 
