@@ -6,20 +6,6 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        //logger.warn(constants.rooms().others);
-        //logger.warn(constants.rooms().others[creep.memory.mainroom]);
-        //logger.warn((constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
-
-
-
-
-        /*if(creep.room.name == constants.rooms().main){
-         //Detect if must add road here
-         if(creep.room.createConstructionSite(creep.pos.x,creep.pos.y, STRUCTURE_ROAD) == 0){
-         console.log('Added road');
-         }
-         }*/
-
         if(creep.memory.harvesting && creep.carry.energy == 0) {
             creep.memory.harvesting = false;
         }
@@ -27,8 +13,9 @@ var roleHarvester = {
             creep.memory.harvesting = true;
         }
         if(creep.memory.harvesting) {
-
+            logger.info('Harvseting');
             if(creep.room.controller.my){
+
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
