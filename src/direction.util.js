@@ -7,6 +7,8 @@ module.exports = {
 
 
 function moveToRoom(creep,targetRoom){
+    logger.info('Move from '+creep.room.name+' to '+targetRoom);
+
     var targetPos = undefined;
     if(creep.room.name == 'E42S38'){
         if(targetRoom == 'E43S38'){
