@@ -105,12 +105,13 @@ module.exports = {
                     }
                 }
                 else  {
+                    body.push(WORK);
+                    body.push(WORK);
+                    maxEnergy = maxEnergy - 100;
+
                     var number = Math.floor(maxEnergy / 200);
 
-                    body.push(WORK);
-                    body.push(WORK);
 
-                    number -= 100;
                     var rest = maxEnergy % 200;
                     for (var i = 0; i < number; i++) {
                         body.push(WORK);
