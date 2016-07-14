@@ -107,7 +107,7 @@ module.exports = {
                 else  {
                     body.push(WORK);
                     body.push(WORK);
-                    maxEnergy = maxEnergy - 100;
+                    maxEnergy = maxEnergy - 200;
 
                     var number = Math.floor(maxEnergy / 200);
 
