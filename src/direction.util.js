@@ -43,7 +43,7 @@ function moveToRoom(creep,targetRoom){
     if(targetPos != undefined){
         logger.debug('Change room '+creep.moveTo(targetPos)+' '+targetPos+' from '+creep.room.name);
     }else{
-        var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.externRoom]);
+        var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
         var exit = creep.pos.findClosestByPath(exitDir);
         logger.debug('Change room other: '+ creep.moveTo(exit)+' '+targetPos+' from '+creep.room.name);
     }

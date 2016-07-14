@@ -12,8 +12,10 @@ function record() {
     for(var roomName of constants.rooms().main){
         rooms.push(Game.rooms[roomName]);
     }
-    for(var roomName of constants.rooms().others){
-        rooms.push(Game.rooms[roomName]);
+    for(var group of constants.rooms().others){
+        for(var roomName of constants.rooms().others[group]){
+            rooms.push(Game.rooms[roomName]);
+        }
     }
 
     for(var room of rooms){
