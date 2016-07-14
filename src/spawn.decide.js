@@ -129,8 +129,6 @@ module.exports = {
                 }
                 var number = Memory.global_id;
 
-                room.sp
-
                 var res = spawn.createCreep(body, undefined, {
                     role: role,
                     extern: extern,
