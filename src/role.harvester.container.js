@@ -89,6 +89,10 @@ var roleHarvester = {
             });
             logger.log("Targets: "+targets,1);
 
+            targets.sort(function(a,b){
+                return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
+            });
+
             var target = targets[0];
 
             console.log('Target target:'+ target);
