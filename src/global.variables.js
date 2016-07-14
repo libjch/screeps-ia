@@ -13,7 +13,7 @@ var truc = {
         data['main'] = ['E42S38','E43S38'];
         data['others'] = {};
         (data['others'])['E42S38'] = ['E41S38','E42S39'];
-        (data['others'])['E43S38'] = ['E43S37'];
+        (data['others'])['E43S38'] = ['E43S37','E44S38'];
         data['targets'] =['E43S38','E43S37'];
         data['attacker'] = false;
         return data;

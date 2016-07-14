@@ -25,6 +25,8 @@ function moveToRoom(creep,targetRoom){
             targetPos = creep.room.getPositionAt(0,16);
         }else if(targetRoom = 'E43S37'){
             targetPos = creep.room.getPositionAt(31,0);
+        }else if(targetRoom = 'E44S38'){
+            targetPos = creep.room.getPositionAt(49,30);
         }
     }else if(creep.room.name == 'E41S38'){
         if(targetRoom == 'E42S38'){
@@ -39,6 +41,16 @@ function moveToRoom(creep,targetRoom){
             targetPos = creep.room.getPositionAt(31,49);
         }else if(targetRoom = 'E43S38'){
             targetPos = creep.room.getPositionAt(31,49);
+        }else if(targetRoom = 'E44S38'){
+            targetPos = creep.room.getPositionAt(31,49);
+        }
+    }else if(creep.room.name == 'E44S38'){
+        if(targetRoom == 'E42S38'){
+            targetPos = creep.room.getPositionAt(0,30);
+        }else if(targetRoom = 'E43S38'){
+            targetPos = creep.room.getPositionAt(0,30);
+        }else if(targetRoom = 'E43S37'){
+            targetPos = creep.room.getPositionAt(0,30);
         }
     }
     console.log(targetPos+' '+creep.room.name+' '+targetRoom);
