@@ -84,7 +84,7 @@ module.exports = {
                 extern = true;
             }
 
-            console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + maxEnergy);
+
             //MOVE 50
             //WORK 100
             //CARRY 50
@@ -129,6 +129,8 @@ module.exports = {
                     }
                 }
                 var number = Memory.global_id;
+
+                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + maxEnergy+" "+body);
 
                 var res = spawn.createCreep(body, undefined, {
                     role: role,
