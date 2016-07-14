@@ -30,7 +30,7 @@ function log(message, severity = 3) {
     console.log('<font color="' + this.colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 
-function highlightfunction (message) {
+function highlight (message) {
     console.log('<font color="' + this.colors['highlight'] + '" type="highlight">' + message + "</font>")
 }
 
