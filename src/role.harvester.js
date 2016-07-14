@@ -67,6 +67,10 @@ var roleHarvester = {
                         if(creep.room.name != creep.memory.mainroom){
                             direction.moveToRoom(creep,creep.memory.mainroom);
                         }else{
+                            if(creep.room.name == 'E43S38'){
+                                creep.memory.role = 'builder';
+                            }
+
                             console.log('c '+creep.moveTo(30+creep.memory.number % 11,6));
                         }
 
