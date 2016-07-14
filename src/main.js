@@ -34,6 +34,10 @@ module.exports.loop = function () {
     }
 
     creeps.sort(function(a, b){
+        if(a.memory.mainroom < b.memory.mainroom) return -1;
+        if(a.memory.mainroom > b.memory.mainroom) return 1;
+
+
         if(a.memory.role < b.memory.role) return -1;
         if(a.memory.role > b.memory.role) return 1;
         return 0;
