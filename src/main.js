@@ -69,15 +69,9 @@ module.exports.loop = function () {
         }
 
         if(creep.memory.extern){
-            if(creep.memory.number % 3 < 1){
-                creep.memory.externRoom = 0;
-            }else if(creep.memory.number % 3 < 2){
-                creep.memory.externRoom = 1;
-            }else if(creep.memory.number % 3 < 3){
-                creep.memory.externRoom = 2;
-            }else if(creep.memory.number % 3 < 4){
-                creep.memory.externRoom = 3;
-            }
+            var otherRooms = constants.rooms().others[creep.memory.mainroom];
+            var x = creep.memory.number % otherRooms.length;
+            creep.memory.externRoom = x;
         }
 
         logger.warn('-'+creep.name+' '+creep.memory.mainroom+' '+
