@@ -8,7 +8,7 @@ var ExampleLogger = {
     highlight: highlight
 }
 
-ExampleLogger.colors = {
+var colors = {
     '5': '#ff0066',
     '4': '#e65c00',
     '3': '#809fff',
@@ -27,11 +27,11 @@ function log(message, severity = 3) {
         severity = 3
     }
 
-    console.log('<font color="' + this.colors[severity] + '" severity="' + severity + '">' + message + "</font>")
+    console.log('<font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 
 function highlight (message) {
-    console.log('<font color="' + this.colors['highlight'] + '" type="highlight">' + message + "</font>")
+    console.log('<font color="' + colors['highlight'] + '" type="highlight">' + message + "</font>")
 }
 
 function info(message){
