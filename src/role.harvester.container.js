@@ -23,7 +23,7 @@ var roleHarvester = {
         }
         if(creep.memory.harvesting) {
 
-            if(creep.room.name == constants.rooms().main){
+            if(creep.room.name == creep.memory.mainroom){
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||

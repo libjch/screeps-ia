@@ -1,5 +1,6 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
+var logger = require('logger');
 
 function getSortedKeys(obj) {
     var keys = []; for(var key in obj) keys.push(key);
@@ -116,17 +117,24 @@ var roleRepairer = {
 
                         targets.sort(function(a,b){
                             return (priorities[a.structureType] * (a.hits + 200 * creep.pos.getRangeTo(a))) - (priorities[b.structureType] * (b.hits + 200 * creep.pos.getRangeTo(b)));
-                        })
-                        var target = targets[0];
-                        console.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target));
+                        });
 
-                        if(creep.pos.x == 49){
-                            creep.moveTo(30+creep.memory.number,6);
-                        }
-                        else if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                            creep.moveTo(target);
+
+                        var target = targets[0];
+
+                        if(target){
+                            console.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target));
+
+                            if(creep.pos.x == 49){
+                                creep.moveTo(30+creep.memory.number,6);
+                            }
+                            else if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                                creep.moveTo(target);
+                            }else{
+                                creep.memory.lastRepairId = target.id;
+                            }
                         }else{
-                            creep.memory.lastRepairId = target.id;
+                            logger.debug('No target');
                         }
                     }
                 }else{
@@ -148,13 +156,13 @@ var roleRepairer = {
             }else{
                 //NOT in current room
                 if(!repairRoads(creep,false)){
-                    direction.moveToRoom(creep,constants.rooms().main);
+                    direction.moveToRoom(creep,creep.memory.mainroom);
                 }
             }
         }
         else {
             //console.log(constants.rooms().others[creep.memory.externRoom]);
-            if(creep.memory.extern && creep.room.name == constants.rooms().main){
+            if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.externRoom]);
             }else{
                 var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});

@@ -18,10 +18,6 @@ var logger = require('logger');
 module.exports.loop = function () {
     logger.highlight('========== NEW TURN ============',1);
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
-    if(Game.time % 100 == 0){
-
-    }
-
 
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
@@ -61,31 +57,34 @@ module.exports.loop = function () {
             creep.memory.externRoom = creep.memory.roomnumber;
         }
 
-        if(creep.memory.extern){
-            if(creep.memory.number % 4 < 1){
-                creep.memory.externRoom = 0;
-            }else if(creep.memory.number % 4 < 2){
-                creep.memory.externRoom = 1;
-            }else if(creep.memory.number % 4 < 3){
-                creep.memory.externRoom = 2;
-            }else if(creep.memory.number % 4 < 4){
-                creep.memory.externRoom = 3;
-            }
+        var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;
+        if(!Memory.roadPlaces[place]){
+            Memory.roadPlaces[place]=1;
         }else{
-            var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;
-            if(!Memory.roadPlaces[place]){
-                Memory.roadPlaces[place]=1;
-            }else{
-                Memory.roadPlaces[place] = Memory.roadPlaces[place]+1;
+            Memory.roadPlaces[place] = Memory.roadPlaces[place]+1;
+        }
+
+        if(creep.memory.extern){
+            if(creep.memory.number % 3 < 1){
+                creep.memory.externRoom = 0;
+            }else if(creep.memory.number % 3 < 2){
+                creep.memory.externRoom = 1;
+            }else if(creep.memory.number % 3 < 3){
+                creep.memory.externRoom = 2;
+            }else if(creep.memory.number % 3 < 4){
+                creep.memory.externRoom = 3;
             }
         }
 
-        logger.log('-'+creep.name+' '+(creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+creep.memory.number + ' ' +creep.memory.role +' '+creep.carry.energy +'/'+creep.carryCapacity +' '+creep.pos ,4);
+        logger.warn('-'+creep.name+' '+creep.memory.mainroom+' '+
+            (creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+
+            creep.memory.number + ' ' +
+            creep.memory.role +' '+
+            creep.carry.energy +'/'+creep.carryCapacity +' ' +
+            creep.pos);
 
         //run roles
         try{
-
-
             if(creep.memory.role == 'harvester') {
                 roleHarvester.run(creep);
             }
@@ -108,7 +107,9 @@ module.exports.loop = function () {
                 roleClaimer.run(creep);
             }
         }catch(e){
-            console.log("ERROR "+e)
+            logger.error('         ')
+            logger.error("ERROR  "+e);
+            logger.error('         ')
         }
     }
 

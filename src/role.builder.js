@@ -22,7 +22,7 @@ var roleBuilder = {
 
         if(creep.memory.building) {
 
-            if(creep.room.controller && creep.room.controller.my){
+            if(creep.room.name == creep.memory.mainroom){
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES,{filter: (constructionSite) => { return constructionSite.my > 0}});
                 var priorities = {tower:1,extension:2,constructedWall:3,rampart:4,road:5,container:6};
 
@@ -77,12 +77,12 @@ var roleBuilder = {
                 }else{
                     //NOT in current room
                     console.log('get back')
-                    direction.moveToRoom(creep,constants.rooms().main);
+                    direction.moveToRoom(creep,creep.memory.mainroom);
                 }
             }
         }
         else {
-            if(creep.memory.extern && creep.room.name == constants.rooms().main){
+            if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.externRoom]);
             }else{
                 var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});

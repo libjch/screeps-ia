@@ -5,11 +5,13 @@ module.exports = {
 };
 
 function record() {
-    var room = Game.rooms[constants.rooms().main];
-
+    //var room = Game.rooms[constants.rooms().main];
 
     var rooms = [];
-    rooms.push(room);
+
+    for(var roomName of constants.rooms().main){
+        rooms.push(Game.rooms[roomName]);
+    }
     for(var roomName of constants.rooms().others){
         rooms.push(Game.rooms[roomName]);
     }

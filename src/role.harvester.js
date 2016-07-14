@@ -21,7 +21,7 @@ var roleHarvester = {
         }
         if(creep.memory.harvesting) {
 
-            if(creep.room.name == constants.rooms().main){
+            if(creep.room.controller.my){
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -69,17 +69,22 @@ var roleHarvester = {
                             console.log('b '+creep.moveTo(targets[0]));
                         }
                     }else{
-                        console.log('c '+creep.moveTo(30+creep.memory.number,6));
+                        if(creep.room.name != creep.memory.mainroom){
+                            direction.moveToRoom(creep,creep.memory.mainroom);
+                        }else{
+                            console.log('c '+creep.moveTo(30+creep.memory.number,6));
+                        }
+
                     }
                 }
             }
             else{
                 //NOT in current room
-                direction.moveToRoom(creep,constants.rooms().main);
+                direction.moveToRoom(creep,creep.memory.mainroom);
             }
         }
         else{ //NOT harvesting
-            if(creep.memory.extern && creep.room.name == constants.rooms().main){
+            if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.externRoom]);
             }else{
                 var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
