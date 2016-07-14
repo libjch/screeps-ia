@@ -8,7 +8,7 @@ var roleHarvester = {
     run: function(creep) {
         logger.warn(constants.rooms().others);
         logger.warn(constants.rooms().others[creep.memory.mainroom]);
-        logger.warn(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+        logger.warn((constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
 
 
 
