@@ -1,10 +1,16 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
+var logger = require('logger');
 
 var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+
+        logger.warn(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+        logger.warn(constants.rooms().others[creep.memory.mainroom]);
+        logger.warn(constants.rooms().others);
+
 
         /*if(creep.room.name == constants.rooms().main){
          //Detect if must add road here
@@ -29,7 +35,7 @@ var roleHarvester = {
                             structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                     }
                 });
-                var priorities = {tower:1,extension:2,spawn:2,rempart:3,container:4};
+                var priorities = {tower:1,extension:2,spawn:2,container:4};
 
                 targets.sort(function(a,b){
                     var pA = priorities[a.structureType];
