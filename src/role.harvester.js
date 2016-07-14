@@ -35,6 +35,7 @@ var roleHarvester = {
                     }
                 });
 
+                logger.info('Targets '+targets);
 
                 if(targets.length > 0) {
                     console.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ creep.pos);
