@@ -8,7 +8,7 @@
  */
 
 var truc = {
-    rooms: function(){return  {main:['E42S38','E43S38'],others:{ E42S39:['E41S38','E42S39'], E43S38:['E43S37']},targets:['E43S38','E43S37'],attacker:false};
+    rooms: function(){return  {main:['E42S38','E43S38'],others:{'E42S39':['E41S38','E42S39'],'E43S38':['E43S37']},targets:['E43S38','E43S37'],attacker:false};
     }
 };
 
