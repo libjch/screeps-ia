@@ -67,7 +67,7 @@ var roleHarvester = {
                         if(creep.room.name != creep.memory.mainroom){
                             direction.moveToRoom(creep,creep.memory.mainroom);
                         }else{
-                            console.log('c '+creep.moveTo(30+creep.memory.number,6));
+                            console.log('c '+creep.moveTo(30+creep.memory.number % 11,6));
                         }
 
                     }
