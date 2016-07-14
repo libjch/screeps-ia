@@ -8,7 +8,7 @@
  */
 
 var truc = {
-    rooms: function(){return
+    rooms: function(){
         var data ={};
         data['main'] = ['E42S38','E43S38'];
         data['others'] = {};
