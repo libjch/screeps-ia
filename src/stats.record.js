@@ -24,7 +24,7 @@ function record() {
             if(room.controller.my){
                 Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
                 var roomCreeps = _.filter(Game.creeps, (creep) => creep.memory.mainroom == room.name);
-                Memory.stats["room." + room.name + ".creeps.countstats creeps per room"] = roomCreeps.length;
+                Memory.stats["room." + room.name + ".creeps.count"] = roomCreeps.length;
             }
             Memory.stats["room." + room.name + ".energyAvailable"] = room.energyAvailable;
             Memory.stats["room." + room.name + ".energyCapacityAvailable"] = room.energyCapacityAvailable;
