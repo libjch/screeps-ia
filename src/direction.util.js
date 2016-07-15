@@ -68,17 +68,18 @@ function findSourceInRoom(creep){
     logger.info("FindSourceInRange");
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
 
+    if(sources.length){
+        var sourceNumber = creep.memory.number % sources.length;
+        var source = sources[sourceNumber];
 
-    var sourceNumber = creep.memory.number % sources.length;
-    var source = sources[sourceNumber];
+        logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length);
+        if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
+            sourceNumber = (sourceNumber + 1) % sources.length;
+        }
 
-    logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length);
-    if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
-        sourceNumber = (sourceNumber + 1) % sources.length;
-    }
-
-    //console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
-    if(creep.harvest(sources[sourceNumber]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[sourceNumber]);
+        //console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
+        if(creep.harvest(sources[sourceNumber]) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(sources[sourceNumber]);
+        }
     }
 }
