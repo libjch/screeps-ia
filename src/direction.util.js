@@ -68,10 +68,11 @@ function findSourceInRoom(creep){
     logger.info("FindSourceInRange");
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
 
+
     var sourceNumber = creep.memory.number % sources.length;
     var source = sources[sourceNumber];
 
-    logger.debug('SourceNumber: '+sourceNumber+' '+source+' '+sources);
+    logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length);
     if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
         sourceNumber = (sourceNumber + 1) % sources.length;
     }
