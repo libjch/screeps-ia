@@ -65,6 +65,7 @@ function moveToRoom(creep,targetRoom){
 }
 
 function findSourceInRoom(creep){
+    logger.info("FindSourceInRange");
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
 
     var sourceNumber = creep.memory.number % sources.length;
