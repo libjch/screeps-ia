@@ -154,7 +154,9 @@ module.exports = {
                 if (extern) {
                     var usage = [];
                     for (let i in constants.rooms().others[roomName].length) {
-                        usage.push(_.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i).length);
+                        var numbers = _.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i);
+                        logger.debug(i+' '+numbers.length);
+                        usage.push(numbers.length);
                     }
 
                     var min = 99;
