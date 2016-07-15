@@ -153,9 +153,8 @@ module.exports = {
                 var externRoomNumber = undefined;
                 if (extern) {
                     var usage = [];
-                    for (let i in constants.rooms().others[roomName].length) {
+                    for (let i in constants.rooms().others[roomName]) {
                         var numbers = _.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i);
-                        logger.debug(i+' '+numbers.length);
                         usage.push(numbers.length);
                     }
 
