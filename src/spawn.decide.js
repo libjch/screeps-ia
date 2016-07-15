@@ -16,7 +16,7 @@ module.exports = {
             var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.mainroom == roomName);
             var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true && creep.memory.mainroom == roomName);
 
-            var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == false && creep.memory.mainroom == roomName);
+            var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader'  || creep.memory.role == 'upgrader.c') && creep.memory.extern == false && creep.memory.mainroom == roomName);
             var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true && creep.memory.mainroom == roomName);
 
 
@@ -32,7 +32,20 @@ module.exports = {
                 'Repairers:' + repairers.length + ' (' + repairersOut.length + ')  ' +
                 'Attackers: ' + attackers.length);
 
-            var room = Game.rooms[roomName];
+
+            var totalEnergyStored = 0;
+            var maxEnergyStored = 0;
+
+            var containers = room.find(FIND_STRUCTURES, {
+                filter: { structureType: STRUCTURE_CONTAINER }
+            });
+            for(let container of containers){
+                totalEnergyStored += container.store[RESOURCE_ENERGY];
+                maxEnergyStored += container.storeCapacity;
+            }
+
+            console.log('Spawn has '+extensions.length+' extensions available');
+
             var energy = room.energyAvailable;
             var maxEnergy = room.energyCapacityAvailable;
 
@@ -47,7 +60,12 @@ module.exports = {
             var extern = false;
             var roomnumber = undefined;
             if (harvesters.length < 2) {
-                role = 'harvester';
+                if (totalEnergyStored > maxEnergyStored * 0.5){
+                    role = 'harvester.c';
+                }else{
+
+                    role = 'harvester';
+                }
             } else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
@@ -57,6 +75,8 @@ module.exports = {
                 role = 'repairer';
             } else if (upgraders.length < 1) {
                 role = 'upgrader';
+            } else if (totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
+                role = 'upgrader.c';
             } else if (constants.rooms().attacker && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;

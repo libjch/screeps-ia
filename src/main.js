@@ -1,6 +1,7 @@
 var roleHarvester = require('role.harvester');
 var roleHarvesterContainer = require('role.harvester.container');
 var roleUpgrader = require('role.upgrader');
+var roleUpgraderContainer = require('role.upgrader.container');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attacker');
@@ -96,6 +97,9 @@ module.exports.loop = function () {
             }
             else if(role == 'upgrader') {
                 roleUpgrader.run(creep);
+            }
+            else if(role == 'upgrader.c') {
+                roleUpgraderContainer.run(creep);
             }
             else if(role == 'builder') {
                 roleBuilder.run(creep);
