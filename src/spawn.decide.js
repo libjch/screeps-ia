@@ -97,7 +97,7 @@ module.exports = {
             } else if (buildersOut.length < 0) { //+3
                 role = 'builder';
                 extern = true;
-            } else if (upgradersOut.length < 0) { //+3
+            } else if (upgradersOut.length < 4) { //+3
                 role = 'upgrader';
                 extern = true;
             }
