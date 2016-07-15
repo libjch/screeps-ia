@@ -122,7 +122,7 @@ module.exports = {
                         body.push(MOVE);
                     }
                 }
-                else  {
+                else {
                     body.push(WORK);
                     body.push(WORK);
                     maxEnergy = maxEnergy - 200;
@@ -148,6 +148,28 @@ module.exports = {
                 }
                 var number = Memory.global_id;
 
+
+                //get least used extern room
+                var externRoomNumber = undefined;
+                if (extern) {
+                    var usage = [];
+                    for (let i in constants.rooms().others[creep.memory.mainroom].length) {
+                        usage.push(_.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i).length);
+                    }
+
+                    var min = 99;
+                    var minI = 0;
+                    for (let i in usage) {
+                        if (usage[i] < min) {
+                            min = usage[i];
+                            minI = i;
+                        }
+                    }
+
+                    logger.log("externRoomChoice: "+minI+" of "+usage);
+                    externRoomNumber = minI;
+                }
+
                 console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable+" "+body);
 
                 var res = spawn.createCreep(body, undefined, {
@@ -155,7 +177,8 @@ module.exports = {
                     extern: extern,
                     number: number,
                     roomnumber: roomnumber,
-                    mainroom: roomName
+                    mainroom: roomName,
+                    externRoom: externRoomNumber
                 });
                 if (_.isString(res)) {
                     logger.log(res);

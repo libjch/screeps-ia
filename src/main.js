@@ -71,11 +71,11 @@ module.exports.loop = function () {
             Memory.roadPlaces[place] = Memory.roadPlaces[place]+1;
         }
 
-        if(creep.memory.extern && !creep.memory.externRoom ){
+        /*if(creep.memory.extern && !creep.memory.externRoom ){
             var otherRooms = constants.rooms().others[creep.memory.mainroom];
             var x = creep.memory.number % otherRooms.length;
             creep.memory.externRoom = x;
-        }
+        }*/
 
         logger.warn('-'+creep.name+' '+creep.memory.mainroom+' '+
             (creep.memory.extern?'(E '+creep.memory.externRoom+') ' : '')+
