@@ -69,7 +69,7 @@ function findSourceInRoom(creep){
 
     var sourceNumber = creep.memory.number % sources.length;
     var source = sources[sourceNumber];
-    if(source.energy < source.energyCapacity * 0.2  && source.pos.getRangeTo(creep.pos) > 4){
+    if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
         sourceNumber = (sourceNumber + 1) % sources.length;
     }
 
