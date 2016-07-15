@@ -13,14 +13,14 @@ var roleBuilder = {
          }*/
 
 
-        if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
+        if(creep.memory.working && creep.carry.energy == 0) {
+            creep.memory.working = false;
         }
-        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.building = true;
+        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.working = true;
         }
 
-        if(creep.memory.building) {
+        if(creep.memory.working) {
 
             if(creep.room.name == creep.memory.mainroom){
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES,{filter: (constructionSite) => { return constructionSite.my > 0}});

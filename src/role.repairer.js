@@ -65,14 +65,14 @@ function repairRoads(creep,filterTops){
 
 var roleRepairer = {
     run: function(creep) {
-        if(creep.memory.repairing && creep.carry.energy == 0) {
-            creep.memory.repairing = false;
+        if(creep.memory.working && creep.carry.energy == 0) {
+            creep.memory.working = false;
         }
-        if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.repairing = true;
+        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.working = true;
         }
 
-        if(creep.memory.repairing) {
+        if(creep.memory.working) {
             //1 Fix strucures with less than 10k
             if(creep.room.controller && creep.room.controller.my){
                 if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0){

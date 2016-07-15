@@ -44,6 +44,8 @@ module.exports.loop = function () {
         return 0;
     });
 
+
+
     for(let creep of creeps) {
 
         //pickup dropped enery;
@@ -69,7 +71,7 @@ module.exports.loop = function () {
             Memory.roadPlaces[place] = Memory.roadPlaces[place]+1;
         }
 
-        if(creep.memory.extern){
+        if(creep.memory.extern && !creep.memory.externRoom ){
             var otherRooms = constants.rooms().others[creep.memory.mainroom];
             var x = creep.memory.number % otherRooms.length;
             creep.memory.externRoom = x;

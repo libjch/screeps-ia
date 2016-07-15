@@ -9,15 +9,15 @@ var roleUpgrader = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
-            creep.memory.upgrading = false;
+        if(creep.memory.working && creep.carry.energy == 0) {
+            creep.memory.working = false;
         }
         console.log("Upgrading: "+creep.carry.energy == creep.carryCapacity+" "+creep.carry.energy +"/"+creep.carryCapacity)
-        if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.upgrading = true;
+        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.working = true;
         }
 
-        if(creep.memory.upgrading) {
+        if(creep.memory.working) {
             if(creep.room.controller.my){
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
