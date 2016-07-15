@@ -83,25 +83,30 @@ module.exports.loop = function () {
 
         //run roles
         try{
-            if(creep.memory.role == 'harvester') {
+            var role = creep.memory.role;
+            if(creep.memory.role_override){
+                role = creep.memory.role_override;
+            }
+
+            if(role == 'harvester') {
                 roleHarvester.run(creep);
             }
-            else if(creep.memory.role == 'harvester.c') {
+            else if(role == 'harvester.c') {
                 roleHarvesterContainer.run(creep);
             }
-            else if(creep.memory.role == 'upgrader') {
+            else if(role == 'upgrader') {
                 roleUpgrader.run(creep);
             }
-            else if(creep.memory.role == 'builder') {
+            else if(role == 'builder') {
                 roleBuilder.run(creep);
             }
-            else if(creep.memory.role == 'repairer') {
+            else if(role == 'repairer') {
                 roleRepairer.run(creep);
             }
-            else if(creep.memory.role == 'attacker') {
+            else if(role == 'attacker') {
                 roleAttacker.run(creep);
             }
-            else if(creep.memory.role == 'claimer') {
+            else if(role == 'claimer') {
                 roleClaimer.run(creep);
             }
         }catch(e){
