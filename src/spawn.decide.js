@@ -54,6 +54,9 @@ module.exports = {
                 maxEnergy = 500;
             }
 
+            var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
+
+
             var role = undefined;
             var extern = false;
             var roomnumber = undefined;
@@ -67,7 +70,7 @@ module.exports = {
             } else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
-            } else if (builders.length < 1) {
+            } else if (builders.length < 1 && constructionsSites.length>0) {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
@@ -83,12 +86,11 @@ module.exports = {
                 extern = true;
             } else if (buildersOut.length < 1) { //+1
                 role = 'builder';
-                roomnumber = 0;
                 extern = true;
             } else if (repairersOut.length < 1) { //+1
                 role = 'repairer';
                 extern = true;
-            } else if (harvestersOut.length < 0) { //+2
+            } else if (harvestersOut.length < 3) { //+2
                 role = 'harvester';
                 extern = true;
             } else if (upgradersOut.length < 2) { //+4
