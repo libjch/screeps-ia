@@ -85,14 +85,9 @@ var roleHarvester = {
         else{ //NOT harvesting
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 logger.info(creep.memory.mainroom+" "+creep.memory.externRoom+" "+(constants.rooms().others[creep.memory.mainroom])+" "+(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
-
                 direction.moveToRoom(creep,(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
             }else{
-                var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
-                console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
-                if(creep.harvest(sources[creep.memory.number % sources.length]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(sources[creep.memory.number % sources.length]);
-                }
+                direction.findSourceInRoom(creep);
             }
         }
     }
