@@ -44,8 +44,6 @@ module.exports = {
                 maxEnergyStored += container.storeCapacity;
             }
 
-            console.log('Spawn has '+extensions.length+' extensions available');
-
             var energy = room.energyAvailable;
             var maxEnergy = room.energyCapacityAvailable;
 
