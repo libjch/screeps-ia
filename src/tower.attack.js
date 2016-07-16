@@ -65,7 +65,7 @@ module.exports = {
             }
         }
 
-
+        logger.log('Towers : '+towers);
         for(var tower of towers){
             logger.warn('Tower : '+tower.pos);
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
