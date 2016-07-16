@@ -71,7 +71,7 @@ module.exports = {
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {
                 tower.attack(closestHostile);
-                return;
+                //return;
             }else{
 
                 for(var i in Game.creeps) {
@@ -83,7 +83,7 @@ module.exports = {
                 }
 
                 repair(tower);
-                return;
+                //return;
             }
 
         }
