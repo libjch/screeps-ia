@@ -55,7 +55,8 @@ module.exports = {
     attack(){
         var towers = [];
 
-        for(let room of constants.rooms().main){
+        for(let roomName of constants.rooms().main){
+            var room = Game.rooms[roomName];
             var ts = room.find(FIND_STRUCTURES, {
                 filter: (s) => s.structureType == STRUCTURE_TOWER
             });
