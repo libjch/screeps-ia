@@ -40,7 +40,7 @@ function repair(tower){
 
     for(var target of targetRoads){
         var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
-        if(contains(topRoads,place)){
+        if(target.room.name != 'E42S38' || contains(topRoads,place)){
             targets.push(target);
         }
     }
