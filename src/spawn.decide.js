@@ -70,7 +70,7 @@ module.exports = {
             } else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
-            } else if (builders.length < 1 && constructionsSites.length>0) {
+            } else if (constructionsSites.length / 4 > builders.length) {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
