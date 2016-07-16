@@ -1,3 +1,6 @@
+var constants = require('global.variables');
+var logger = require('logger');
+
 /*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';
@@ -50,9 +53,18 @@ function repair(tower){
 
 module.exports = {
     attack(){
-        var towers = Game.spawns.Spawn1.room.find(FIND_STRUCTURES, {
-            filter: (s) => s.structureType == STRUCTURE_TOWER
-        });
+        var towers = [];
+
+        for(let room of constants.rooms().main){
+            var ts = room.find(FIND_STRUCTURES, {
+                filter: (s) => s.structureType == STRUCTURE_TOWER
+            });
+            for(let t of ts){
+                towers.push(t);
+            }
+        }
+
+
         for(var tower of towers){
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {
