@@ -29,20 +29,20 @@ function repair(tower){
             return (structure.structureType == STRUCTURE_ROAD && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.2));
         }
     });
-    var topRoads = getSortedKeys(Memory.roadPlaces);
-    if(topRoads.length > 200){
-        topRoads = topRoads.slice(0,200);
-    }
-    /*var i =0;
-     for(var t of topRoads){
-     console.log(i++ + ' '+t+' '+Memory.roadPlaces[t]);
-     }*/
 
-    for(var target of targetRoads){
-        var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
-        if(target.room.name != 'E42S38' || contains(topRoads,place)){
-            targets.push(target);
+    if(tower.room.name == 'E42S38'){
+        var topRoads = getSortedKeys(Memory.roadPlaces);
+        if(topRoads.length > 200){
+            topRoads = topRoads.slice(0,200);
         }
+        for(var target of targetRoads){
+            var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
+            if(target.room.name != 'E42S38' || contains(topRoads,place)){
+                targets.push(target);
+            }
+        }
+    }else{
+        targets = targetRoads;
     }
 
     if(targets.length){
@@ -67,6 +67,7 @@ module.exports = {
 
 
         for(var tower of towers){
+            logger.warn('Tower : '+tower.pos);
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {
                 tower.attack(closestHostile);
