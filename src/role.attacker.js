@@ -107,12 +107,12 @@ function run (creep) {
         }
     }
 
-    for(var targetI in constants.rooms().targets_path){
-        if(targetI < constants.rooms().targets_path.length - 1){
-            if(creep.room.name = constants.rooms().targets_path[targetI]){
-                var exitDir = creep.room.findExitTo(constants.rooms().targets_path[targetI+1]);
+    for (var i = 0; i < constants.rooms().targets_path.length; i++) {
+        if(i < constants.rooms().targets_path.length - 1){
+            if(creep.room.name = constants.rooms().targets_path[i]){
+                var exitDir = creep.room.findExitTo(constants.rooms().targets_path[i+1]);
                 var exit = creep.pos.findClosestByRange(exitDir);
-                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+constants.rooms().targets_path[targetI+1]+' '+(targetI+1));
+                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1));
                 return;
             }
         }else{
