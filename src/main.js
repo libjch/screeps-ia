@@ -96,13 +96,13 @@ module.exports.loop = function () {
             if(role == 'harvester') {
                 roleHarvester.run(creep);
             }
-            else if(role == 'harvester.c') {
+            else if(role == 'harvester-c' || role == 'harvester.c') {
                 roleHarvesterContainer.run(creep);
             }
             else if(role == 'upgrader') {
                 roleUpgrader.run(creep);
             }
-            else if(role == 'upgrader.c') {
+            else if(role == 'upgrader-c' || role == 'upgrader.c') {
                 roleUpgraderContainer.run(creep);
             }
             else if(role == 'builder') {
