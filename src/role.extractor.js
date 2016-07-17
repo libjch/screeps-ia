@@ -77,7 +77,7 @@ var roleExtractor = {
 
         for(var roomName in Game.rooms){
             var room = Game.rooms[roomName];
-            if(room.controller.my){
+            if(room.controller && room.controller.my){
                 var sources = room.find(FIND_SOURCES);
                 for(let source of sources) {
                     if (!Memory.extractors[source.id]) {
