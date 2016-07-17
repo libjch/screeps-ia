@@ -44,6 +44,8 @@ function moveToRoom(creep,targetRoom){
             targetPos = creep.room.getPositionAt(31,49);
         }else if(targetRoom == 'E44S38'){
             targetPos = creep.room.getPositionAt(31,49);
+        }else if(targetRoom == 'E44S37'){
+            targetPos = creep.room.getPositionAt(49,31);
         }
     }else if(creep.room.name == 'E44S38'){
         if(targetRoom == 'E42S38'){

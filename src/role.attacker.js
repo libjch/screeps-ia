@@ -110,14 +110,12 @@ function run (creep) {
     for (var i = 0; i < constants.rooms().targets_path.length; i++) {
         if(i < constants.rooms().targets_path.length - 1){
             if(creep.room.name = constants.rooms().targets_path[i]){
-                var exitDir = creep.room.findExitTo(constants.rooms().targets_path[i+1]);
-                var exit = creep.pos.findClosestByRange(exitDir);
+                directionUtil.moveToRoom(creep,constants.rooms().targets_path[i+1]);
                 logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1));
                 return;
             }
         }else{
-            var exitDir = creep.room.findExitTo(constants.rooms().targets_final);
-            var exit = creep.pos.findClosestByRange(exitDir);
+            directionUtil.moveToRoom(creep,constants.rooms().targets_final);
             logger.debug('move exit last '+creep.moveTo(exit));
             return;
         }
