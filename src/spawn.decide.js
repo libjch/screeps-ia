@@ -80,7 +80,7 @@ module.exports = {
                 role = 'repairer';
             } else if (upgraders.length < 2) {
                 role = 'upgrader';
-            } else if (false && totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
+            } else if (totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
