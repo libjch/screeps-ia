@@ -71,6 +71,8 @@ function findSourceInRoom(creep){
         var sources = creep.room.find(FIND_SOURCES);
 
         for(let source of sources){
+            logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep);
+
             if(!Memory.extractors[source.id]){
                 logger.error('Unknow source: '+source.id);
             }
