@@ -61,7 +61,7 @@ module.exports = {
             var extern = false;
             var roomnumber = undefined;
             if (harvesters.length < 2) {
-                if (totalEnergyStored > maxEnergyStored * 0.5){
+                if (false && totalEnergyStored > maxEnergyStored * 0.5){
                     role = 'harvester-c';
                 }else{
 
@@ -76,7 +76,7 @@ module.exports = {
                 role = 'repairer';
             } else if (upgraders.length < 1) {
                 role = 'upgrader';
-            } else if (totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
+            } else if (false && totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (constants.rooms().attacker && attackers.length < 1) {
                 role = 'attacker';
