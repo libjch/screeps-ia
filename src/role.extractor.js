@@ -12,7 +12,7 @@ var roleExtractor = {
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
-        if(creep.memory.working) {
+        if(creep.memory.working && creep.memory.extractor ) {
             //Transfer to closest container
 
 
@@ -42,7 +42,6 @@ var roleExtractor = {
                     if(sources.length){
                         var source = sources[0];
                         Memory.extractors[source.id].creep = creep.id;
-
                         creep.memory.extractor.sourceId = source.id;
 
                         logger.error("Container id "+Memory.extractors[source.id].container);
