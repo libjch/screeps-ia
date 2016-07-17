@@ -61,7 +61,7 @@ module.exports = {
             var role = undefined;
             var extern = false;
             var roomnumber = undefined;
-            if (harvesters.length < 2) {
+            if (harvesters.length < 1) {
                 if (false && totalEnergyStored > maxEnergyStored * 0.5){
                     role = 'harvester-c';
                 }else{
@@ -74,7 +74,7 @@ module.exports = {
             else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
-            }else if (constructionsSites.length / 4 > builders.length) {
+            }else if (constructionsSites.length / 8 > builders.length) {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
