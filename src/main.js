@@ -6,6 +6,7 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attacker');
 var roleClaimer = require('role.claimer');
+var roleExtractor = require('role.extractor');
 
 var spawnDecider = require('spawn.decide');
 var towerAttack = require('tower.attack');
@@ -27,6 +28,7 @@ module.exports.loop = function () {
     }
     spawnDecider.spawn();
     towerAttack.attack();
+    roleExtractor.cleanExtractors();
 
     var creeps = [];
 
