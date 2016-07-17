@@ -79,7 +79,7 @@ module.exports = {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
-            } else if (upgraders.length < 1) {
+            } else if (upgraders.length < 2) {
                 role = 'upgrader';
             } else if (false && totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
                 role = 'upgrader-c';
