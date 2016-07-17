@@ -103,4 +103,4 @@ var roleExtractor = {
     }
 };
 
-mmodule.exports = roleExtractor;
+module.exports = roleExtractor;
