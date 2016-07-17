@@ -191,7 +191,7 @@ module.exports = {
                     externRoomNumber = minI;
                 }
 
-                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable+" "+body);
+                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable);
 
                 var res = spawn.createCreep(body, role +'-'+number, {
                     role: role,
