@@ -118,11 +118,15 @@ module.exports = {
                     var number = Math.floor(maxEnergy / 200);
                     var rest = maxEnergy % 200;
                     for (var i = 0; i < number; i++) {
+                        body.push(TOUGH);
+                        body.push(TOUGH);
+                    }
+                    for (var i = 0; i < number; i++) {
                         body.push(MOVE);
                         body.push(MOVE);
+                    }
+                    for (var i = 0; i < number; i++) {
                         body.push(ATTACK);
-                        body.push(TOUGH);
-                        body.push(TOUGH);
                     }
                     if (rest >= 150) {
                         body.push(MOVE);
