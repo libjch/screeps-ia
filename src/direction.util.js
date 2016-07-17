@@ -82,7 +82,7 @@ function findSourceInRoom(creep){
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
-                if(container.energy > creep.carryCapacity){
+                if(container.store[RESOURCE_ENERGY] > creep.carryCapacity){
                     if(container.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(container);
                     }
