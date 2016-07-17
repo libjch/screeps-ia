@@ -70,6 +70,9 @@ function findSourceInRoom(creep){
     if(creep.room.controller.my){
         var sources = creep.room.find(FIND_SOURCES);
 
+        var targetContainer = undefined;
+        var targetContainerScore = 0;
+
         for(let source of sources){
             logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep);
 
@@ -82,13 +85,18 @@ function findSourceInRoom(creep){
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
-                if(container.store[RESOURCE_ENERGY] > creep.carryCapacity){
-                    if(container.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(container);
-                    }
-                    return;
+                var score = container.store[RESOURCE_ENERGY] - 10 * creep.pos.getRangeTo(container);
+                if(score > targetContainerScore){
+                    score = targetContainerScore;
+                    targetContainer = container;
                 }
             }
+        }
+        if(targetContainer){
+            if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(targetContainer);
+            }
+            return;
         }
     }
     logger.info('No sources from exractor');
