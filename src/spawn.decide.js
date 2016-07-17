@@ -31,7 +31,7 @@ module.exports = {
                 'Builders:' + builders.length + ' (' + buildersOut.length + ')  ' +
                 'Upgraders:' + upgraders.length + ' (' + upgradersOut.length + ')  ' +
                 'Repairers:' + repairers.length + ' (' + repairersOut.length + ')  ' +
-                'Attackers: ' + attackers.length);
+                'Attackers: ' + attackers.length+'  Extractors: '+extractors.length);
 
 
             var totalEnergyStored = 0;
