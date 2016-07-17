@@ -79,7 +79,7 @@ function findSourceInRoom(creep){
             if(!Memory.extractors[source.id]){
                 logger.error('Unknow source: '+source.id);
             }
-            else if(Memory.extractors[source.id].creep){
+            else if(Memory.extractors[source.id].container){
                 //
                 logger.info('Source with extractor found: '+Memory.extractors[source.id].container)
                 //get resource from container:
