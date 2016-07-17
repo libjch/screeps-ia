@@ -86,6 +86,7 @@ var roleRepairer = {
                         if(target && target.hits < target.hitsMax){
                             if(creep.repair(target) == ERR_NOT_IN_RANGE){
                                 creep.memory.lastRepairId = undefined;
+                                logger.warn('Repair not in range');
                             }else{
                                 console.log('Continue repairing : '+target);
                                 return ;
