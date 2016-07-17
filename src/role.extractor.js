@@ -41,9 +41,12 @@ var roleExtractor = {
                     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return Memory.extractors[source.id].creep == undefined}});
                     if(sources.length){
                         var source = sources[0];
-                        Memory.extractors[source.id] = creep.id;
+                        Memory.extractors[source.id].creep = creep.id;
 
                         creep.memory.extractor.sourceId = source.id;
+
+                        logger.error("Container id "+Memory.extractors[source.id].container);
+
                         creep.memory.extractor.containerId = Memory.extractors[source.id].container;
 
                         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
