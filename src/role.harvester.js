@@ -20,7 +20,8 @@ var roleHarvester = {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN ||
-                            structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+                            structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity &&
+                            (structure.structureType != STRUCTURE_TOWER || structure.energy < structure.energyCapacity*0.8);
                     }
                 });
                 var priorities = {tower:1,extension:2,spawn:2,container:4};
