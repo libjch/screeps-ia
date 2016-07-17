@@ -78,10 +78,12 @@ module.exports = {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
+            } else if (upgraders.length < 1) {
+                role = 'upgrader';
+            } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
+                role = 'upgrader-c';
             } else if (upgraders.length < 2) {
                 role = 'upgrader';
-            } else if (totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
-                role = 'upgrader-c';
             } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
