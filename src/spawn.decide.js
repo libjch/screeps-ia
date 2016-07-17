@@ -82,7 +82,7 @@ module.exports = {
                 role = 'upgrader';
             } else if (false && totalEnergyStored > maxEnergyStored * 0.5 && upgraders.length < 2){
                 role = 'upgrader-c';
-            } else if (constants.rooms().attacker && attackers.length < 1) {
+            } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
             } else if (harvestersOut.length < 2) { //+2
