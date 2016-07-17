@@ -18,6 +18,7 @@ var roleExtractor = {
 
             if(creep.room.controller.my) {
                 var target = Game.getObjectById(creep.memory.extractor.containerId);
+                logger.debug('Container : '+target);
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos);
                 }
