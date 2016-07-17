@@ -88,7 +88,7 @@ function findSourceInRoom(creep){
                 var score = container.store[RESOURCE_ENERGY] - 10 * creep.pos.getRangeTo(container);
                 //logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+creep.pos.getRangeTo(container));
                 if(score > targetContainerScore){
-                    score = targetContainerScore;
+                    targetContainerScore = score;
                     targetContainer = container;
                 }
             }
