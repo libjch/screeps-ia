@@ -53,6 +53,7 @@ var roleHarvester = {
                             return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] < structure.storeCapacity)
                         }
                     });
+
                     targets.sort(function(a,b){
                         return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
                     });
