@@ -25,6 +25,7 @@ module.exports = {
 
             var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.mainroom == roomName);
 
+            var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractors') && creep.memory.extern == false && creep.memory.mainroom == roomName);
 
             logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' (' + harvestersOut.length + ') ' +
                 'Builders:' + builders.length + ' (' + buildersOut.length + ')  ' +
@@ -67,9 +68,13 @@ module.exports = {
 
                     role = 'harvester';
                 }
-            } else if (harvestersOut.length < 2) { //+2
+            }
+
+            else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
+            } else if(extractors.length < 2 && roomName =='E43S38'){
+                role = 'extractor';
             } else if (constructionsSites.length / 4 > builders.length) {
                 role = 'builder';
             } else if (repairers.length < 1) {
@@ -121,6 +126,19 @@ module.exports = {
                         body.push(TOUGH);
                     }
                     if (rest >= 150) {
+                        body.push(MOVE);
+                    }
+                }else  if (role == 'extractor') {
+                    body.push(CARRY);
+                    body.push(CARRY);
+                    body.push(MOVE);
+                    maxEnergy = maxEnergy - 150;
+                    var number = Math.floor(maxEnergy / 100);
+                    var rest = maxEnergy % 100;
+                    for (var i = 0; i < number; i++) {
+                        body.push(WORK);
+                    }
+                    if (rest >= 50) {
                         body.push(MOVE);
                     }
                 }
