@@ -116,6 +116,8 @@ module.exports.loop = function () {
             }
             else if(role == 'claimer') {
                 roleClaimer.run(creep);
+            }else if(role == 'extractor'){
+                roleExtractor.run(creep);
             }
         }catch(e){
             logger.error('         ')
