@@ -20,7 +20,7 @@ function repairRoads(creep,filterTops){
     var targets = [];
     var targetRoads = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-            return (structure.structureType == STRUCTURE_ROAD && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
+            return ((structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_CONTAINER)  && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
         }
     });
 
@@ -75,14 +75,14 @@ var roleRepairer = {
         if(creep.memory.working) {
             //1 Fix strucures with less than 10k
             if(creep.room.controller && creep.room.controller.my){
-                if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0){
+                if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.x ==49){
                     creep.moveTo(30+(creep.memory.number%15),6);
                     return;
                 }
 
                 if(creep.memory.lastRepairId){
                     var target = Game.getObjectById(creep.memory.lastRepairId);
-                    if(target){
+                    if(target && target.room.name == creep.room.name){
                         if(target && target.hits < target.hitsMax){
                             if(creep.repair(target) == ERR_NOT_IN_RANGE){
                                 creep.memory.lastRepairId = undefined;
@@ -137,7 +137,7 @@ var roleRepairer = {
                             logger.debug('No target');
                         }
                     }
-                }else{
+                }else{ //repair targets
                     targets.sort(function(a,b){
                         return (a.hits  + 200 * creep.pos.getRangeTo(a)) - (b.hits + 200 * creep.pos.getRangeTo(b));
                     })
@@ -145,9 +145,7 @@ var roleRepairer = {
                     var target = targets[0];
                     console.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target));
 
-                    if(creep.pos.x == 49){
-                        creep.moveTo(30+creep.memory.number,6);
-                    }else if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                    if(creep.repair(target) == ERR_NOT_IN_RANGE){
                         creep.moveTo(target);
                     }else{
                         creep.memory.lastRepairId = target.id;
