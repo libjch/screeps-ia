@@ -73,29 +73,30 @@ var roleRepairer = {
         }
 
         if(creep.memory.working) {
+            //0 continue repair
+            if(creep.memory.lastRepairId){
+                var target = Game.getObjectById(creep.memory.lastRepairId);
+                if(target && target.room.name == creep.room.name){
+                    if(target && target.hits < target.hitsMax){
+                        if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                            creep.memory.lastRepairId = undefined;
+                            logger.warn('Repair not in range');
+                        }else{
+                            console.log('Continue repairing : '+target);
+                            return ;
+                        }
+                    }
+                }else{
+                    creep.memory.lastRepairId = undefined;
+                }
+            }
+
+
             //1 Fix strucures with less than 10k
             if(creep.room.controller && creep.room.controller.my){
                 if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.x ==49){
                     creep.moveTo(30+(creep.memory.number%15),6);
                     return;
-                }
-
-                if(creep.memory.lastRepairId){
-                    var target = Game.getObjectById(creep.memory.lastRepairId);
-                    if(target && target.room.name == creep.room.name){
-                        if(target && target.hits < target.hitsMax){
-                            if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                                creep.memory.lastRepairId = undefined;
-                                logger.warn('Repair not in range');
-                            }else{
-                                console.log('Continue repairing : '+target);
-                                return ;
-                            }
-                        }
-                    }else{
-                        creep.memory.lastRepairId = undefined;
-                    }
-
                 }
 
                 var targets = creep.room.find(FIND_STRUCTURES, {
