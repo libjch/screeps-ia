@@ -109,7 +109,7 @@ function run (creep) {
 
     for (var i = 0; i < constants.rooms().targets_path.length; i++) {
         if(i < constants.rooms().targets_path.length - 1){
-            if(creep.room.name = constants.rooms().targets_path[i]){
+            if(creep.room.name == constants.rooms().targets_path[i]){
                 directionUtil.moveToRoom(creep,constants.rooms().targets_path[i+1]);
                 logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1));
                 return;
