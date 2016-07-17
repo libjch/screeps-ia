@@ -73,6 +73,8 @@ var roleExtractor = {
     },
 
     cleanExtractors: function(){
+        Memory.containers = {};
+
         for(var roomName in Game.rooms){
             var room = Game.rooms[roomName];
             if(room.controller.my){
@@ -109,6 +111,10 @@ var roleExtractor = {
                                 Memory.extractors[source.id].containerCS = container.id;
                             }
                         }
+                    }
+
+                    if(Memory.extractors[source.id].container){
+                        Memory.containers[container] = true;
                     }
 
                 }
