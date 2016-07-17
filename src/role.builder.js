@@ -24,7 +24,7 @@ var roleBuilder = {
 
             if(creep.room.name == creep.memory.mainroom){
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES,{filter: (constructionSite) => { return constructionSite.my > 0}});
-                var priorities = {tower:1,extension:2,constructedWall:3,rampart:4,road:5,container:6};
+                var priorities = {tower:1,extension:2,constructedWall:3,rampart:4,road:8,container:6,storage:9};
 
                 if(targets.length == 0 || creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0){
                     console.log('escape '+creep.moveTo(30+(creep.memory.number%15),6));
