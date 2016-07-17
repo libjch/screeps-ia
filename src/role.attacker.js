@@ -102,7 +102,7 @@ function run (creep) {
             var exitDir = creep.room.findExitTo(constants.rooms().targets_path[0]);
             var exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(exit);
-            logger.log("No creep main room");
+            logger.log("No creep main room "+exit);
             return;
         }
     }
