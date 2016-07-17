@@ -73,7 +73,7 @@ module.exports = {
             else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
                 extern = true;
-            } else if(extractors.length < 2 && roomName =='E43S38'){
+            } else if(extractors.length < 2){
                 role = 'extractor';
             } else if (constructionsSites.length / 4 > builders.length) {
                 role = 'builder';
