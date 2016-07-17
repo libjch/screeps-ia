@@ -87,6 +87,7 @@ function findSourceInRoom(creep){
             }
         }
     }
+    logger.info('No sources from exractor');
 
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0 && Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
