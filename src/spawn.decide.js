@@ -49,10 +49,10 @@ module.exports = {
             var maxEnergy = room.energyCapacityAvailable;
 
             if (harvesters.length == 0) {
-                maxEnergy = max(300,energy);
+                maxEnergy = energy > 300 ? energy : 300;
             }
             if (harvesters.length == 1 && harvestersOut.length == 0) {
-                maxEnergy = max(500,energy);
+                maxEnergy = energy > 500 ? energy : 500;
             }
 
             var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
