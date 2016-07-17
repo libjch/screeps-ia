@@ -133,6 +133,7 @@ module.exports = {
                     body.push(MOVE);
                     maxEnergy = maxEnergy - 150;
                     var number = Math.floor(maxEnergy / 100);
+                    number = number > 10 ? 10 : number;
                     var rest = maxEnergy % 100;
                     for (var i = 0; i < number; i++) {
                         body.push(WORK);
