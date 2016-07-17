@@ -18,6 +18,14 @@ var roleExtractor = {
 
             if(creep.room.controller.my) {
                 var target = Game.getObjectById(creep.memory.extractor.containerId);
+
+                var sourceId = creep.memory.extractor.sourceId;
+                if(target == undefined && Memory.extractors[sourceId].containerCS){
+                    target = Game.getObjectById(Memory.extractors[sourceId].containerCS);
+                    if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
+                }
                 logger.debug('Container : '+target+' '+creep.memory.extractor+' '+creep.memory.extractor.containerId);
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos);
