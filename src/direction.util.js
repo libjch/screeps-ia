@@ -86,13 +86,14 @@ function findSourceInRoom(creep){
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
                 var score = container.store[RESOURCE_ENERGY] - 10 * creep.pos.getRangeTo(container);
-                logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+creep.pos.getRangeTo(container));
+                //logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+creep.pos.getRangeTo(container));
                 if(score > targetContainerScore){
                     score = targetContainerScore;
                     targetContainer = container;
                 }
             }
         }
+        logger.info('Target : '+targetContainer+' '+targetContainerScore);
         if(targetContainer && targetContainerScore > 0){
             if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targetContainer);
