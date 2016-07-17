@@ -88,6 +88,17 @@ var roleExtractor = {
                             });
                             var container = containers[0];
                             Memory.extractors[source.id].container = container.id;
+                        }else{
+                            containers = source.pos.findInRange(FIND_CONSTRUCTION_SITES,5, {
+                                filter: { structureType: STRUCTURE_CONTAINER }
+                            });
+                            if(containers.length) {
+                                containers.sort(function (a, b) {
+                                    return (source.pos.getRangeTo(a)) - (source.pos.getRangeTo(b));
+                                });
+                                var container = containers[0];
+                                Memory.extractors[source.id].containerCS = container.id;
+                            }
                         }
                     }
 
