@@ -92,6 +92,9 @@ var roleExtractor = {
                         });
 
                         if(containers.length){
+                            containers.sort(function(a,b){
+                                return (source.pos.getRangeTo(a)) - (source.pos.getRangeTo(b));
+                            });
                             var container = containers[0];
                             Memory.extractors[source.id].container = container.id;
                         }
