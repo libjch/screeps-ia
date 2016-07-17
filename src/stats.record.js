@@ -36,7 +36,7 @@ function record() {
                 Memory.stats["room." + room.name +".sources."+i+".energyCapacity"] = source.energyCapacity;
             }
 
-            Memory.stats["room." + room.name+".invaders.count"] = _.filter(Game.creeps, (creep) => !creep.my);
+            Memory.stats["room." + room.name+".invaders.count"] = _.filter(Game.creeps, (creep) => !creep.my).length;
 
         }
     }
