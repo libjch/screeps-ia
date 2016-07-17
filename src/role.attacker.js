@@ -112,7 +112,7 @@ function run (creep) {
             if(creep.room.name = constants.rooms().targets_path[targetI]){
                 var exitDir = creep.room.findExitTo(constants.rooms().targets_path[targetI+1]);
                 var exit = creep.pos.findClosestByRange(exitDir);
-                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+constants.rooms().targets_path[targetI+1]+' '+targetI);
+                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+constants.rooms().targets_path[targetI+1]+' '+(targetI+1));
                 return;
             }
         }else{
