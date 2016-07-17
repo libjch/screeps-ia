@@ -62,6 +62,7 @@ var roleExtractor = {
                     }
                 }else{
                     var source = Game.getObjectById(creep.memory.extractor.sourceId);
+                    Memory.extractors[source.id].creep = creep.id;
                     if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(source);
                     }
