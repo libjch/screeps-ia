@@ -92,7 +92,7 @@ function findSourceInRoom(creep){
                 }
             }
         }
-        if(targetContainer){
+        if(targetContainer && targetContainerScore > 0){
             if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targetContainer);
             }
