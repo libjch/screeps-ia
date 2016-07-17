@@ -69,12 +69,15 @@ var roleHarvester = {
                     }else{
                         if(creep.room.name != creep.memory.mainroom){
                             direction.moveToRoom(creep,creep.memory.mainroom);
-                        }else{
+                        }else {
                             //if(creep.room.name == 'E43S38'){
                             //    creep.memory.role = 'builder';
                             //}
-
-                            console.log('c '+creep.moveTo(30+creep.memory.number % 11,6));
+                            if (creep.room.storage) {
+                                if (creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                    console.log('s ' + creep.moveTo(creep.room.storage));
+                                }
+                            }
                         }
 
                     }
