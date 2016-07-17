@@ -68,13 +68,24 @@ function findSourceInRoom(creep){
     logger.info("FindSourceInRange");
 
     if(creep.room.controller.my){
+        var sources = creep.room.find(FIND_SOURCES);
 
+        for(let source of sources){
+            if(Memory.extractors[source.id].creep){
+                //get resource from container:
+                var container = Game.getObjectById(Memory.extractors[source.id].container);
 
-
+                if(container.energy > creep.carryCapacity){
+                    if(container.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(container);
+                    }
+                    return;
+                }
+            }
+        }
     }
 
-    var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
-
+    var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0 && Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
         var sourceNumber = creep.memory.number % sources.length;
         var source = sources[sourceNumber];

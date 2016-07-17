@@ -15,32 +15,16 @@ var roleExtractor = {
         if(creep.memory.working) {
             //Transfer to closest container
 
-            if(creep.room.controller.my){
-                var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] < structure.storeCapacity && creep.pos.getRangeTo(structure) < 5)
-                    }
-                });
-                targets.sort(function(a,b){
-                    return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
-                });
 
-                if(targets.length > 0) {
-                    console.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]));
-                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        console.log('b '+creep.moveTo(targets[0]));
-                    }
-                }else{
-                    if(creep.room.name != creep.memory.mainroom){
-                        direction.moveToRoom(creep,creep.memory.mainroom);
-                    }else{
-
-                    }
+            if(creep.room.controller.my) {
+                var target = Game.getObjectById(creep.memory.extractor.containerId);
+                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos);
                 }
-            }
-            else{
-                //NOT in current room
-                direction.moveToRoom(creep,creep.memory.mainroom);
+            }else {
+                if (creep.room.name != creep.memory.mainroom) {
+                    direction.moveToRoom(creep, creep.memory.mainroom);
+                }
             }
         }
         else{ //NOT harvesting
@@ -57,6 +41,10 @@ var roleExtractor = {
                     if(sources.length){
                         var source = sources[0];
                         Memory.extractors[source.id] = creep.id;
+
+                        creep.memory.extractor.sourceId = source.id;
+                        creep.memory.extractor.containerId = Memory.extractors[source.id].container;
+
                         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(source);
                         }
