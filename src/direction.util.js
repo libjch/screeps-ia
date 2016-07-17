@@ -85,7 +85,7 @@ function findSourceInRoom(creep){
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
-                var score = container.store[RESOURCE_ENERGY] - 10 * creep.pos.getRangeTo(container);
+                var score = container.store[RESOURCE_ENERGY] - 15 * creep.pos.getRangeTo(container);
                 //logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+creep.pos.getRangeTo(container));
                 if(score > targetContainerScore){
                     targetContainerScore = score;
