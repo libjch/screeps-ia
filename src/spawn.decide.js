@@ -77,6 +77,7 @@ module.exports = {
                 extern = true;
             }else if (constructionsSites.length / 8 > builders.length) {
                 role = 'builder';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
@@ -94,9 +95,11 @@ module.exports = {
                 extern = true;
             } else if (buildersOut.length < 1) { //+1
                 role = 'builder';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 extern = true;
             } else if (repairersOut.length < 1) { //+1
                 role = 'repairer';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 extern = true;
             } else if (harvestersOut.length < 3) { //+2
                 role = 'harvester';
