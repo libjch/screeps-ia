@@ -65,11 +65,12 @@ module.exports = {
                 if (false && totalEnergyStored > maxEnergyStored * 0.5){
                     role = 'harvester-c';
                 }else{
-
                     role = 'harvester';
+                    maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 }
             } else if(extractors.length < 2){
                 role = 'extractor';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             }
             else if (harvestersOut.length < 2) { //+2
                 role = 'harvester';
@@ -78,11 +79,12 @@ module.exports = {
                 role = 'builder';
             } else if (repairers.length < 1) {
                 role = 'repairer';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if (upgraders.length < 1) {
                 role = 'upgrader';
             } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
-            } else if (upgraders.length < 2) {
+            } else if (upgraders.length < 0) {
                 role = 'upgrader';
             } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
@@ -105,7 +107,7 @@ module.exports = {
             } else if (buildersOut.length < 0) { //+3
                 role = 'builder';
                 extern = true;
-            } else if (upgradersOut.length < 4) { //+3
+            } else if (upgradersOut.length < 0) { //+3
                 role = 'upgrader';
                 extern = true;
             }
