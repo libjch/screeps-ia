@@ -83,6 +83,7 @@ module.exports = {
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if (upgraders.length < 1) {
                 role = 'upgrader';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (upgraders.length < 0) {
@@ -103,6 +104,7 @@ module.exports = {
                 extern = true;
             } else if (harvestersOut.length < 3) { //+2
                 role = 'harvester';
+                maxEnergy = maxEnergy > 1300 ? 3500 : maxEnergy;
                 extern = true;
             } else if (upgradersOut.length < 2) { //+4
                 role = 'upgrader';
