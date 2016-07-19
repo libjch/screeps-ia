@@ -114,8 +114,8 @@ var roleExtractor = {
                         }
                     }
 
-                    if(Memory.containers[source.id].container){
-                        Memory.containers[container.id] = true;
+                    if(Memory.extractors[source.id].container){
+                        Memory.containers[Memory.extractors[source.id].container] = true;
                     }
 
                 }
