@@ -73,6 +73,7 @@ var roleExtractor = {
     },
 
     cleanExtractors: function(){
+        logger.error('CLEAN EXTRACTOR');
         Memory.containers = {};
 
         for(var roomName in Game.rooms){
