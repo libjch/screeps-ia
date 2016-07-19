@@ -31,7 +31,7 @@ var roleBuilder = {
                     return;
                 }
                 if(targets.length == 0){
-                    creep.memory.role = 'upgrader';
+                    creep.memory.role_override = 'upgrader';
                     return;
                 }else{
 
