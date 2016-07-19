@@ -36,7 +36,25 @@ function record() {
                 Memory.stats["room." + room.name +".sources."+i+".energyCapacity"] = source.energyCapacity;
             }
 
+            var containers= room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 0)
+                }
+            });
+
+            var totalInContainer = 0;
+            var totalContainerCapacity;
+            for(let container of containers){
+                totalInContainer += container.store[RESOURCE_ENERGY];
+                totalContainerCapacity += container.storeCapacity;
+            }
+
+            Memory.stats["room." + room.name +".containers."+i+".energy"] = totalInContainer;
+            Memory.stats["room." + room.name +".containers."+i+".storeCapacity"] = totalContainerCapacity;
+
+
             Memory.stats["room." + room.name+".invaders.count"] = _.filter(Game.creeps, (creep) => !creep.my).length;
+
 
         }
     }
