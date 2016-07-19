@@ -57,6 +57,10 @@ module.exports = {
 
             var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
 
+            var externalSources = 2;
+            if(roomName == 'E43S32'){
+                externalSources = 4;
+            }
 
             var role = undefined;
             var extern = false;
@@ -72,7 +76,7 @@ module.exports = {
                 role = 'extractor';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             }
-            else if (harvestersOut.length < 2) { //+2
+            else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
             }else if (constructionsSites.length / 8 > builders.length) {
@@ -91,7 +95,7 @@ module.exports = {
             } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
-            } else if (harvestersOut.length < 2) { //+2
+            } else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
             } else if (buildersOut.length < 1) { //+1
@@ -102,11 +106,11 @@ module.exports = {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 extern = true;
-            } else if (harvestersOut.length < 3) { //+2
+            } else if (harvestersOut.length < 0) { //+2
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1300 ? 3500 : maxEnergy;
                 extern = true;
-            } else if (upgradersOut.length < 2) { //+4
+            } else if (upgradersOut.length < externalSources) { //+4
                 role = 'upgrader';
                 extern = true;
             } else if (buildersOut.length < 0) { //+3
