@@ -41,13 +41,13 @@ function record() {
         }
     }
 
-    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester'  && creep.memory.extern == false);
+    var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' || creep.memory.role == 'harvester-c')  && creep.memory.extern == false);
     var harvestersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.extern == true);
 
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder'  && creep.memory.extern == false);
     var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true);
 
-    var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader'  && creep.memory.extern == false);
+    var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader' || creep.memory.role == 'upgrader-c')   && creep.memory.extern == false);
     var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true);
 
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer'  && creep.memory.extern == false);
