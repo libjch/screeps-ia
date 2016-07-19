@@ -43,14 +43,14 @@ function record() {
             });
 
             var totalInContainer = 0;
-            var totalContainerCapacity;
+            var totalContainerCapacity = 0;
             for(let container of containers){
                 totalInContainer += container.store[RESOURCE_ENERGY];
                 totalContainerCapacity += container.storeCapacity;
             }
 
-            Memory.stats["room." + room.name +".containers."+i+".energy"] = totalInContainer;
-            Memory.stats["room." + room.name +".containers."+i+".storeCapacity"] = totalContainerCapacity;
+            Memory.stats["room." + room.name +".containers.energy"] = totalInContainer;
+            Memory.stats["room." + room.name +".containers.storeCapacity"] = totalContainerCapacity;
 
 
             Memory.stats["room." + room.name+".invaders.count"] = _.filter(Game.creeps, (creep) => !creep.my).length;
