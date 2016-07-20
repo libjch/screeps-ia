@@ -21,15 +21,16 @@ var roleBuilder = {
         }
 
         if(creep.memory.working) {
+            if( creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.y==0){
+                console.log('escape '+creep.moveTo(creep.room.controller.pos));
+                return;
+            }
 
             if(creep.room.name == creep.memory.mainroom){
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES,{filter: (constructionSite) => { return constructionSite.my > 0}});
                 var priorities = {tower:1,extension:2,constructedWall:3,rampart:4,road:8,container:6,storage:9};
 
-                if( creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0){
-                    console.log('escape '+creep.moveTo(creep.room.controller.pos));
-                    return;
-                }
+
                 if(targets.length == 0){
                     creep.memory.role_override = 'upgrader';
                     return;
@@ -80,7 +81,8 @@ var roleBuilder = {
                     }
                 }else{
                     //NOT in current room
-                    console.log('get back')
+                    console.log('get back');
+
                     direction.moveToRoom(creep,creep.memory.mainroom);
                 }
             }
