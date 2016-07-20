@@ -92,6 +92,12 @@ module.exports.loop = function () {
             if(creep.memory.role_override){
                 role = creep.memory.role_override;
             }
+            if(creep.ticksToLive == 100){
+                creep.memory.working = true;
+            }
+            if(creep.ticksToLive < 50){
+                creep.memory.working = true;
+            }
 
             if(role == 'harvester') {
                 roleHarvester.run(creep);
