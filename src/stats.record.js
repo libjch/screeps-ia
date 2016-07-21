@@ -53,7 +53,7 @@ function record() {
             Memory.stats["room." + room.name +".containers.storeCapacity"] = totalContainerCapacity;
 
 
-            Memory.stats["room." + room.name+".invaders.count"] = _.filter(Game.creeps, (creep) => !creep.my).length;
+            Memory.stats["room." + room.name+".invaders.count"] = room.find(FIND_HOSTILE_CREEPS).length;//_.filter(Game.creeps, (creep) => !creep.my).length;
 
 
         }
