@@ -66,7 +66,7 @@ module.exports = {
             var extern = false;
             var roomnumber = undefined;
             if (harvesters.length < 1) {
-                if (false && totalEnergyStored > maxEnergyStored * 0.5){
+                if (false && totalEnergyStored > maxEnergyStored * 0.35){
                     role = 'harvester-c';
                 }else{
                     role = 'harvester';
@@ -158,7 +158,7 @@ module.exports = {
                     if (rest >= 50) {
                         body.push(MOVE);
                     }
-                }else  if (role == 'harvester' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
+                }else  if (role == 'harvester-c' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
                     body.push(CARRY);
                     body.push(CARRY);
                     body.push(CARRY);
