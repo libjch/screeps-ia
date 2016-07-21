@@ -75,6 +75,9 @@ module.exports = {
             } else if(extractors.length < 2){
                 role = 'extractor';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+            } else if (upgraders.length < 1) {
+                role = 'upgrader';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             }
             else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
@@ -85,10 +88,7 @@ module.exports = {
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-            } else if (upgraders.length < 1) {
-                role = 'upgrader';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-            } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
+            }  else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (upgraders.length < 0) {
                 role = 'upgrader';
@@ -156,6 +156,26 @@ module.exports = {
                         body.push(WORK);
                     }
                     if (rest >= 50) {
+                        body.push(MOVE);
+                    }
+                }else  if (role == 'harvester' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
+                    body.push(CARRY);
+                    body.push(CARRY);
+                    body.push(CARRY);
+                    body.push(CARRY);
+                    body.push(CARRY);
+                    body.push(MOVE);
+                    body.push(MOVE);
+                    body.push(MOVE);
+                    body.push(MOVE);
+                    body.push(MOVE);
+
+                    maxEnergy = maxEnergy - 500;
+                    var number = Math.floor(maxEnergy / 200);
+                    number = number > 10 ? 10 : number;
+                    for (var i = 0; i < number; i++) {
+                        body.push(WORK);
+                        body.push(CARRY);
                         body.push(MOVE);
                     }
                 }
