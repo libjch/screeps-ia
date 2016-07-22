@@ -106,6 +106,7 @@ function run (creep) {
             return;
         }
     }
+    logger.error(1);
 
     for (var i = 0; i < constants.rooms().targets_path.length; i++) {
         if(i < constants.rooms().targets_path.length - 1){
@@ -120,6 +121,7 @@ function run (creep) {
             return;
         }
     }
+    logger.error(2);
     if(creep.room.name == constants.rooms().targets_final){
         target = findEnemyStructure(creep);
         logger.info("Enemy structure: "+target);
@@ -132,6 +134,7 @@ function run (creep) {
             logger.info("Enemy wall: "+target);
         }
     }
+    logger.error(3);
     logger.debug("Target : "+target);
 
     if (!creep.pos.isNearTo(target)) {
