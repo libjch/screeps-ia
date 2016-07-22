@@ -142,9 +142,6 @@ module.exports = {
                     for (var i = 0; i < number; i++) {
                         body.push(ATTACK);
                     }
-                    if (rest >= 150) {
-                        body.push(MOVE);
-                    }
                 }else  if (role == 'extractor') {
                     body.push(CARRY);
                     body.push(CARRY);
@@ -224,7 +221,7 @@ module.exports = {
                     externRoomNumber = minI;
                 }
 
-                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable);
+                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable+" "+body);
 
                 var res = spawn.createCreep(body, role +'-'+number, {
                     role: role,
