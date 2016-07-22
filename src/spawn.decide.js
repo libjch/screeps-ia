@@ -96,6 +96,7 @@ module.exports = {
             } else if (constants.rooms().attacker && roomName == 'E42S38' && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
+                maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
             } else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
@@ -131,7 +132,7 @@ module.exports = {
                 if (role == 'attacker') {
                     var number = Math.floor(maxEnergy / 200);
                     var rest = maxEnergy % 200;
-                    number -= 3;
+                    number -= 1;
                     for (var i = 0; i < number; i++) {
                         body.push(TOUGH);
                         body.push(TOUGH);
