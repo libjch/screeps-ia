@@ -59,7 +59,7 @@ module.exports = {
 
             var externalSources = 2;
             if(roomName == 'E43S32'){
-                externalSources = 4;
+                externalSources = 2;
             }
 
             var role = undefined;
