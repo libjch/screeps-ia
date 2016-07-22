@@ -10,7 +10,7 @@ module.exports = {
 
 
 function findEnemyCreep(creep){
-    var targets = creep.room.find(FIND_HOSTILE_CREEPS, {filter: function(enemy){!enemy.my}});
+    var targets = creep.room.find(FIND_HOSTILE_CREEPS);//, {filter: function(enemy){!enemy.my}});
     if(targets){
         return creep.pos.findClosestByPath(targets);
     }
