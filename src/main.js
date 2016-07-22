@@ -109,7 +109,8 @@ module.exports.loop = function () {
                 roleUpgrader.run(creep);
             }
             else if(role == 'upgrader-c' || role == 'upgrader.c') {
-                roleUpgraderContainer.run(creep);
+                roleUpgrader.run(creep);
+                //roleUpgraderContainer.run(creep);
             }
             else if(role == 'builder') {
                 roleBuilder.run(creep);
