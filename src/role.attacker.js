@@ -53,7 +53,7 @@ function findWall (creep) {
             if (object.my) {
                 return false;
             }
-            if ( object.structureType !== STRUCTURE_WALL) {
+            if ( object.structureType !== STRUCTURE_WALL && object.structureType !== STRUCTURE_RAMPART) {
                 return false;
             }
             return true;
