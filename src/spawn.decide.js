@@ -131,6 +131,7 @@ module.exports = {
                 if (role == 'attacker') {
                     var number = Math.floor(maxEnergy / 200);
                     var rest = maxEnergy % 200;
+                    number -= 3;
                     for (var i = 0; i < number; i++) {
                         body.push(TOUGH);
                         body.push(TOUGH);
