@@ -19,7 +19,7 @@ var truc = {
         data['targets_path'] = ['E43S38','E43S37'];
         data['targets_final'] ='E43S37';
 
-        data['attacker'] = false;
+        data['attacker'] = true;
         return data;
     }
 };
