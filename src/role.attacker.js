@@ -108,7 +108,7 @@ function run (creep) {
     }
     logger.error(1);
 
-    for (var i = 0; i < constants.rooms().targets_path.length; i++) {
+    for (var i = 0; i < constants.rooms().targets_path.length-1; i++) {
         logger.error(4+' '+i);
         if(i < constants.rooms().targets_path.length - 1){
             if(creep.room.name == constants.rooms().targets_path[i]){
