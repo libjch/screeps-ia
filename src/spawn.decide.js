@@ -237,6 +237,8 @@ module.exports = {
                 if (_.isString(res)) {
                     logger.log(res);
                     Memory.global_id = number + 1;
+                }else{
+                    logger.warn(res);
                 }
             }
         }
