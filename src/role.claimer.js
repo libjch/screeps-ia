@@ -15,7 +15,7 @@ function run (creep) {
 
     var targetRoom = Game.rooms['E44S38'];
 
-    if(creep.room.name !== targetRoom){
+    if(creep.room.name !== targetRoom.name){
         var exitDir = creep.room.findExitTo(targetRoom);
         var exit = creep.pos.findClosestByRange(exitDir);
         console.log(creep.moveTo(exit));
