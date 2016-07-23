@@ -10,12 +10,12 @@ module.exports = {
 
 function run (creep) {
     //spawn claimer:
-    // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'role'claimer', extern: true});
+    // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true});
 
 
-    var targetRoom = Game.rooms['E43S38'];
+    var targetRoom = Game.rooms['E44S38'];
 
-    if(creep.room.name == creep.memory.mainroom){
+    if(creep.room.name !== targetRoom){
         var exitDir = creep.room.findExitTo(targetRoom);
         var exit = creep.pos.findClosestByRange(exitDir);
         console.log(creep.moveTo(exit));
