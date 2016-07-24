@@ -26,7 +26,6 @@ function log(message, severity = 3) {
     } else if (!Number.isInteger(severity)) {
         severity = 3
     }
-    if(severity >= 4)
     console.log('<font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 
