@@ -16,7 +16,7 @@ var roleExtractor = {
             //Transfer to closest container
 
 
-            if(creep.room.controller.my) {
+            if(creep.room.name == creep.memory.mainroom) {
                 var target = Game.getObjectById(creep.memory.extractor.containerId);
 
                 var sourceId = creep.memory.extractor.sourceId;
