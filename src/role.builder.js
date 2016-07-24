@@ -49,8 +49,11 @@ var roleBuilder = {
                     if(targets.length) {
                         var target = targets[0];
                         console.log('    target: ' + target.structureType + ' ' + creep.pos.getRangeTo(target) + ' ' + target.progress +'/' + target.progressTotal);
-                        if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                        var res = creep.build(target);
+                        if(res == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target);
+                        }else{
+                            logger.warn(res);
                         }
                     }
                 }
