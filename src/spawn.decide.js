@@ -51,7 +51,7 @@ module.exports = {
             if (harvesters.length == 0) {
                 maxEnergy = energy > 300 ? energy : 300;
             }
-            if (harvesters.length == 1 && harvestersOut.length == 0) {
+            if (harvesters.length == 1 && harvestersOut.length == 0 && maxEnergy >= 500) {
                 maxEnergy = energy > 500 ? energy : 500;
             }
 
