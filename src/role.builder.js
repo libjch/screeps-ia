@@ -1,6 +1,6 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
-
+var logger = require('logger');
 var roleBuilder = {
 
 
