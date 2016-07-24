@@ -187,6 +187,7 @@ module.exports = {
                     var number = Math.floor(maxEnergy / 200);
 
                     var rest = maxEnergy % 200;
+                    logger.error('number: '+number+' '+rest+' '+maxEnergy+' '+energy);
                     for (var i = 0; i < number; i++) {
                         body.push(WORK);
                         body.push(CARRY);

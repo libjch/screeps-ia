@@ -18,7 +18,7 @@ var roleUpgrader = {
         }
 
         if(creep.memory.working) {
-            if(creep.room.controller.my){
+            if(creep.room.controller.my && creep.memory.mainroom == creep.room.name){
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
                 }
