@@ -65,6 +65,10 @@ module.exports = {
             var role = undefined;
             var extern = false;
             var roomnumber = undefined;
+            if(harvesters.length == 0 && energy >= 300){
+                maxEnergy = energy;
+            }
+
             if (harvesters.length < 2) {
                 if (false && totalEnergyStored > maxEnergyStored * 0.35){
                     role = 'harvester-c';
