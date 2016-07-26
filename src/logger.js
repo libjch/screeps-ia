@@ -34,7 +34,7 @@ function highlight (message) {
 }
 
 function info(message){
-    log(message, 1);
+    //log(message, 1);
 }
 function debug(message){
     log(message,2);
