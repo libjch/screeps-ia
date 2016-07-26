@@ -136,7 +136,7 @@ function run (creep) {
         }
     }
     logger.error(3);
-    logger.debug("Target : "+target);
+    logger.debug("Target : "+target+' '+target.pos);
 
     if (!creep.pos.isNearTo(target)) {
         logger.info("Move "+creep.moveTo(target));
