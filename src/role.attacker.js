@@ -56,6 +56,9 @@ function findWall (creep) {
             if ( object.structureType !== STRUCTURE_WALL && object.structureType !== STRUCTURE_RAMPART) {
                 return false;
             }
+            if(object.room.name == 'E44S37' && object.pos.y < 20){
+                return false;
+            }
             return true;
         }
     });
