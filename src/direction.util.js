@@ -87,7 +87,7 @@ function moveToRoom(creep,targetRoom){
         }
     }
 
-    console.log(creep.room.name+' '+creep.pos.roomName);
+    console.log(creep.room.name+' '+creep.pos.roomName+' '+creep.pos.x);
     console.log(targetPos+' '+creep.room.name+' '+targetRoom+' '+creep.pos);
     if(targetPos != undefined){
         logger.debug('Change room '+creep.moveTo(targetPos)+' '+targetPos+' from '+creep.pos);
