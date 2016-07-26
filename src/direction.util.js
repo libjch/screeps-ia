@@ -86,9 +86,9 @@ function moveToRoom(creep,targetRoom){
             targetPos = creep.room.getPositionAt(0,13);
         }
     }
-    console.log(targetPos+' '+creep.room.name+' '+targetRoom);
+    console.log(targetPos+' '+creep.room.name+' '+targetRoom+' '+creep.pos);
     if(targetPos != undefined){
-        logger.debug('Change room '+creep.moveTo(targetPos)+' '+targetPos+' from '+creep.room.name);
+        logger.debug('Change room '+creep.moveTo(targetPos)+' '+targetPos+' from '+creep.pos);
     }else{
         var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
         var exit = creep.pos.findClosestByPath(exitDir);
