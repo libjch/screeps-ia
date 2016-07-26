@@ -57,10 +57,8 @@ module.exports = {
 
             var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
 
-            var externalSources = 2;
-            if(roomName == 'E43S32'){
-                externalSources = 2;
-            }
+            var externalSources = 1;
+
 
             var role = undefined;
             var extern = false;
