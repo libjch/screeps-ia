@@ -25,4 +25,4 @@ var truc = {
     }
 };
 
-module.exports = true;
+module.exports = truc;
