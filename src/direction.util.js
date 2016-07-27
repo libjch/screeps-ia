@@ -150,7 +150,7 @@ function findSourceInRoom(creep){
 
         //console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
         var res = creep.harvest(sources[sourceNumber]);
-        logger.log('source:'+sources[sourceNumber]+' '+res);
+        logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1));
 
         if(res == ERR_NOT_IN_RANGE) {
             creep.moveTo(sources[sourceNumber]);
