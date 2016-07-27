@@ -153,7 +153,7 @@ function findSourceInRoom(creep){
         var res = creep.harvest(sources[sourceNumber]);
         logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1));
 
-        logger.warn(creep.room.controller.my +' '+creep.controller.owner);
+        logger.warn(creep.room.controller.my +' '+creep.room.controller.owner);
         if(!creep.room.controller.my && creep.room.controller.owner) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
