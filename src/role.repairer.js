@@ -17,19 +17,16 @@ function contains(list, obj) {
 }
 
 function repairRoads(creep,filterTops){
-    var targets = [];
-    var targetRoads = creep.room.find(FIND_STRUCTURES, {
+    //var targets = [];
+    var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return ((structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_CONTAINER)  && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
         }
     });
 
-    if(filterTops) {
+    /*if(filterTops) {
         var topRoads = getSortedKeys(Memory.roadPlaces);
 
-        /*for(var i = 0; i< topRoads.length ; i+=100){
-         console.log(i+' '+Memory.roadPlaces[topRoads[i]]);
-         }*/
         if (topRoads.length > 400) {
             topRoads = topRoads.slice(0, 400);
         }
@@ -43,7 +40,7 @@ function repairRoads(creep,filterTops){
         }
     }else{
         targets = targetRoads;
-    }
+    }*/
 
     if(targets.length != 0){
         targets.sort(function(a,b){
