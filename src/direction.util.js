@@ -155,5 +155,21 @@ function findSourceInRoom(creep){
         if(res == ERR_NOT_IN_RANGE) {
             creep.moveTo(sources[sourceNumber]);
         }
+
+        if(res == -1){
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0);
+                }
+            });
+
+            if(targets){
+                var targetContainer = targets[0];
+                if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targetContainer);
+                }
+            }
+
+        }
     }
 }
