@@ -56,6 +56,7 @@ function findConstructionSite(creep){
         }
     });
 
+    logger.warn('targets '+targets+' '+creep);
     if(targets){
         return creep.pos.findClosestByPath(targets);
     }
@@ -80,36 +81,7 @@ function findWall (creep) {
         return creep.pos.findClosestByPath(targets);
     }
 }
-/*
-function findEnemy (creep) {
-    var targets = creep.room.find(FIND_HOSTILE_CREEPS);
-    if (!targets.length) {
-        targets = creep.room.find(FIND_STRUCTURES, {
-            filter: function(object) {
-                if (object.my) {
-                    return false;
-                }
-                if (object.structureType !== STRUCTURE_TOWER && object.structureType !== STRUCTURE_SPAWN && object.structureType !== STRUCTURE_EXTENSION) {
-                    return false;
-                }
-                return true;
-            }
-        });
 
-        var priorities = {tower:1,extension:2,spawn:3};
-        targets.sort(function(a,b){
-            var pA = priorities[a.structureType];
-            var pB = priorities[b.structureType];
-            if(pA == pB){
-                return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
-            }else{
-                return pA - pB;
-            }
-        });
-    }
-    //console.log(targets);
-    return creep.pos.findClosestByPath(targets);
-}*/
 
 function run (creep) {
     var target = undefined;
@@ -123,10 +95,8 @@ function run (creep) {
             return;
         }
     }
-    logger.error(1);
 
     for (var i = 0; i < constants.rooms().targets_path.length-1; i++) {
-        logger.error(4+' '+i);
         if(i < constants.rooms().targets_path.length - 1){
             if(creep.room.name == constants.rooms().targets_path[i]){
                 directionUtil.moveToRoom(creep,constants.rooms().targets_path[i+1]);
@@ -139,7 +109,7 @@ function run (creep) {
             return;
         }
     }
-    logger.error(2);
+
     if(creep.room.name == constants.rooms().targets_final){
         target = findEnemyStructure(creep);
         logger.info("Enemy structure: "+target);
@@ -156,7 +126,6 @@ function run (creep) {
             logger.info("Enemy Construction site: "+target);
         }
     }
-    logger.error(3);
     logger.debug("Target : "+target+' '+target.pos);
 
     if (!creep.pos.isNearTo(target)) {
