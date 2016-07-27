@@ -139,10 +139,6 @@ function findSourceInRoom(creep){
 
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});//Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
-        logger.warn(creep.controller.my +' '+creep.controller.owner);
-        if(!creep.controller.my && creep.controller.owner){
-            sources = [];
-        }
 
         var sourceNumber = creep.memory.number % sources.length;
         var source = sources[sourceNumber];
@@ -157,11 +153,8 @@ function findSourceInRoom(creep){
         var res = creep.harvest(sources[sourceNumber]);
         logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1));
 
-        if(res == ERR_NOT_IN_RANGE) {
-            creep.moveTo(sources[sourceNumber]);
-        }
-
-        if(res == -1){
+        logger.warn(creep.controller.my +' '+creep.controller.owner);
+        if(!creep.room.controller.my && creep.room.controller.owner) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0);
@@ -174,7 +167,9 @@ function findSourceInRoom(creep){
                     creep.moveTo(targetContainer);
                 }
             }
-
+        }
+        else if(res == ERR_NOT_IN_RANGE) {
+            creep.moveTo(sources[sourceNumber]);
         }
     }
 }
