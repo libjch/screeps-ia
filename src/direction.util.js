@@ -139,6 +139,7 @@ function findSourceInRoom(creep){
 
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});//Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
+        logger.warn(creep.controller.my +' '+creep.controller.owner);
         if(!creep.controller.my && creep.controller.owner){
             sources = [];
         }
