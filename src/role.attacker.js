@@ -46,7 +46,21 @@ function findEnemyStructure(creep){
     return undefined;
 }
 
+function findConstructionSite(creep){
+    var targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+        filter: function(object) {
+            if (object.my) {
+                return false;
+            }
+            return true;
+        }
+    });
 
+    if(targets){
+        return creep.pos.findClosestByPath(targets);
+    }
+    return undefined;
+}
 function findWall (creep) {
     var targets = creep.room.find(FIND_STRUCTURES, {
         filter: function(object) {
@@ -136,6 +150,10 @@ function run (creep) {
         if(!target){
             target = findWall(creep);
             logger.info("Enemy wall: "+target);
+        }
+        if(!target){
+            target = findConstructionSite(creep);
+            logger.info("Enemy Construction site: "+target);
         }
     }
     logger.error(3);
