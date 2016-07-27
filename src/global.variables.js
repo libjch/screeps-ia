@@ -26,3 +26,4 @@ var truc = {
 };
 
 module.exports = truc;
+
