@@ -47,14 +47,7 @@ function findEnemyStructure(creep){
 }
 
 function findConstructionSite(creep){
-    var targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
-        filter: function(object) {
-            if (object.my) {
-                return false;
-            }
-            return true;
-        }
-    });
+    var targets = creep.room.find(FIND_HOSTILE_CONSTRUCTION_SITES);
 
     logger.warn('targets '+targets+' '+creep);
     if(targets){
