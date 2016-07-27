@@ -95,7 +95,7 @@ module.exports = {
                 role = 'upgrader-c';
             } else if (upgraders.length < 0) {
                 role = 'upgrader';
-            } else if (constants.rooms().attacker && (roomName == 'E42S38' || roomName == 'E44S38')  && attackers.length < 1) {
+            } else if (constants.rooms().attacker && (roomName == 'E44S38')  && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
                 maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
