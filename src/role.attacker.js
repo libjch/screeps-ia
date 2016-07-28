@@ -114,11 +114,13 @@ function run (creep) {
             target = findWall(creep);
             logger.info("Enemy wall: "+target);
         }
-        if(!target){
+        if(!target) {
             target = findConstructionSite(creep);
-            logger.info("Enemy Construction site: "+target);
-            creep.moveTo(target);
-            return;
+            logger.info("Enemy Construction site: " + target);
+            if (target) {
+                creep.moveTo(target);
+                return;
+            }
         }
         if(!target && creep.room.name == 'E44S37'){
             creep.moveTo(7,12);
