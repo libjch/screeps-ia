@@ -102,6 +102,7 @@ module.exports = {
             } else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
+
             } else if (buildersOut.length < 1) { //+1
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
