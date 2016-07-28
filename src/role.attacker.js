@@ -118,6 +118,10 @@ function run (creep) {
             target = findConstructionSite(creep);
             logger.info("Enemy Construction site: "+target);
         }
+        if(!target && creep.room.name == 'E44S37'){
+            creep.moveTo(7,12);
+            return;
+        }
     }
     logger.debug("Target : "+target+' '+target.pos);
 
