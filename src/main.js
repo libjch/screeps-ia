@@ -17,6 +17,8 @@ var recorder = require('stats.record');
 var roadPlanner = require('road.planner');
 var logger = require('logger');
 
+
+
 module.exports.loop = function () {
     logger.highlight('========== NEW TURN ============',1);
     //Clear: Game.rooms['E42S38'].find(FIND_CONSTRUCTION_SITES).forEach(a => a.remove());
@@ -27,6 +29,7 @@ module.exports.loop = function () {
         }
     }
     spawnDecider.spawn();
+
     towerAttack.attack();
     roleExtractor.cleanExtractors();
 
