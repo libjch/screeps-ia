@@ -68,9 +68,9 @@ module.exports = {
             }
 
             if (harvesters.length < 2) {
-                if (false && totalEnergyStored > maxEnergyStored * 0.35){
+                /*if (false && totalEnergyStored > maxEnergyStored * 0.35){
                     role = 'harvester-c';
-                }else{
+                }else*/{
                     role = 'harvester';
                     maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 }
@@ -82,20 +82,20 @@ module.exports = {
                 role = 'upgrader';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             }
-            else if (harvestersOut.length < externalSources) { //+2
+            /*else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
-            }else if (constructionsSites.length / 8 > builders.length) {
+            }*/else if (constructionsSites.length / 8 > builders.length) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-            }  else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
+            } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (upgraders.length < 0) {
                 role = 'upgrader';
-            } else if (harvestersOut.length < externalSources) { //+2
+            }/* else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
 
@@ -120,7 +120,7 @@ module.exports = {
             } else if (upgradersOut.length < 0) { //+3
                 role = 'upgrader';
                 extern = true;
-            }
+            }*/
 
 
             //MOVE 50
@@ -128,7 +128,12 @@ module.exports = {
             //CARRY 50
             var body = [];
             if (role != undefined) {
-                if (role == 'attacker') {
+                if(maxEnergy <= 300){
+                    body.push(WORK);
+                    body.push(WORK);
+                    body.push(MOVE);
+                    body.push(CARRY);
+                }else if (role == 'attacker') {
                     var number = Math.floor(maxEnergy / 250);
                     var rest = maxEnergy % 250;
                     number -= 1;
@@ -144,7 +149,7 @@ module.exports = {
                     for (var i = 0; i < number; i++) {
                         body.push(ATTACK);
                     }
-                }else  if (role == 'extractor') {
+                } else if (role == 'extractor') {
                     body.push(CARRY);
                     body.push(CARRY);
                     body.push(MOVE);
@@ -158,7 +163,7 @@ module.exports = {
                     if (rest >= 50) {
                         body.push(MOVE);
                     }
-                }else  if (role == 'harvester-c' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
+                } else if (role == 'harvester-c' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
                     body.push(CARRY);
                     body.push(CARRY);
                     body.push(CARRY);
@@ -183,7 +188,7 @@ module.exports = {
                     var number = Math.floor(maxEnergy / 200);
 
                     var rest = maxEnergy % 200;
-                    logger.error('number: '+number+' '+rest+' '+maxEnergy+' '+energy);
+                    logger.error('number: ' + number + ' ' + rest + ' ' + maxEnergy + ' ' + energy);
                     for (var i = 0; i < number; i++) {
                         body.push(WORK);
                         body.push(CARRY);
@@ -205,41 +210,22 @@ module.exports = {
                 //get least used extern room
                 var externRoomNumber = undefined;
                 if (extern) {
-                   /* var usage = [];
-                    for (let i in constants.rooms().others[roomName]) {
-                        var numbers = _.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i);
-                        usage.push(numbers.length);
+                    console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body);
+
+                    var res = spawn.createCreep(body, role + '-' + number, {
+                        role: role,
+                        extern: extern,
+                        number: number,
+                        roomnumber: roomnumber,
+                        mainroom: roomName,
+                        externRoom: externRoomNumber
+                    });
+                    if (_.isString(res)) {
+                        logger.log(res);
+                        Memory.global_id = number + 1;
+                    } else {
+                        logger.warn(res);
                     }
-
-                    var min = 99;
-                    var minI = 0;
-                    for (let i in usage) {
-                        if (usage[i] < min) {
-                            min = usage[i];
-                            minI = i;
-                        }
-                    }
-
-                    logger.log("externRoomChoice: "+minI+" of "+usage);
-                    externRoomNumber = minI;
-                    */
-                }
-
-                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable+" "+body);
-
-                var res = spawn.createCreep(body, role +'-'+number, {
-                    role: role,
-                    extern: extern,
-                    number: number,
-                    roomnumber: roomnumber,
-                    mainroom: roomName,
-                    externRoom: externRoomNumber
-                });
-                if (_.isString(res)) {
-                    logger.log(res);
-                    Memory.global_id = number + 1;
-                }else{
-                    logger.warn(res);
                 }
             }
         }
