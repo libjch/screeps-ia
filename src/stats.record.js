@@ -1,4 +1,3 @@
-var constants = require('global.variables');
 
 module.exports = {
     record : record
@@ -9,14 +8,11 @@ function record() {
 
     var rooms = [];
 
-    for(var roomName of constants.rooms().main){
-        rooms.push(Game.rooms[roomName]);
+    for(let i in Game.spawns) {
+        var spawn = Game.spawns[i];
+        rooms.push(spawn.room);
     }
-    for(var group in constants.rooms().others){
-        for(var roomName of constants.rooms().others[group]){
-            rooms.push(Game.rooms[roomName]);
-        }
-    }
+
 
     for(var room of rooms){
         //console.log(roomName+' '+Game.rooms[roomName]);
