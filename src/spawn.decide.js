@@ -1,4 +1,4 @@
-var constants = require('global.variables');
+//var constants = require('global.variables');
 var logger = require('logger');
 module.exports = {
 
@@ -95,10 +95,6 @@ module.exports = {
                 role = 'upgrader-c';
             } else if (upgraders.length < 0) {
                 role = 'upgrader';
-            } else if (constants.rooms().attacker && (roomName == 'E44S38')  && attackers.length < 1) {
-                role = 'attacker';
-                extern = true;
-                maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
             } else if (harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
@@ -209,7 +205,7 @@ module.exports = {
                 //get least used extern room
                 var externRoomNumber = undefined;
                 if (extern) {
-                    var usage = [];
+                   /* var usage = [];
                     for (let i in constants.rooms().others[roomName]) {
                         var numbers = _.filter(Game.creeps, (creep) => creep.memory.mainroom == roomName && creep.memory.externRoom == i);
                         usage.push(numbers.length);
@@ -226,6 +222,7 @@ module.exports = {
 
                     logger.log("externRoomChoice: "+minI+" of "+usage);
                     externRoomNumber = minI;
+                    */
                 }
 
                 console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable+" "+body);

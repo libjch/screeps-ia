@@ -28,7 +28,7 @@ module.exports.loop = function () {
         }
     }
     spawnDecider.spawn();
-    //towerAttack.attack();
+    towerAttack.attack();
 
     roleExtractor.cleanExtractors();
 
