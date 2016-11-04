@@ -69,8 +69,8 @@ module.exports = {
 
             if (harvesters.length < 2) {
                 /*if (false && totalEnergyStored > maxEnergyStored * 0.35){
-                    role = 'harvester-c';
-                }else*/{
+                 role = 'harvester-c';
+                 }else*/{
                     role = 'harvester';
                     maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 }
@@ -83,9 +83,9 @@ module.exports = {
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             }
             /*else if (harvestersOut.length < externalSources) { //+2
-                role = 'harvester';
-                extern = true;
-            }*/else if (constructionsSites.length / 8 > builders.length) {
+             role = 'harvester';
+             extern = true;
+             }*/else if (constructionsSites.length / 8 > builders.length) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             } else if (repairers.length < 1) {
@@ -96,31 +96,31 @@ module.exports = {
             } else if (upgraders.length < 0) {
                 role = 'upgrader';
             }/* else if (harvestersOut.length < externalSources) { //+2
-                role = 'harvester';
-                extern = true;
+             role = 'harvester';
+             extern = true;
 
-            } else if (buildersOut.length < 1) { //+1
-                role = 'builder';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-                extern = true;
-            } else if (repairersOut.length < 1) { //+1
-                role = 'repairer';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-                extern = true;
-            } else if (harvestersOut.length < 0) { //+2
-                role = 'harvester';
-                maxEnergy = maxEnergy > 1300 ? 3500 : maxEnergy;
-                extern = true;
-            } else if (upgradersOut.length < externalSources) { //+4
-                role = 'upgrader';
-                extern = true;
-            } else if (buildersOut.length < 0) { //+3
-                role = 'builder';
-                extern = true;
-            } else if (upgradersOut.length < 0) { //+3
-                role = 'upgrader';
-                extern = true;
-            }*/
+             } else if (buildersOut.length < 1) { //+1
+             role = 'builder';
+             maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+             extern = true;
+             } else if (repairersOut.length < 1) { //+1
+             role = 'repairer';
+             maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+             extern = true;
+             } else if (harvestersOut.length < 0) { //+2
+             role = 'harvester';
+             maxEnergy = maxEnergy > 1300 ? 3500 : maxEnergy;
+             extern = true;
+             } else if (upgradersOut.length < externalSources) { //+4
+             role = 'upgrader';
+             extern = true;
+             } else if (buildersOut.length < 0) { //+3
+             role = 'builder';
+             extern = true;
+             } else if (upgradersOut.length < 0) { //+3
+             role = 'upgrader';
+             extern = true;
+             }*/
 
 
             //MOVE 50
@@ -209,24 +209,24 @@ module.exports = {
 
                 //get least used extern room
                 var externRoomNumber = undefined;
-                if (extern) {
-                    console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body);
 
-                    var res = spawn.createCreep(body, role + '-' + number, {
-                        role: role,
-                        extern: extern,
-                        number: number,
-                        roomnumber: roomnumber,
-                        mainroom: roomName,
-                        externRoom: externRoomNumber
-                    });
-                    if (_.isString(res)) {
-                        logger.log(res);
-                        Memory.global_id = number + 1;
-                    } else {
-                        logger.warn(res);
-                    }
+                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body);
+
+                var res = spawn.createCreep(body, role + '-' + number, {
+                    role: role,
+                    extern: extern,
+                    number: number,
+                    roomnumber: roomnumber,
+                    mainroom: roomName,
+                    externRoom: externRoomNumber
+                });
+                if (_.isString(res)) {
+                    logger.log(res);
+                    Memory.global_id = number + 1;
+                } else {
+                    logger.warn(res);
                 }
+
             }
         }
     }
