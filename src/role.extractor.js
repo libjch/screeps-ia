@@ -90,7 +90,7 @@ var roleExtractor = {
                         }
                     }
                     if (!Memory.extractors[source.id].container || !Game.getObjectById(Memory.extractors[source.id].container)) {
-                        var containers = source.pos.findInRange(FIND_STRUCTURES,5, {
+                        var containers = source.pos.findInRange(FIND_STRUCTURES,3, {
                             filter: { structureType: STRUCTURE_CONTAINER }
                         });
 
@@ -101,7 +101,7 @@ var roleExtractor = {
                             var container = containers[0];
                             Memory.extractors[source.id].container = container.id;
                         }else{
-                            containers = source.pos.findInRange(FIND_CONSTRUCTION_SITES,5, {
+                            containers = source.pos.findInRange(FIND_CONSTRUCTION_SITES,3, {
                                 filter: { structureType: STRUCTURE_CONTAINER }
                             });
                             if(containers.length) {
@@ -110,6 +110,17 @@ var roleExtractor = {
                                 });
                                 var container = containers[0];
                                 Memory.extractors[source.id].containerCS = container.id;
+                            }else{
+                                //Build Container!
+
+                                //Find construction site position:
+                                var path = room.findPath(source.pos, room.spawn().pos,{ignoreCreeps:true});
+                                for(let i = 0;i<3;i++){
+                                    var pos = path[i].pos;
+                                    if(room.createConstructionSite(pos.x,pos.y,STRUCTURE_CONTAINER) == OK){
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }

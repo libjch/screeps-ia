@@ -11,7 +11,6 @@ var roleExtractor = require('role.extractor');
 var spawnDecider = require('spawn.decide');
 var towerAttack = require('tower.attack');
 
-var constants = require('global.variables');
 var recorder = require('stats.record');
 
 var roadPlanner = require('road.planner');
