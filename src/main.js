@@ -30,6 +30,7 @@ module.exports.loop = function () {
     towerAttack.attack();
 
     roleExtractor.cleanExtractors();
+    roadPlanner.checkRoads();
 
     var creeps = [];
 
