@@ -1,14 +1,5 @@
-var constants = require('global.variables');
 var logger = require('logger');
 
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports.thing = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('tower.attack');
- * mod.thing == 'a thing'; // true
- */
 function getSortedKeys(obj) {
     var keys = []; for(var key in obj) keys.push(key);
     return keys.sort(function(a,b){return obj[b]-obj[a]});
@@ -56,8 +47,10 @@ module.exports = {
     attack(){
         var towers = [];
 
-        for(let roomName of constants.rooms().main){
-            var room = Game.rooms[roomName];
+        for(let i in Game.spawns){
+            var spawn = Game.spawns[i];
+            var room = spawn.room;
+
             var ts = room.find(FIND_STRUCTURES, {
                 filter: (s) => s.structureType == STRUCTURE_TOWER
             });
