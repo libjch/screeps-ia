@@ -15,7 +15,7 @@ function record() {
 
 
     for(var room of rooms){
-        console.log(roomName+' '+Game.rooms[roomName]);
+        console.log(room+' '+room.name);
         if(room){
             if(room.controller.my){
                 Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
