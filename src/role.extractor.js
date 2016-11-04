@@ -114,7 +114,7 @@ var roleExtractor = {
                                 //Build Container!
 
                                 //Find construction site position:
-                                var path = room.findPath(source.pos, room.spawn().pos,{ignoreCreeps:true});
+                                var path = room.findPath(source.pos, room.controller.pos,{ignoreCreeps:true});
                                 for(let i = 0;i<3;i++){
                                     var pos = path[i].pos;
                                     if(room.createConstructionSite(pos.x,pos.y,STRUCTURE_CONTAINER) == OK){
