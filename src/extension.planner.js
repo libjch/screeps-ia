@@ -69,9 +69,9 @@ module.exports = {
                         }
 
                         //Find 1st spot available around spawn:
-                        for(let dx = 0; dx < 10; dx++){
+                        for(let dx = 0; dx < 8; dx++){
                             for(let dxs = -1; dxs <2;dxs +=2){ //go both ways
-                                for(let dy = 0; dy < 10; dy++){
+                                for(let dy = 0; dy < 8; dy++){
                                     for(let dys = -1; dys < 2; dys +=2){ //search both ways
                                         var x = spawn.pos.x + (dx*dxs);
                                         var y = spawn.pos.y + (dy*dys);

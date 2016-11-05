@@ -74,62 +74,67 @@ var roleExtractor = {
     },
 
     cleanExtractors: function(){
-        logger.error('CLEAN EXTRACTOR',classname);
-        Memory.containers = {};
 
-        for(var roomName in Game.rooms){
-            var room = Game.rooms[roomName];
-            if(room.controller && room.controller.my){
-                var sources = room.find(FIND_SOURCES);
-                for(let source of sources) {
-                    if (!Memory.extractors[source.id]) {
-                        Memory.extractors[source.id] = {};
-                    }
-                    if (Memory.extractors[source.id].creep) {
-                        if (!Game.getObjectById(Memory.extractors[source.id].creep)) {
-                            Memory.extractors[source.id].creep = undefined;
+        if(Game.time % 30 == 0){
+
+
+            logger.error('CLEAN EXTRACTOR',classname);
+            Memory.containers = {};
+
+            for(var roomName in Game.rooms){
+                var room = Game.rooms[roomName];
+                if(room.controller && room.controller.my){
+                    var sources = room.find(FIND_SOURCES);
+                    for(let source of sources) {
+                        if (!Memory.extractors[source.id]) {
+                            Memory.extractors[source.id] = {};
                         }
-                    }
-                    if (!Memory.extractors[source.id].container || !Game.getObjectById(Memory.extractors[source.id].container)) {
-                        var containers = source.pos.findInRange(FIND_STRUCTURES,3, {
-                            filter: { structureType: STRUCTURE_CONTAINER }
-                        });
-
-                        if(containers.length){
-                            containers.sort(function(a,b){
-                                return (source.pos.getRangeTo(a)) - (source.pos.getRangeTo(b));
-                            });
-                            var container = containers[0];
-                            Memory.extractors[source.id].container = container.id;
-                        }else{
-                            containers = source.pos.findInRange(FIND_CONSTRUCTION_SITES,3, {
+                        if (Memory.extractors[source.id].creep) {
+                            if (!Game.getObjectById(Memory.extractors[source.id].creep)) {
+                                Memory.extractors[source.id].creep = undefined;
+                            }
+                        }
+                        if (!Memory.extractors[source.id].container || !Game.getObjectById(Memory.extractors[source.id].container)) {
+                            var containers = source.pos.findInRange(FIND_STRUCTURES,3, {
                                 filter: { structureType: STRUCTURE_CONTAINER }
                             });
-                            if(containers.length) {
-                                containers.sort(function (a, b) {
+
+                            if(containers.length){
+                                containers.sort(function(a,b){
                                     return (source.pos.getRangeTo(a)) - (source.pos.getRangeTo(b));
                                 });
                                 var container = containers[0];
-                                Memory.extractors[source.id].containerCS = container.id;
+                                Memory.extractors[source.id].container = container.id;
                             }else{
-                                //Build Container!
+                                containers = source.pos.findInRange(FIND_CONSTRUCTION_SITES,3, {
+                                    filter: { structureType: STRUCTURE_CONTAINER }
+                                });
+                                if(containers.length) {
+                                    containers.sort(function (a, b) {
+                                        return (source.pos.getRangeTo(a)) - (source.pos.getRangeTo(b));
+                                    });
+                                    var container = containers[0];
+                                    Memory.extractors[source.id].containerCS = container.id;
+                                }else{
+                                    //Build Container!
 
-                                //Find construction site position:
-                                var path = room.findPath(source.pos, room.controller.pos,{ignoreCreeps:true});
+                                    //Find construction site position:
+                                    var path = room.findPath(source.pos, room.controller.pos,{ignoreCreeps:true});
 
-                                for(let i = 0;i<3;i++){
-                                    if(room.createConstructionSite(path[i].x,path[i].y,STRUCTURE_CONTAINER) == OK){
-                                        break;
+                                    for(let i = 0;i<3;i++){
+                                        if(room.createConstructionSite(path[i].x,path[i].y,STRUCTURE_CONTAINER) == OK){
+                                            break;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    if(Memory.extractors[source.id].container){
-                        Memory.containers[Memory.extractors[source.id].container] = true;
-                    }
+                        if(Memory.extractors[source.id].container){
+                            Memory.containers[Memory.extractors[source.id].container] = true;
+                        }
 
+                    }
                 }
             }
         }
