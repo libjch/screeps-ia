@@ -73,9 +73,12 @@ module.exports = {
                             for(let dxs = -1; dxs <2;dxs +=2){ //go both ways
                                 for(let dy = 0; dy < 10; dy++){
                                     for(let dys = -1; dys < 2; dys +=2){ //search both ways
+                                        var x = spawn.pos.x + (dx*dxs);
+                                        var y = spawn.pos.y + (dy*dys);
+
+                                        logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2));
                                         if(dx%2 == dy%2){ //on the grid
-                                            var x = spawn.pos.x + (dx*dxs);
-                                            var y = spawn.pos.y + (dy*dys);
+
                                             var res = room.createConstructionSite(x, y, STRUCTURE_EXTENSION);
 
                                             logger.warn("Create extensions at:"+x+' '+y+' '+res,classname);
