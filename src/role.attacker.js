@@ -116,7 +116,7 @@ function run (creep) {
         }
         if(!target) {
             target = findConstructionSite(creep);
-            logger.info("Enemy Construction site: " + target), classname;
+            logger.info("Enemy Construction site: " + target,classname);
             if (target) {
                 creep.moveTo(target);
                 return;

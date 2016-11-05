@@ -1,4 +1,5 @@
 var logger = require('logger');
+var classname = 'StatsRecorder';
 
 module.exports = {
     record : record
@@ -16,7 +17,7 @@ function record() {
 
 
     for(var room of rooms){
-        logger.debug(room+' '+room.name);
+        logger.debug(room+' '+room.name,classname);
         if(room){
             if(room.controller.my){
                 Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;

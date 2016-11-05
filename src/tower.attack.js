@@ -1,4 +1,5 @@
 var logger = require('logger');
+var classname = 'TowerAttack';
 
 function getSortedKeys(obj) {
     var keys = []; for(var key in obj) keys.push(key);
@@ -33,7 +34,7 @@ function repair(tower){
             }
         }
     }else{
-        logger.info('Targets '+targets);
+        logger.info('Targets '+targets,classname);
         targets = targetRoads;
     }
 
@@ -61,7 +62,7 @@ module.exports = {
 
         //logger.log('Towers : '+towers);
         for(var tower of towers){
-            logger.warn('Tower : '+tower.pos);
+            logger.warn('Tower : '+tower.pos,classname);
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {
                 tower.attack(closestHostile);

@@ -4,7 +4,7 @@ var classname = 'Spanwer';
 module.exports = {
 
     spawn(){
-        logger.warn('=======Spawns======')
+        logger.warn('=======Spawns======',classname)
         for(var i in Game.spawns) {
             var spawn = Game.spawns[i];
             var room = spawn.room;
@@ -32,7 +32,7 @@ module.exports = {
                 'Builders:' + builders.length + ' (' + buildersOut.length + ')  ' +
                 'Upgraders:' + upgraders.length + ' (' + upgradersOut.length + ')  ' +
                 'Repairers:' + repairers.length + ' (' + repairersOut.length + ')  ' +
-                'Attackers: ' + attackers.length+'  Extractors: '+extractors.length);
+                'Attackers: ' + attackers.length+'  Extractors: '+extractors.length,classname);
 
 
             var totalEnergyStored = 0;
@@ -189,7 +189,7 @@ module.exports = {
                     var number = Math.floor(maxEnergy / 200);
 
                     var rest = maxEnergy % 200;
-                    logger.error('number: ' + number + ' ' + rest + ' ' + maxEnergy + ' ' + energy);
+                    logger.error('number: ' + number + ' ' + rest + ' ' + maxEnergy + ' ' + energy,classname);
                     for (var i = 0; i < number; i++) {
                         body.push(WORK);
                         body.push(CARRY);
@@ -222,7 +222,7 @@ module.exports = {
                     externRoom: externRoomNumber
                 });
                 if (_.isString(res)) {
-                    logger.log(res);
+                    logger.log(res,classname);
                     Memory.global_id = number + 1;
                 } else {
                     logger.warn(res,classname);

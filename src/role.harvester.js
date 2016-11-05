@@ -14,7 +14,7 @@ var roleHarvester = {
             creep.memory.working = true;
         }
         if(creep.memory.working) {
-            logger.info('Harvseting');
+            logger.info('Harvseting',classname);
             if(creep.room.controller.my){
 
                 var targets = creep.room.find(FIND_STRUCTURES, {
@@ -37,7 +37,7 @@ var roleHarvester = {
                     }
                 });
 
-                logger.info('Targets '+targets);
+                logger.info('Targets '+targets,classname);
 
                 if(targets.length > 0) {
                     logger.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ creep.pos,classname);
@@ -91,7 +91,7 @@ var roleHarvester = {
         }
         else{ //NOT harvesting
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
-                logger.info(creep.memory.mainroom+" "+creep.memory.externRoom+" "+(constants.rooms().others[creep.memory.mainroom])+" "+(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
+                logger.info(creep.memory.mainroom+" "+creep.memory.externRoom+" "+(constants.rooms().others[creep.memory.mainroom])+" "+(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom],classname);
                 direction.moveToRoom(creep,(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
             }else{
                 direction.findSourceInRoom(creep);

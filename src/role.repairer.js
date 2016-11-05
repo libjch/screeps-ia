@@ -123,7 +123,7 @@ var roleRepairer = {
                         var target = targets[0];
 
                         if(target){
-                            console.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target));
+                            logger.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target),classname);
 
                             if(creep.pos.x == 49){
                                 creep.moveTo(30+creep.memory.number,6);
@@ -134,7 +134,7 @@ var roleRepairer = {
                                 creep.memory.lastRepairId = target.id;
                             }
                         }else{
-                            logger.debug('No target');
+                            logger.debug('No target',classname);
                         }
                     }
                 }else{ //repair targets

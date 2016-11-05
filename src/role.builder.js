@@ -24,7 +24,7 @@ var roleBuilder = {
 
         if(creep.memory.working) {
             if( creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.y==0){
-                logger.log('escape '+creep.moveTo(creep.room.controller.pos));
+                logger.log('escape '+creep.moveTo(creep.room.controller.pos),classname);
                 return;
             }
 

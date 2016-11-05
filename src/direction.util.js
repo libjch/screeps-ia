@@ -29,7 +29,7 @@ function findSourceInRoom(creep){
             logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
 
             if(!Memory.extractors[source.id]){
-                logger.error('Unknow source: '+source.id);
+                logger.error('Unknow source: '+source.id,classname);
             }
             else if(Memory.extractors[source.id].container){
                 //
