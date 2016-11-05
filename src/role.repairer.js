@@ -1,6 +1,7 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
+var classname = 'RoleRepairer';
 
 function getSortedKeys(obj) {
     var keys = []; for(var key in obj) keys.push(key);
@@ -49,7 +50,7 @@ function repairRoads(creep,filterTops){
 
         var target = targets[0];
         var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
-        console.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target)+' '+Memory.roadPlaces[place]);
+        logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target)+' '+Memory.roadPlaces[place],classname);
         if(creep.repair(target) == ERR_NOT_IN_RANGE){
             creep.moveTo(target);
         }else{
@@ -77,9 +78,9 @@ var roleRepairer = {
                     if(target && target.hits < target.hitsMax){
                         if(creep.repair(target) == ERR_NOT_IN_RANGE){
                             creep.memory.lastRepairId = undefined;
-                            logger.warn('Repair not in range');
+                            logger.warn('Repair not in range',classname);
                         }else{
-                            console.log('Continue repairing : '+target);
+                            logger.log('Continue repairing : '+target,classname);
                             return ;
                         }
                     }
@@ -142,7 +143,7 @@ var roleRepairer = {
                     })
 
                     var target = targets[0];
-                    console.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target));
+                    logger.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target),classname);
 
                     if(creep.repair(target) == ERR_NOT_IN_RANGE){
                         creep.moveTo(target);

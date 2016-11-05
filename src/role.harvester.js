@@ -1,6 +1,7 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
+var classname = 'RoleHarvester';
 
 var roleHarvester = {
 
@@ -39,12 +40,12 @@ var roleHarvester = {
                 logger.info('Targets '+targets);
 
                 if(targets.length > 0) {
-                    console.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ creep.pos);
+                    logger.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ creep.pos,classname);
 
                     if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        var res = console.log('g '+creep.moveTo(targets[0]));
+                        var res = logger.log('g '+creep.moveTo(targets[0]),classname);
                         if(res == -2){
-                            console.log('a '+creep.moveTo(7,45));
+                            logger.log('a '+creep.moveTo(7,45),classname);
                         }
                     }
                 }else{
@@ -61,10 +62,10 @@ var roleHarvester = {
                     });
 
                     if(targets.length > 0) {
-                        console.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]));
+                        logger.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]),classname);
 
                         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            console.log('b '+creep.moveTo(targets[0]));
+                            logger.log('b '+creep.moveTo(targets[0]),classname);
                         }
                     }else{
                         if(creep.room.name != creep.memory.mainroom){
@@ -75,7 +76,7 @@ var roleHarvester = {
                             //}
                             if (creep.room.storage) {
                                 if (creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                    console.log('s ' + creep.moveTo(creep.room.storage));
+                                    logger.log('s ' + creep.moveTo(creep.room.storage),classname);
                                 }
                             }
                         }

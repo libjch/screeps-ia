@@ -2,7 +2,8 @@
  * Created by libjch on 12/07/16.
  */
 var constants = require('global.variables');
-
+var logger = require('logger');
+var classname = 'RoleClaimer';
 
 module.exports = {
     run: run
@@ -18,16 +19,16 @@ function run (creep) {
     if(creep.room.name !== targetRoom.name){
         var exitDir = creep.room.findExitTo(targetRoom);
         var exit = creep.pos.findClosestByRange(exitDir);
-        console.log(creep.moveTo(exit));
+        logger.log(creep.moveTo(exit));
         return true;
     }
 
     if(creep.room.name == targetRoom.name){
-        console.log('a '+creep.room.controller);
+        logger.log('a '+creep.room.controller);
         creep.moveTo(creep.room.controller);
         if(creep.room.controller) {
             var res = creep.claimController(creep.room.controller);
-            console.log('b '+res)
+            logger.log('b '+res)
             if(res == ERR_NOT_IN_RANGE) {
 
                 return true;

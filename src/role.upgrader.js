@@ -3,6 +3,8 @@
  */
 var constants = require('global.variables');
 var direction = require('direction.util');
+var logger = require('logger');
+var classname = 'RoleUpgrader';
 
 var roleUpgrader = {
 
@@ -12,7 +14,7 @@ var roleUpgrader = {
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
-        console.log("Upgrading: "+creep.carry.energy == creep.carryCapacity+" "+creep.carry.energy +"/"+creep.carryCapacity)
+        logger.log("Upgrading: "+creep.carry.energy == creep.carryCapacity+" "+creep.carry.energy +"/"+creep.carryCapacity,classname)
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }

@@ -24,7 +24,7 @@ var roleBuilder = {
 
         if(creep.memory.working) {
             if( creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.y==0){
-                console.log('escape '+creep.moveTo(creep.room.controller.pos));
+                logger.log('escape '+creep.moveTo(creep.room.controller.pos));
                 return;
             }
 
@@ -50,7 +50,7 @@ var roleBuilder = {
 
                     if(targets.length) {
                         var target = targets[0];
-                        console.log('    target: ' + target.structureType + ' ' + creep.pos.getRangeTo(target) + ' ' + target.progress +'/' + target.progressTotal);
+                        logger.log('    target: ' + target.structureType + ' ' + creep.pos.getRangeTo(target) + ' ' + target.progress +'/' + target.progressTotal,classname);
                         var res = creep.build(target);
                         if(res == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target);
@@ -78,7 +78,7 @@ var roleBuilder = {
                         })
                         if(targets.length) {
                             var target = targets[0];
-                            console.log('    target: ' + target.structureType + ' ' + creep.pos.getRangeTo(target) + ' ' + target.progress +'/' + target.progressTotal);
+                            logger.log('    target: ' + target.structureType + ' ' + creep.pos.getRangeTo(target) + ' ' + target.progress +'/' + target.progressTotal,classname);
                             if(creep.build(target) == ERR_NOT_IN_RANGE) {
                                 creep.moveTo(target);
                             }
@@ -86,7 +86,7 @@ var roleBuilder = {
                     }
                 }else{
                     //NOT in current room
-                    console.log('get back');
+                    logger.log('get back',classname);
 
                     direction.moveToRoom(creep,creep.memory.mainroom);
                 }

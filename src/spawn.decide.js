@@ -1,5 +1,6 @@
 //var constants = require('global.variables');
 var logger = require('logger');
+var classname = 'Spanwer';
 module.exports = {
 
     spawn(){
@@ -210,7 +211,7 @@ module.exports = {
                 //get least used extern room
                 var externRoomNumber = undefined;
 
-                console.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body);
+                logger.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body,classname);
 
                 var res = spawn.createCreep(body, role + '-' + number, {
                     role: role,
@@ -224,7 +225,7 @@ module.exports = {
                     logger.log(res);
                     Memory.global_id = number + 1;
                 } else {
-                    logger.warn(res);
+                    logger.warn(res,classname);
                 }
 
             }
