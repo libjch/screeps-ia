@@ -18,11 +18,11 @@ module.exports = {
                 if (room.controller && room.controller.my) {
 
                     var number = 0;
-                    var extensions = creep.room.find(FIND_STRUCTURES, {
+                    var extensions = room.find(FIND_STRUCTURES, {
                         filter: (structure) => { return (structure.structureType == STRUCTURE_EXTENSION);}});
                     number +=  extensions.length;
 
-                    var extensionsSites = creep.room.find(FIND_CONSTRUCTION_SITES, {
+                    var extensionsSites = room.find(FIND_CONSTRUCTION_SITES, {
                         filter: (csite) => { return (csite.structureType == STRUCTURE_EXTENSION);}});
 
                     number += extensionsSites.length;
