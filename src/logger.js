@@ -26,11 +26,14 @@ function log(message, severity, classname = '') {
     } else if (!Number.isInteger(severity)) {
         severity = 3
     }
-    console.log('<font color="' + colors[severity] + '" severity="' + severity + '">' + classname + ': ' + message + "</font>")
+
+    classname = (classname + '                   ').substr(0,10);
+    console.log('<font color="grey">' + classname + ': ' + '</font><font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 
 function highlight (message,classname) {
-    console.log('<font color="' + colors['highlight'] + '" type="highlight">' + classname + ': '+ message + "</font>")
+    classname = (classname + '                   ').substr(0,10);
+    console.log('<font color="grey">' + classname + ': ' + '</font><font color="' + colors['highlight'] + '" type="highlight">' + message + "</font>")
 }
 
 function info(message, classname = ''){
