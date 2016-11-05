@@ -14,6 +14,8 @@ var towerAttack = require('tower.attack');
 var recorder = require('stats.record');
 
 var roadPlanner = require('road.planner');
+var extensionPlanner = require('extension.planner');
+
 var logger = require('logger');
 
 var classname = 'Main';
@@ -31,6 +33,7 @@ module.exports.loop = function () {
 
     roleExtractor.cleanExtractors();
     roadPlanner.checkRoads();
+    extensionPlanner.checkExtensions();
 
     var creeps = [];
 
