@@ -1,5 +1,5 @@
 
-var ExampleLogger = {
+var ScreepsLogger = {
     log: log,
     info: info,
     debug: debug,
@@ -19,7 +19,7 @@ var colors = {
     'highlight': '#ffff00',
 }
 
-function log(message, severity, classname = '') {
+function _log(message, severity, classname = '') {
     if(severity > 5) {
         severity = 5
     } else if (severity < 0) {
@@ -38,19 +38,24 @@ function highlight (message,classname) {
 }
 
 function info(message, classname = ''){
-    //log(message, 1, classname);
+    //_log(message, 1, classname);
 }
 function debug(message, classname = ''){
-    log(message,2,classname);
+    _log(message,2,classname);
 }
 
+function log(message, classname = ''){
+    _log(message,3,classname);
+}
+
+
 function warn(message, classname = ''){
-    log(message, 4, classname);
+    _log(message,4, classname);
 }
 
 function error(message, classname = ''){
-    log(message,5, classname);
+    _log(message,5, classname);
 }
 
 
-module.exports = ExampleLogger
+module.exports = ScreepsLogger
