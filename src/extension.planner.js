@@ -59,7 +59,7 @@ module.exports = {
                     logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
 
                     //Availables extensions:
-                    var avails = getAvailableNUmber(room);
+                    var avails = getAvailableExtensionsNumber(room);
 
                     if(number < avails){
                         //Build around spawner
