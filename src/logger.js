@@ -18,7 +18,7 @@ var colors = {
     'highlight': '#ffff00',
 }
 
-function log(message, severity = 3) {
+function log(message, severity, classname = '') {
     if(severity > 5) {
         severity = 5
     } else if (severity < 0) {
@@ -26,26 +26,26 @@ function log(message, severity = 3) {
     } else if (!Number.isInteger(severity)) {
         severity = 3
     }
-    console.log('<font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
+    console.log('<font color="' + colors[severity] + '" severity="' + severity + '">' + classname + ': ' + message + "</font>")
 }
 
-function highlight (message) {
-    console.log('<font color="' + colors['highlight'] + '" type="highlight">' + message + "</font>")
+function highlight (message,classname) {
+    console.log('<font color="' + colors['highlight'] + '" type="highlight">' + classname + ': '+ message + "</font>")
 }
 
-function info(message){
-    //log(message, 1);
+function info(message, classname = ''){
+    //log(message, 1, classname);
 }
-function debug(message){
-    log(message,2);
-}
-
-function warn(message){
-    log(message, 4);
+function debug(message, classname = ''){
+    log(message,2,classname);
 }
 
-function error(message){
-    log(message,5);
+function warn(message, classname = ''){
+    log(message, 4, classname);
+}
+
+function error(message, classname = ''){
+    log(message,5, classname);
 }
 
 

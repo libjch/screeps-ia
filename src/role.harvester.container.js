@@ -1,6 +1,7 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
+var classname = 'RoleHarvesterC';
 
 
 var roleHarvester = {
@@ -80,14 +81,14 @@ var roleHarvester = {
             }
         }
         else{
-            logger.log("Not harvesting",1);
+            logger.info("Not harvesting",classname);
 
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 50)
                 }
             });
-            logger.log("Targets: "+targets,1);
+            logger.info("Targets: "+targets,classname);
 
             targets.sort(function(a,b){
                 return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
@@ -95,7 +96,7 @@ var roleHarvester = {
 
             var target = targets[0];
 
-            console.log('Target target:'+ target);
+            logger.log('Target target:'+ target,classname);
             if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }

@@ -1,6 +1,8 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
+var classname = 'RoleBuilder';
+
 var roleBuilder = {
 
 
@@ -53,7 +55,7 @@ var roleBuilder = {
                         if(res == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target);
                         }else{
-                            logger.warn(res);
+                            logger.warn('MoveTo: '+res,classname);
                         }
                     }
                 }

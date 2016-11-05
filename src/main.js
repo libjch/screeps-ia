@@ -16,10 +16,10 @@ var recorder = require('stats.record');
 var roadPlanner = require('road.planner');
 var logger = require('logger');
 
-
+var classname = 'Main';
 
 module.exports.loop = function () {
-    logger.highlight('========== NEW TURN ============',1);
+    logger.highlight('========== NEW TURN ============',classname);
 
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
@@ -111,9 +111,9 @@ module.exports.loop = function () {
                 roleExtractor.run(creep);
             }
         }catch(e){
-            logger.error('         ')
-            logger.error("ERROR  "+e);
-            logger.error('         ')
+            logger.error('         ',classname)
+            logger.error("ERROR  "+e,classname);
+            logger.error('         ',classname)
         }
     }
 

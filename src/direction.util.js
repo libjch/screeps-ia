@@ -1,6 +1,8 @@
 var constants = require('global.variables');
 var logger = require('logger');
 
+var classname = 'DirectionUtil';
+
 module.exports = {
     moveToRoom: moveToRoom,
     findSourceInRoom: findSourceInRoom
@@ -8,102 +10,14 @@ module.exports = {
 
 
 function moveToRoom(creep,targetRoom){
-    logger.info('Move from '+creep.room.name+' to '+targetRoom);
-
-    var targetPos = undefined;
-    if(creep.room.name == 'E42S38'){
-        if(targetRoom == 'E43S38'){
-            targetPos = creep.room.getPositionAt(49,14);
-        }else if(targetRoom == 'E42S39'){
-            targetPos = creep.room.getPositionAt(26,49);
-        }else if(targetRoom == 'E41S38'){
-            targetPos = creep.room.getPositionAt(0,15);
-        }else if(targetRoom == 'E43S37'){
-            targetPos = creep.room.getPositionAt(49,14);
-        }
-    }else if(creep.room.name == 'E43S38'){
-        if(targetRoom == 'E42S38'){
-            targetPos = creep.room.getPositionAt(0,16);
-        }else if(targetRoom == 'E43S37'){
-            targetPos = creep.room.getPositionAt(31,0);
-        }else if(targetRoom == 'E44S38'){
-            targetPos = creep.room.getPositionAt(49,30);
-        }
-    }else if(creep.room.name == 'E41S38'){
-        if(targetRoom == 'E42S38'){
-            targetPos = creep.room.getPositionAt(49,18);
-        }
-    }else if(creep.room.name == 'E42S39'){
-        if(targetRoom == 'E42S38'){
-            targetPos = creep.room.getPositionAt(28,0);
-        }
-    }else if(creep.room.name == 'E43S37'){
-        if(targetRoom == 'E42S38'){
-            targetPos = creep.room.getPositionAt(31,49);
-        }else if(targetRoom == 'E43S38'){
-            targetPos = creep.room.getPositionAt(31,49);
-        }else if(targetRoom == 'E44S38'){
-            targetPos = creep.room.getPositionAt(31,49);
-        }else if(targetRoom == 'E44S37'){
-            targetPos = creep.room.getPositionAt(49,31);
-        }
-    }else if(creep.room.name == 'E44S38'){
-        if(targetRoom == 'E44S37'){
-            if(creep.pos.x < 10){
-                targetPos = creep.room.getPositionAt(16,24);
-            }else{
-                targetPos = creep.room.getPositionAt(13,0);
-            }
-        }
-        if(targetRoom == 'E42S38'){
-            targetPos = creep.room.getPositionAt(0,30);
-        }else if(targetRoom == 'E43S38'){
-            targetPos = creep.room.getPositionAt(0,30);
-        }else if(targetRoom == 'E43S37'){
-            targetPos = creep.room.getPositionAt(0,30);
-        }else if(targetRoom == 'E44S39'){
-            targetPos = creep.room.getPositionAt(28,49);
-        }else if(targetRoom == 'E45S35'){
-            targetPos = creep.room.getPositionAt(49,26);
-        }
-    }else if(creep.room.name == 'E44S37'){
-        if(targetRoom == 'E44S36'){
-            targetPos = creep.room.getPositionAt(7,0);
-        }else if(targetRoom == 'E44S38'){
-            targetPos = creep.room.getPositionAt(17,49);
-        }
-    }else if(creep.room.name == 'E44S39') {
-        if (targetRoom == 'E44S38') {
-            targetPos = creep.room.getPositionAt(28, 0);
-        }
-    }else if(creep.room.name == 'E44S36'){
-        if(targetRoom == 'E43S36'){
-            if(creep.pos.y > 43){
-                targetPos = creep.room.getPositionAt(2,43);
-            }else{
-                targetPos = creep.room.getPositionAt(0,24);
-            }
-        }
-    }else if(creep.room.name == 'E43S36'){
-        if(targetRoom == 'E42S36'){
-            targetPos = creep.room.getPositionAt(0,13);
-        }
-    }else if(creep.room.name == 'E45S38'){
-        targetPos = creep.room.getPositionAt(0,26);
-    }
-
-    console.log('ROOM :'+ creep.room.name+' POS:'+creep.pos+' TARGET:'+targetPos);
-    if(targetPos != undefined){
-        logger.debug('Change room '+creep.moveTo(targetPos)+' '+targetPos+' from '+creep.pos);
-    }else{
-        var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
-        var exit = creep.pos.findClosestByPath(exitDir);
-        logger.debug('Change room other: '+ creep.moveTo(exit)+' '+targetPos+' from '+creep.room.name);
-    }
+    logger.info('Move from '+creep.room.name+' to '+targetRoom,classname);
+    var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+    var exit = creep.pos.findClosestByPath(exitDir);
+    logger.debug('Change room other: '+ creep.moveTo(exit)+' '+targetPos+' from '+creep.room.name,classname);
 }
 
 function findSourceInRoom(creep){
-    logger.info("FindSourceInRange");
+    logger.info("FindSourceInRange",classname);
 
     if(creep.room.controller.my){
         var sources = creep.room.find(FIND_SOURCES);
@@ -112,14 +26,14 @@ function findSourceInRoom(creep){
         var targetContainerScore = 0;
 
         for(let source of sources){
-            logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep);
+            logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
 
             if(!Memory.extractors[source.id]){
                 logger.error('Unknow source: '+source.id);
             }
             else if(Memory.extractors[source.id].container){
                 //
-                logger.info('Source with extractor found: '+Memory.extractors[source.id].container)
+                logger.info('Source with extractor found: '+Memory.extractors[source.id].container,classname)
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
@@ -131,7 +45,7 @@ function findSourceInRoom(creep){
                 }
             }
         }
-        logger.info('Target : '+targetContainer+' '+targetContainerScore);
+        logger.info('Target : '+targetContainer+' '+targetContainerScore,classname);
         if(targetContainer && targetContainerScore > 0){
             if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targetContainer);
@@ -139,7 +53,7 @@ function findSourceInRoom(creep){
             return;
         }
     }
-    logger.info('No sources from exractor');
+    logger.info('No sources from exractor',classname);
 
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});//Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
@@ -147,7 +61,7 @@ function findSourceInRoom(creep){
         var sourceNumber = creep.memory.number % sources.length;
         var source = sources[sourceNumber];
 
-        logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length);
+        logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length,classname);
         if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
             sourceNumber = (sourceNumber + 1) % sources.length;
         }
@@ -155,9 +69,9 @@ function findSourceInRoom(creep){
 
         //console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
         var res = creep.harvest(sources[sourceNumber]);
-        logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1));
+        logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1),classname);
 
-        logger.warn(creep.room.controller.my +' '+creep.room.controller.owner);
+        logger.warn(creep.room.controller.my +' '+creep.room.controller.owner,classname);
         if(!creep.room.controller.my && creep.room.controller.owner) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {

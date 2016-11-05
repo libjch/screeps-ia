@@ -1,7 +1,7 @@
 var constants = require('global.variables');
 var directionUtil = require('direction.util');
 var logger = require('logger');
-
+var classname = 'RoleAttacker';
 
 
 module.exports = {
@@ -49,7 +49,7 @@ function findEnemyStructure(creep){
 function findConstructionSite(creep){
     var targets = creep.room.find(FIND_HOSTILE_CONSTRUCTION_SITES);
 
-    logger.warn('targets '+targets+' '+creep);
+    logger.warn('targets '+targets+' '+creep,classname);
     if(targets){
         return creep.pos.findClosestByPath(targets);
     }
@@ -84,7 +84,7 @@ function run (creep) {
             var exitDir = creep.room.findExitTo(constants.rooms().targets_path[0]);
             var exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(exit);
-            logger.log("No creep main room "+exit);
+            logger.log("No creep main room "+exit,classname);
             return;
         }
     }
@@ -93,47 +93,43 @@ function run (creep) {
         if(i < constants.rooms().targets_path.length - 1){
             if(creep.room.name == constants.rooms().targets_path[i]){
                 directionUtil.moveToRoom(creep,constants.rooms().targets_path[i+1]);
-                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1));
+                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1),classname);
                 return;
             }
         }else{
             directionUtil.moveToRoom(creep,constants.rooms().targets_final);
-            logger.debug('move exit last '+creep.moveTo(exit));
+            logger.debug('move exit last '+creep.moveTo(exit),classname);
             return;
         }
     }
 
     if(creep.room.name == constants.rooms().targets_final){
         target = findEnemyStructure(creep);
-        logger.info("Enemy structure: "+target);
+        logger.info("Enemy structure: "+target,classname);
         if(!target){
             target = findEnemyCreep(creep);
-            logger.info("Enemy creep: "+target);
+            logger.info("Enemy creep: "+target,classname);
         }
         if(!target){
             target = findWall(creep);
-            logger.info("Enemy wall: "+target);
+            logger.info("Enemy wall: "+target,classname);
         }
         if(!target) {
             target = findConstructionSite(creep);
-            logger.info("Enemy Construction site: " + target);
+            logger.info("Enemy Construction site: " + target), classname;
             if (target) {
                 creep.moveTo(target);
                 return;
             }
         }
-        if(!target && creep.room.name == 'E44S37'){
-            creep.moveTo(7,12);
-            return;
-        }
     }
-    logger.debug("Target : "+target+' '+target.pos);
+    logger.debug("Target : "+target+' '+target.pos,classname);
 
     if (!creep.pos.isNearTo(target)) {
-        logger.info("Move "+creep.moveTo(target));
-        logger.info("Attack "+creep.attack(target));
+        logger.info("Move "+creep.moveTo(target),classname);
+        logger.info("Attack "+creep.attack(target),classname);
     } else {
-        logger.info("Atack "+creep.attack(target));
+        logger.info("Atack "+creep.attack(target),classname);
     }
 }
 

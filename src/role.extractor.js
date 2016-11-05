@@ -1,6 +1,7 @@
 var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
+var classname = 'RoleExtractor';
 
 var roleExtractor = {
 
@@ -26,9 +27,9 @@ var roleExtractor = {
                         creep.moveTo(target);
                     }
                 }
-                logger.debug('Container : '+target+' '+creep.memory.extractor+' '+creep.memory.extractor.containerId);
+                logger.debug('Container : '+target+' '+creep.memory.extractor+' '+creep.memory.extractor.containerId,classname);
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos);
+                    logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos,classname);
                 }
             }else {
                 if (creep.room.name != creep.memory.mainroom) {
@@ -52,7 +53,7 @@ var roleExtractor = {
                         Memory.extractors[source.id].creep = creep.id;
                         creep.memory.extractor.sourceId = source.id;
 
-                        logger.error("Container id "+Memory.extractors[source.id].container);
+                        logger.error("Container id "+Memory.extractors[source.id].container,classname);
 
                         creep.memory.extractor.containerId = Memory.extractors[source.id].container;
 
@@ -73,7 +74,7 @@ var roleExtractor = {
     },
 
     cleanExtractors: function(){
-        logger.error('CLEAN EXTRACTOR');
+        logger.error('CLEAN EXTRACTOR',classname);
         Memory.containers = {};
 
         for(var roomName in Game.rooms){
