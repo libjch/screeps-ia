@@ -35,6 +35,7 @@ var roleBuilder = {
 
                 if(targets.length == 0){
                     creep.memory.role_override = 'upgrader';
+                    creep.memory.role_override_time = Game.time + 300;
                     return;
                 }else{
 

@@ -135,6 +135,9 @@ var roleRepairer = {
                             }
                         }else{
                             logger.debug('No target',classname);
+                            creep.memory.role_override = 'upgrader';
+                            creep.memory.role_override_time = Game.time + 300;
+                            return;
                         }
                     }
                 }else{ //repair targets

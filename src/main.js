@@ -68,14 +68,14 @@ module.exports.loop = function () {
         try{
             var role = creep.memory.role;
 
-            if(role == undefined){
-
-            }
-
-
             if(creep.memory.role_override){
                 role = creep.memory.role_override;
             }
+
+            if(creep.memory.role_override_time < Game.time){
+                creep.memory.role_override = undefined;
+            }
+
             if(creep.ticksToLive == 100){
                 creep.memory.working = true;
             }
