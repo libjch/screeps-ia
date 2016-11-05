@@ -26,7 +26,7 @@ function findSourceInRoom(creep){
         var targetContainerScore = 0;
 
         for(let source of sources){
-            logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
+            //logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
 
             if(!Memory.extractors[source.id]){
                 logger.error('Unknow source: '+source.id,classname);
