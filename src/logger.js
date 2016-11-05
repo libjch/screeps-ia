@@ -15,6 +15,7 @@ var colors = {
     '2': '#999999',
     '1': '#737373',
     '0': '#666666',
+    'classname': '#d3d3d3',
     'highlight': '#ffff00',
 }
 
@@ -27,13 +28,13 @@ function log(message, severity, classname = '') {
         severity = 3
     }
 
-    classname = (classname + '                   ').substr(0,10);
-    console.log('<font color="grey">' + classname + ': ' + '</font><font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
+    classname = (classname + '                               ').substr(0,20);
+    console.log('<font color="' + colors['classname'] + '">' + classname + ': ' + '</font><font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 
 function highlight (message,classname) {
-    classname = (classname + '                   ').substr(0,10);
-    console.log('<font color="grey">' + classname + ': ' + '</font><font color="' + colors['highlight'] + '" type="highlight">' + message + "</font>")
+    classname = (classname + '                                ').substr(0,20);
+    console.log('<font color="' + colors['classname'] + '">' + classname + ': ' + '</font><font color="' + colors['highlight'] + '" type="highlight">' + message + "</font>")
 }
 
 function info(message, classname = ''){
