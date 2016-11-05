@@ -14,7 +14,7 @@ var roleUpgrader = {
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
-        logger.log("Upgrading: "+creep.carry.energy == creep.carryCapacity+" "+creep.carry.energy +"/"+creep.carryCapacity,classname);
+        logger.log("Upgrading: "+(creep.carry.energy == creep.carryCapacity)+" "+creep.carry.energy +"/"+creep.carryCapacity,classname);
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
