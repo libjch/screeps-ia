@@ -13,6 +13,8 @@ var classname = 'WallPlanner';
 
 
 function checkAndBuild(room,x,y,type){
+    logger.log(room.lookAt(x,y));
+
     room.createConstructionSite(x, y, type);
 }
 
