@@ -23,7 +23,7 @@ module.exports = {
                     //Left wall:
                     var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0);
                     for(let y = 0;y<49;y++){
-                        logger.debug(entrances[0][y]);
+                        logger.debug(entrances[y][0]);
                     }
                 }
             }
