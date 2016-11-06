@@ -15,20 +15,22 @@ var spawn = undefined;
 function checkAndBuild(room,x,y,type){
     var existing = room.lookForAt(LOOK_CONSTRUCTION_SITES,x,y);
     if(existing.length){
-        logger.warn('Existing CS at '+x+' '+y);
+        logger.warn('Existing CS at '+x+' '+y,classname);
         return;
     }
     existing = room.lookForAt(LOOK_STRUCTURES,x,y);
     if(existing.length){
-        logger.warn('Existing STR at '+x+' '+y);
+        logger.warn('Existing STR at '+x+' '+y,classname);
         return;
     }
 
     if(spawn.pos.findPathTo(x,y).length) {
-        room.createConstructionSite(x, y, type);
+
+        console.log(spawn.pos.findPathTo(x,y));
+        //room.createConstructionSite(x, y, type);
     }
     else{
-        logger.warn('No path found to '+x+' '+y);
+        logger.warn('No path found to '+x+' '+y,classname);
     }
 }
 
@@ -97,7 +99,7 @@ module.exports = {
                                     //last of a border
                                     checkAndBuild(room,x, y + 1, STRUCTURE_WALL);
                                     checkAndBuild(room,x, y + 2, STRUCTURE_WALL);
-                                    checkAndBuild(room,x - 1, y - 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x + 1, y + 2, STRUCTURE_WALL);
                                 }
                                 if (y == exit.y) {
                                     //logger.debug('Create Rampart? '+x+' '+y);
