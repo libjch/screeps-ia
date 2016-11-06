@@ -21,10 +21,9 @@ module.exports = {
                     //var exits = Game.map.describeExits(roomName);
 
                     //Left wall:
-                    var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0,true);
-
-                    for(let entry of entrances){
-                        logger.debug(entry.x+" "+entry.y+" "+entry.structure,classname);
+                    var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0);
+                    for(let y = 0;y<49;y++){
+                        logger.debug(entrances[0][y]);
                     }
                 }
             }
