@@ -113,7 +113,7 @@ var roleRepairer = {
                             }
                         });
 
-                        var priorities = {tower:1.0,extension:1.0,constructedWall:5,rampart:5,road:2,container:3};
+                        var priorities = {tower:1.0,extension:1.0,constructedWall:5,rampart:4.5,road:2,container:3};
 
                         targets.sort(function(a,b){
                             return (priorities[a.structureType] * (a.hits + 200 * creep.pos.getRangeTo(a))) - (priorities[b.structureType] * (b.hits + 200 * creep.pos.getRangeTo(b)));
