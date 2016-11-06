@@ -22,10 +22,10 @@ module.exports = {
 
                     var spawns = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
                     var spawn = spawns[0];
-                    logger.debug(spawn+" "+spawn.pos);
+                    logger.debug(spawn+" "+spawn.pos,classname);
 
                     var exit = spawn.pos.findClosestByPath(FIND_EXIT_LEFT);
-                    logger.debug(exit);
+                    logger.debug(exit,classname);
 
                     //Left wall:
                     var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0);
