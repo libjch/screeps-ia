@@ -21,7 +21,7 @@ module.exports = {
                     //var exits = Game.map.describeExits(roomName);
 
                     var spawn = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
-                    logger.debug(spawn+" "+spawn.pos);
+                    logger.debug(spawn+" "+Game.spawns[spawn].pos);
 
                     var exit = spawn.pos.findClosestByPath(FIND_EXIT_LEFT);
                     logger.debug(exit);
