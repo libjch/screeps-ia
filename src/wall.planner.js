@@ -17,7 +17,7 @@ function checkAndBuild(room,x,y,type){
 
     existing = room.lookForAt(LOOK_TERRAIN,x,y);
     if(existing == 'wall'){
-        logger.warn('Already a wall at '+x+' '+y,classname);
+        //logger.warn('Already a wall at '+x+' '+y,classname);
         return;
     }
 
@@ -32,9 +32,15 @@ function checkAndBuild(room,x,y,type){
         return;
     }
 
-    if(spawn.pos.findPathTo(x,y).length) {
+    var path = spawn.pos.findPathTo(x,y);
+    if(path.length) {
 
-        console.log('Path find to '+x+' '+y);
+        var res = "";
+        for(let step of path){
+            res += step;
+        }
+        console.log('Path find to '+x+' '+y+' '+res);
+
         //room.createConstructionSite(x, y, type);
     }
     else{
