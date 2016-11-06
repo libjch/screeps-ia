@@ -24,7 +24,7 @@ module.exports = {
                     var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0,true);
 
                     for(let entry of entrances){
-                        logger.debug(entry);
+                        logger.debug(entry.toString(),classname);
                     }
                 }
             }
