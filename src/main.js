@@ -25,7 +25,7 @@ var lastCpu = 0;
 
 function tick(step){
     var nowCpu = Game.cpu.getUsed();
-    logger.trace('CPU Usage '+step+': '+ (nowCpu - lastCpu);
+    logger.trace('CPU Usage '+step+': '+ (nowCpu - lastCpu));
     lastCpu = nowCpu;
 }
 
