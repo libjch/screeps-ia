@@ -26,7 +26,7 @@ function checkAndBuild(room,x,y,type){
 
     if(spawn.pos.findPathTo(x,y).length) {
 
-        console.log(spawn.pos.findPathTo(x,y));
+        console.log('Path find to '+x+' '+y);
         //room.createConstructionSite(x, y, type);
     }
     else{
