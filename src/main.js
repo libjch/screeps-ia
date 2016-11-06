@@ -36,7 +36,7 @@ module.exports.loop = function () {
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             logger.warn("Delete creep:"+Memory.creeps[i]);
-            //delete Memory.creeps[i];
+            delete Memory.creeps[i];
         }
     }
     tick('Cleaned Memory');
