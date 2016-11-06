@@ -63,7 +63,13 @@ module.exports.loop = function () {
     tick('CheckExtensions');
     towerPlanner.checkTowers();
     tick('CheckTowers');
-    wallPlanner.checkWalls();
+
+    try{
+        wallPlanner.checkWalls();
+
+    }catch(e) {
+        logger.error("ERROR  "+e,classname);
+    }
     tick('wallPlanners');
 
     var creeps = [];
