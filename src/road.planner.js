@@ -22,7 +22,10 @@ module.exports = {
                     for (let source of sources) {
                         var path = room.findPath(source.pos, room.controller.pos, {ignoreCreeps: true});
                         for (let i = 0; i < 20 && i < path.length; i++) {
-                            logger.debug("Create road:" + room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD),classname);
+                            var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
+                            if(res != ERR_INVALID_TARGET){
+                                logger.debug("Create road:" +res ,classname);
+                            }
                         }
                     }
                 }
