@@ -52,7 +52,10 @@ var roleHarvester = {
                         creep.moveTo(targets[0]);
                     }
                 }else{
-                    creep.moveTo(30+creep.memory.number,6);
+                    logger.debug('No target',classname);
+                    creep.memory.role_override = 'upgrader';
+                    creep.memory.role_override_time = Game.time + 100;
+                    return;
 
                     /*
                      var targets = creep.room.find(FIND_STRUCTURES, {

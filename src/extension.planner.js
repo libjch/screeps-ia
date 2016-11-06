@@ -1,5 +1,6 @@
 
 var logger = require('logger');
+var buildUtil = require('build.util');
 var classname = 'ExtensionPlanner';
 /*
  * Module code goes here. Use 'module.exports' to export things:
@@ -31,15 +32,6 @@ module.exports = {
                 var room = Game.rooms[roomName];
                 if (room.controller && room.controller.my) {
 
-                    var roomSpawn = undefined;
-                    for(var i in Game.spawns) {
-                        var spawn = Game.spawns[i];
-                        if(spawn.room == room){
-                            roomSpawn = spawn;
-                            break;
-                        }
-                    }
-
                     var number = 0;
                     var extensions = room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
@@ -62,38 +54,10 @@ module.exports = {
                     var avails = getAvailableExtensionsNumber(room);
 
                     if(number < avails){
-                        //Build around spawner
-                        if(roomSpawn == undefined){
-                            logger.error('No spawn found for room '+roomName,classname);
-                            continue;
-                        }
-
                         //Find 1st spot available around spawn:
-                        for(let dx = 0; dx < 8; dx++){
-                            for(let dxs = -1; dxs <2;dxs +=2){ //go both ways
-                                for(let dy = 0; dy < 8; dy++){
-                                    for(let dys = -1; dys < 2; dys +=2){ //search both ways
-                                        var x = spawn.pos.x + (dx*dxs);
-                                        var y = spawn.pos.y + (dy*dys);
-
-                                        logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2));
-                                        if(dx%2 == dy%2){ //on the grid
-
-                                            var res = room.createConstructionSite(x, y, STRUCTURE_EXTENSION);
-
-                                            logger.warn("Create extensions at:"+x+' '+y+' '+res,classname);
-                                            if(res == OK){
-                                                number++;
-                                                if(number == avails){
-                                                    return;
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-
+                        var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_EXTENSION);
+                        if(res == OK){
+                            number++;
                         }
                     }
                 }

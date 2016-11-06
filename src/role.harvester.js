@@ -78,6 +78,11 @@ var roleHarvester = {
                                 if (creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                     logger.log('s ' + creep.moveTo(creep.room.storage),classname);
                                 }
+                            }else{
+                                logger.debug('No target',classname);
+                                creep.memory.role_override = 'upgrader';
+                                creep.memory.role_override_time = Game.time + 100;
+                                return;
                             }
                         }
 
