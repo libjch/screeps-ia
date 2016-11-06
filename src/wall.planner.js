@@ -39,7 +39,13 @@ function checkAndBuild(room,x,y,type){
         for(let step of path){
             res += "("+step.x+','+step.y+')';
         }
-        console.log('Path find to '+x+' '+y+' '+res);
+        var step = path[path.length-1];
+        if(step.x != x || step.y != step.y){
+            console.log('NO Path find to '+x+' '+y+' '+step.x+' '+step.y);
+        }else{
+            console.log('OK Path find to '+x+' '+y+' '+step.x+' '+step.y);
+        }
+
 
         //room.createConstructionSite(x, y, type);
     }
