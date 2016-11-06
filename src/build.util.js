@@ -8,10 +8,10 @@ module.exports = {
 };
 
 
-function tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType){
-    var x = roomSpawn.pos.x + (dx*dxs);
-    var y = roomSpawn.pos.y + (dy*dys);
-    //logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2),classname);
+function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
+    var x = roomSpawn.pos.x + (dx);
+    var y = roomSpawn.pos.y + (dy);
+    logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2),classname);
     if(dx%2 == dy%2){ //on the grid
         var res = roomSpawn.room.createConstructionSite(x, y, structureType);
         logger.warn("Create " + structureType+ " at:"+x+' '+y+' '+res,classname);
@@ -39,10 +39,10 @@ function findBuildPositionInRoom(room,structureType){
     for(let dist = 1;dist < 12;dist++){
         //X
         for(let dxs = -1; dxs <2;dxs +=2) { //go both ways
-            var dx = dist * dxs;
+            var dx = dist;
             for(let dy = 0; dy <= dist; dy++) {
-                for (let dys = -1; dys < 2; dys += 2) { //search both ways
-                    if(tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType)==OK){
+                for (let dys = -1; dys < 2; dys += 2) { //search both way
+                    if(tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
                         return OK;
                     }
                 }
@@ -51,10 +51,10 @@ function findBuildPositionInRoom(room,structureType){
 
         //Y
         for(let dys = -1; dys <2;dys +=2) { //go both ways
-            var dy = dist * dys;
+            var dy = dist;
             for(let dx = 0; dx <= dist; dx++) {
                 for (let dxs = -1; dxs < 2; dxs += 2) { //search both ways
-                    if(tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType)==OK){
+                    if(tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
                         return OK;
                     }
                 }
