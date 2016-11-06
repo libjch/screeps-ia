@@ -20,15 +20,8 @@ module.exports = {
                 if (room.controller && room.controller.my) {
                     //var exits = Game.map.describeExits(roomName);
 
-                    var spawn = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
-
-                    for(let s of Game.spawns){
-                        if(s.room == room){
-                            spawn = s;
-                            break;
-                        }
-                    }
-
+                    var spawns = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
+                    var spawn = spawns[0];
                     logger.debug(spawn+" "+spawn.pos);
 
                     var exit = spawn.pos.findClosestByPath(FIND_EXIT_LEFT);
