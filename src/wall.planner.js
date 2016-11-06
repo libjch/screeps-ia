@@ -13,7 +13,15 @@ var classname = 'WallPlanner';
 var spawn = undefined;
 
 function checkAndBuild(room,x,y,type){
-    var existing = room.lookForAt(LOOK_CONSTRUCTION_SITES,x,y);
+    var existing = undefined;
+
+    existing = room.lookForAt(LOOK_TERRAIN,x,y);
+    if(existing == 'wall'){
+        logger.warn('Already a wall at '+x+' '+y,classname);
+        return;
+    }
+
+    existing = room.lookForAt(LOOK_CONSTRUCTION_SITES,x,y);
     if(existing.length){
         logger.warn('Existing CS at '+x+' '+y,classname);
         return;
