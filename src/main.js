@@ -40,6 +40,8 @@ module.exports.loop = function () {
         }
     }
     tick('Cleaned Memory');
+
+    return;
     spawnDecider.spawn();
     tick('SpawnDecide');
     towerAttack.attack();
