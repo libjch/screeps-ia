@@ -15,6 +15,7 @@ var recorder = require('stats.record');
 
 var roadPlanner = require('road.planner');
 var extensionPlanner = require('extension.planner');
+var towerPlanner = require('tower.planner');
 
 var logger = require('logger');
 
@@ -34,6 +35,7 @@ module.exports.loop = function () {
     roleExtractor.cleanExtractors();
     roadPlanner.checkRoads();
     extensionPlanner.checkExtensions();
+    towerPlanner.checkTowers();
 
     var creeps = [];
 

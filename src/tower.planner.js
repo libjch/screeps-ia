@@ -11,13 +11,13 @@ var classname = 'ExtensionPlanner';
  * mod.thing == 'a thing'; // true
  */
 
-function getAvailableExtensionsNumber(room) {
-    return CONTROLLER_STRUCTURES.extension[room.controller.level];
+function getAvailableTowersNumber(room) {
+    return CONTROLLER_STRUCTURES.tower[room.controller.level];
 }
 
 module.exports = {
-    checkExtensions: function(){
-        if(Game.time % 100 == 10){
+    checkTowers: function(){
+        if(Game.time % 100 == 20){
             for(var roomName in Game.rooms) {
                 var room = Game.rooms[roomName];
                 if (room.controller && room.controller.my) {
@@ -25,27 +25,27 @@ module.exports = {
                     var number = 0;
                     var extensions = room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
-                            return (structure.structureType == STRUCTURE_EXTENSION);
+                            return (structure.structureType == STRUCTURE_TOWER);
                         }
                     });
                     number += extensions.length;
 
                     var extensionsSites = room.find(FIND_CONSTRUCTION_SITES, {
                         filter: (csite) => {
-                            return (csite.structureType == STRUCTURE_EXTENSION);
+                            return (csite.structureType == STRUCTURE_TOWER);
                         }
                     });
 
                     number += extensionsSites.length;
 
-                    logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
+                    logger.log("Number of towsers: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
 
                     //Availables extensions:
                     var avails = getAvailableExtensionsNumber(room);
 
                     if(number < avails){
                         //Find 1st spot available around spawn:
-                        var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_EXTENSION);
+                        var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_TOWER);
                         if(res == OK){
                             number++;
                         }
