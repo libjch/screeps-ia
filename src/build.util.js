@@ -40,7 +40,7 @@ function findBuildPositionInRoom(room,structureType){
         //X
         for(let dxs = -1; dxs <2;dxs +=2) { //go both ways
             var dx = dist * dxs;
-            for(let dy = 0; dy < dist; dy++) {
+            for(let dy = 0; dy <= dist; dy++) {
                 for (let dys = -1; dys < 2; dys += 2) { //search both ways
                     if(tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType)==OK){
                         return OK;
@@ -52,7 +52,7 @@ function findBuildPositionInRoom(room,structureType){
         //Y
         for(let dys = -1; dys <2;dys +=2) { //go both ways
             var dy = dist * dys;
-            for(let dx = 0; dx < dist; dx++) {
+            for(let dx = 0; dx <= dist; dx++) {
                 for (let dxs = -1; dxs < 2; dxs += 2) { //search both ways
                     if(tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType)==OK){
                         return OK;
