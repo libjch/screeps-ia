@@ -32,17 +32,17 @@ module.exports = {
                     var x = 0;
                     for(let y = 0;y<49;y++){
                         if(entrances[y][0] == 'plain'){
-
                             if(y == exit.y){
+                                //logger.debug('Create Rampart? '+x+' '+y);
                                 var res = room.createConstructionSite(x,y,STRUCTURE_RAMPART);
-                                if(res != ERR_INVALID_TARGET){
+                                //if(res != ERR_INVALID_TARGET){
                                     logger.debug("Create Rampart:" +res ,classname);
-                                }
+                                //}
                             }else{
                                 var res = room.createConstructionSite(x,y,STRUCTURE_WALL);
-                                if(res != ERR_INVALID_TARGET){
+                                //if(res != ERR_INVALID_TARGET){
                                     logger.debug("Create wall:" +res ,classname);
-                                }
+                                //}
                             }
                         }
                     }
