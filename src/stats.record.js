@@ -86,4 +86,11 @@ function record() {
     Memory.stats["creep.repairer.out.count"] = repairersOut.length;
 
     Memory.stats["creep.attacker.count"] = attackers.length;
+
+    Memory.stats["game.time"] = Game.time;
+    Memory.stats["game.cpu.limit"] = Game.cpu.limit;
+    Memory.stats["game.cpu.tickLimit"] = Game.cpu.tickLimit;
+    Memory.stats["game.cpu.bucket"] = Game.cpu.bucket;
+    Memory.stats["game.cpu.use"] = Game.cpu.getUsed();
+
 }

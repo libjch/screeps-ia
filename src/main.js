@@ -21,22 +21,34 @@ var logger = require('logger');
 
 var classname = 'Main';
 
+var lastCpu = 0;
+
+function tick(step){
+    var nowCpu = Game.cpu.getUsed();
+    logger.trace('CPU Usage '+step+': '+ (nowCpu - lastCpu);
+    lastCpu = nowCpu;
+}
+
 module.exports.loop = function () {
     logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
-
+    var lastCpu = Game.cpu.getUsed();
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
         }
     }
     spawnDecider.spawn();
+    tick('SpawnDecide');
     towerAttack.attack();
-
+    tick('TowerAttack');
     roleExtractor.cleanExtractors();
+    tick('Extractors');
     roadPlanner.checkRoads();
+    tick('CheckRoads');
     extensionPlanner.checkExtensions();
+    tick('CheckExtensions');
     towerPlanner.checkTowers();
-
+    tick('CheckTowers');
     var creeps = [];
 
     for(var name in Game.creeps) {
@@ -54,7 +66,7 @@ module.exports.loop = function () {
     });
 
 
-
+    tick('StartCreeps');
     for(let creep of creeps) {
 
         //pickup dropped enery;
@@ -120,9 +132,11 @@ module.exports.loop = function () {
             logger.error("ERROR  "+e,classname);
             logger.error('         ',classname)
         }
-    }
 
+        tick('Creep '+creep.name);
+    }
     recorder.record();
+    tick('RecordStats');
 };
 
 //Game.spawns.Spawn1.createCreep([WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY],'JC', {role: 'builder', extern: false,number:1,roomnumber:0,mainroom:'E43S38'});

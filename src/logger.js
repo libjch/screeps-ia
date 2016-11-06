@@ -5,10 +5,12 @@ var ScreepsLogger = {
     debug: debug,
     warn: warn,
     error: error,
+    trace: trace,
     highlight: highlight
 }
 
 var colors = {
+    '6': '#00DDCC',
     '5': '#ff0066',
     '4': '#e65c00',
     '3': '#809fff',
@@ -55,6 +57,11 @@ function warn(message, classname = ''){
 
 function error(message, classname = ''){
     _log(message,5, classname);
+}
+
+
+function trace(message, classname = ''){
+    _log(message,6, classname);
 }
 
 
