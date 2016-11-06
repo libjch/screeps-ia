@@ -10,12 +10,26 @@ var classname = 'WallPlanner';
  * var mod = require('road.planner');
  * mod.thing == 'a thing'; // true
  */
-
+var spawn = undefined;
 
 function checkAndBuild(room,x,y,type){
-    logger.log(room.lookAt(x,y));
+    var existing = room.lookForAt(LOOK_CONSTRUCTION_SITES,x,y);
+    if(existing.length){
+        logger.warn('Existing CS at '+x+' '+y);
+        return;
+    }
+    existing = room.lookForAt(LOOK_STRUCTURES,x,y);
+    if(existing.length){
+        logger.warn('Existing STR at '+x+' '+y);
+        return;
+    }
 
-    //room.createConstructionSite(x, y, type);
+    if(spawn.pos.findPathTo(x,y).length) {
+        room.createConstructionSite(x, y, type);
+    }
+    else{
+        logger.warn('No path found to '+x+' '+y);
+    }
 }
 
 module.exports = {
@@ -27,7 +41,7 @@ module.exports = {
                     //var exits = Game.map.describeExits(roomName);
 
                     var spawns = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
-                    var spawn = spawns[0];
+                    spawn = spawns[0];
                     logger.debug(spawn+" "+spawn.pos,classname);
 
                     {//Left wall:
