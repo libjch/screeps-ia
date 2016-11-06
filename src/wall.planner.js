@@ -12,6 +12,10 @@ var classname = 'WallPlanner';
  */
 
 
+function checkAndBuild(room,x,y,type){
+    room.createConstructionSite(x, y, type);
+}
+
 module.exports = {
     checkWalls: function(){
         if(Game.time % 100 == 30){
@@ -34,24 +38,24 @@ module.exports = {
                             if (entrances[y][0] == 'plain') {
                                 if (entrances[y - 1][0] == 'wall') {
                                     //new border
-                                    room.createConstructionSite(x, y - 1, STRUCTURE_WALL);
-                                    room.createConstructionSite(x, y - 2, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 1, y - 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y - 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 1, y - 2, STRUCTURE_WALL);
                                 }
                                 if (entrances[y + 1][0] == 'wall') {
                                     //last of a border
-                                    room.createConstructionSite(x, y + 1, STRUCTURE_WALL);
-                                    room.createConstructionSite(x, y + 2, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 1, y + 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y + 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y + 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 1, y + 2, STRUCTURE_WALL);
                                 }
                                 if (y == exit.y) {
                                     //logger.debug('Create Rampart? '+x+' '+y);
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create wall:" + res, classname);
                                     //}
@@ -69,24 +73,24 @@ module.exports = {
                             if (entrances[y][49] == 'plain') {
                                 if (entrances[y - 1][49] == 'wall') {
                                     //new border
-                                    room.createConstructionSite(x, y - 1, STRUCTURE_WALL);
-                                    room.createConstructionSite(x, y - 2, STRUCTURE_WALL);
-                                    room.createConstructionSite(x + 1, y - 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y - 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x + 1, y - 2, STRUCTURE_WALL);
                                 }
                                 if (entrances[y + 1][49] == 'wall') {
                                     //last of a border
-                                    room.createConstructionSite(x, y + 1, STRUCTURE_WALL);
-                                    room.createConstructionSite(x, y + 2, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 1, y + 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y + 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x, y + 2, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 1, y - 2, STRUCTURE_WALL);
                                 }
                                 if (y == exit.y) {
                                     //logger.debug('Create Rampart? '+x+' '+y);
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create wall:" + res, classname);
                                     //}
@@ -103,24 +107,24 @@ module.exports = {
                             if (entrances[0][x] == 'plain') {
                                 if (entrances[0][x-1] == 'wall') {
                                     //new border
-                                    room.createConstructionSite(x - 1, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 2, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 2, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 1, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 2, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 2, y - 1, STRUCTURE_WALL);
                                 }
                                 if (entrances[0][x+1] == 'wall') {
                                     //last of a border
-                                    room.createConstructionSite(x+1, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x+2, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x+2, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+1, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+2, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+2, y - 1, STRUCTURE_WALL);
                                 }
                                 if (x == exit.x) {
                                     //logger.debug('Create Rampart? '+x+' '+y);
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create wall:" + res, classname);
                                     //}
@@ -137,24 +141,24 @@ module.exports = {
                             if (entrances[49][x] == 'plain') {
                                 if (entrances[49][x-1] == 'wall') {
                                     //new border
-                                    room.createConstructionSite(x - 1, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 2, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x - 2, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 1, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 2, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x - 2, y + 1, STRUCTURE_WALL);
                                 }
                                 if (entrances[49][x+1] == 'wall') {
                                     //last of a border
-                                    room.createConstructionSite(x+1, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x+2, y, STRUCTURE_WALL);
-                                    room.createConstructionSite(x+2, y - 1, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+1, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+2, y, STRUCTURE_WALL);
+                                    checkAndBuild(room,x+2, y + 1, STRUCTURE_WALL);
                                 }
                                 if (x == exit.x) {
                                     //logger.debug('Create Rampart? '+x+' '+y);
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
-                                    var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
+                                    var res = checkAndBuild(room,x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
                                     //logger.debug("Create wall:" + res, classname);
                                     //}
