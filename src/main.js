@@ -31,12 +31,14 @@ function tick(step){
 
 module.exports.loop = function () {
     logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
-    var lastCpu = Game.cpu.getUsed();
+
+    lastCpu = Game.cpu.getUsed();
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
         }
     }
+    tick('Cleaned Memory');
     spawnDecider.spawn();
     tick('SpawnDecide');
     towerAttack.attack();
