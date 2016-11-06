@@ -23,12 +23,12 @@ function checkAndBuild(room,x,y,type){
 
     existing = room.lookForAt(LOOK_CONSTRUCTION_SITES,x,y);
     if(existing.length){
-        logger.warn('Existing CS at '+x+' '+y,classname);
+        //logger.warn('Existing CS at '+x+' '+y,classname);
         return;
     }
     existing = room.lookForAt(LOOK_STRUCTURES,x,y);
     if(existing.length){
-        logger.warn('Existing STR at '+x+' '+y,classname);
+        //logger.warn('Existing STR at '+x+' '+y,classname);
         return;
     }
 
