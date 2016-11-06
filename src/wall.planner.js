@@ -32,6 +32,18 @@ module.exports = {
                     var x = 2;
                     for(let y = 0;y<49;y++){
                         if(entrances[y][0] == 'plain'){
+                            if(entrances[y-1][0] == 'wall'){
+                                //new border
+                                room.createConstructionSite(x,y-1,STRUCTURE_WALL);
+                                room.createConstructionSite(x,y-2,STRUCTURE_WALL);
+                                room.createConstructionSite(x-1,y-2,STRUCTURE_WALL);
+                            }
+                            if(entrances[y+1][0] == 'wall'){
+                                //last of a border
+                                room.createConstructionSite(x,y+1,STRUCTURE_WALL);
+                                room.createConstructionSite(x,y+2,STRUCTURE_WALL);
+                                room.createConstructionSite(x-1,y+2,STRUCTURE_WALL);
+                            }
                             if(y == exit.y){
                                 //logger.debug('Create Rampart? '+x+' '+y);
                                 var res = room.createConstructionSite(x,y,STRUCTURE_RAMPART);
