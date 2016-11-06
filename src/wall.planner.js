@@ -37,7 +37,7 @@ function checkAndBuild(room,x,y,type){
 
         var res = "";
         for(let step of path){
-            res += step;
+            res += "("+step.x+','+step.y+')';
         }
         console.log('Path find to '+x+' '+y+' '+res);
 
