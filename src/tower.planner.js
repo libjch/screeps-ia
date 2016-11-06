@@ -17,7 +17,7 @@ function getAvailableTowersNumber(room) {
 
 module.exports = {
     checkTowers: function(){
-        if(Game.time % 2 == 0){
+        if(true || Game.time % 100 == 20){
             for(var roomName in Game.rooms) {
                 var room = Game.rooms[roomName];
                 if (room.controller && room.controller.my) {
