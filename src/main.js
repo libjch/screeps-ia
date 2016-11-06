@@ -22,7 +22,7 @@ var logger = require('logger');
 var classname = 'Main';
 
 module.exports.loop = function () {
-    logger.highlight('========== NEW TURN ============',classname);
+    logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
 
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
