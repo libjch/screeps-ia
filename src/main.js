@@ -23,9 +23,14 @@ var classname = 'Main';
 
 var lastCpu = 0;
 
+function printFloat(value){
+    return (''+value).substr(0,5);
+}
+
 function tick(step){
     var nowCpu = Game.cpu.getUsed();
-    logger.trace('CPU Usage '+step+': '+ (nowCpu - lastCpu)+' total:'+nowCpu);
+    step = (step+'               ').substr(0,15);
+    logger.trace('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
     lastCpu = nowCpu;
 }
 
