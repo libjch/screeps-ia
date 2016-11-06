@@ -1,7 +1,7 @@
 
 var logger = require('logger');
 var buildUtil = require('build.util');
-var classname = 'ExtensionPlanner';
+var classname = 'WallPlanner';
 /*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';

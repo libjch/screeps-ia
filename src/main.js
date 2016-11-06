@@ -16,6 +16,7 @@ var recorder = require('stats.record');
 var roadPlanner = require('road.planner');
 var extensionPlanner = require('extension.planner');
 var towerPlanner = require('tower.planner');
+var wallPlanner = require('wall.planner');
 
 var logger = require('logger');
 
@@ -62,6 +63,9 @@ module.exports.loop = function () {
     tick('CheckExtensions');
     towerPlanner.checkTowers();
     tick('CheckTowers');
+    wallPlanner.checkWalls();
+    tick('wallPlanners');
+
     var creeps = [];
 
     for(var name in Game.creeps) {
