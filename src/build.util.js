@@ -13,7 +13,7 @@ function tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType){
     var y = roomSpawn.pos.y + (dy*dys);
     logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2));
     if(dx%2 == dy%2){ //on the grid
-        var res = room.createConstructionSite(x, y, structureType);
+        var res = roomSpawn.room.createConstructionSite(x, y, structureType);
         logger.warn("Create " + structureType+ " at:"+x+' '+y+' '+res,classname);
         return res;
     }
