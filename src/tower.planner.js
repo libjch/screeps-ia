@@ -41,7 +41,7 @@ module.exports = {
                     logger.log("Number of towsers: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
 
                     //Availables extensions:
-                    var avails = getAvailableExtensionsNumber(room);
+                    var avails = getAvailableTowersNumber(room);
 
                     if(number < avails){
                         //Find 1st spot available around spawn:
