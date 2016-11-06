@@ -20,7 +20,7 @@ function tryBuildAtPosition(roomSpawn,dx,dxs,dy,dys,structureType){
 }
 
 function findBuildPositionInRoom(room,structureType){
-    logger.debug("Find Build spot in room: "+room.name);
+    logger.debug("Find Build spot in room: "+room);
 
     var roomSpawn = undefined;
     for(var i in Game.spawns) {

@@ -31,8 +31,7 @@ function tick(step){
 
 module.exports.loop = function () {
     logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
-
-    lastCpu = Game.cpu.getUsed();
+    tick('Start');
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             logger.warn("Delete creep:"+Memory.creeps[i]);
