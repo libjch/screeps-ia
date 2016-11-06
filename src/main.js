@@ -35,6 +35,7 @@ module.exports.loop = function () {
     lastCpu = Game.cpu.getUsed();
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
+            logger.warn("Delete creep:"+Memory.creeps[i]);
             delete Memory.creeps[i];
         }
     }
