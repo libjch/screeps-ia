@@ -22,7 +22,7 @@ module.exports = {
 
                     var spawn = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN});
 
-                    var exit = creep.pos.findClosestByPath(FIND_EXIT_LEFT);
+                    var exit = spawn.pos.findClosestByPath(FIND_EXIT_LEFT);
                     logger.debug(exit);
 
                     var ignoreList = {};
