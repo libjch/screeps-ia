@@ -29,7 +29,7 @@ module.exports = {
 
                     //Left wall:
                     var entrances = room.lookForAtArea(LOOK_TERRAIN,0,0,49,0);
-                    var x = 0;
+                    var x = 2;
                     for(let y = 0;y<49;y++){
                         if(entrances[y][0] == 'plain'){
                             if(y == exit.y){
