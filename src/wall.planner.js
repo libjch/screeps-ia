@@ -54,7 +54,7 @@ function checkAndBuild(room,x,y,type){
 
 module.exports = {
     checkWalls: function(){
-        if(Game.time % 100 == 30){
+        if(Game.time % 1000 == 30){
             for(var roomName in Game.rooms) {
                 var room = Game.rooms[roomName];
                 if (room.controller && room.controller.my) {
