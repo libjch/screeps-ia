@@ -48,12 +48,12 @@ module.exports = {
                                     //logger.debug('Create Rampart? '+x+' '+y);
                                     var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create Rampart:" + res, classname);
+                                    //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
                                     var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create wall:" + res, classname);
+                                    //logger.debug("Create wall:" + res, classname);
                                     //}
                                 }
                             }
@@ -83,12 +83,12 @@ module.exports = {
                                     //logger.debug('Create Rampart? '+x+' '+y);
                                     var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create Rampart:" + res, classname);
+                                    //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
                                     var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create wall:" + res, classname);
+                                    //logger.debug("Create wall:" + res, classname);
                                     //}
                                 }
                             }
@@ -117,12 +117,12 @@ module.exports = {
                                     //logger.debug('Create Rampart? '+x+' '+y);
                                     var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create Rampart:" + res, classname);
+                                    //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
                                     var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create wall:" + res, classname);
+                                    //logger.debug("Create wall:" + res, classname);
                                     //}
                                 }
                             }
@@ -151,12 +151,12 @@ module.exports = {
                                     //logger.debug('Create Rampart? '+x+' '+y);
                                     var res = room.createConstructionSite(x, y, STRUCTURE_RAMPART);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create Rampart:" + res, classname);
+                                    //logger.debug("Create Rampart:" + res, classname);
                                     //}
                                 } else {
                                     var res = room.createConstructionSite(x, y, STRUCTURE_WALL);
                                     //if(res != ERR_INVALID_TARGET){
-                                    logger.debug("Create wall:" + res, classname);
+                                    //logger.debug("Create wall:" + res, classname);
                                     //}
                                 }
                             }
