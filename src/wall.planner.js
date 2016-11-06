@@ -15,12 +15,12 @@ var classname = 'WallPlanner';
 function checkAndBuild(room,x,y,type){
     logger.log(room.lookAt(x,y));
 
-    room.createConstructionSite(x, y, type);
+    //room.createConstructionSite(x, y, type);
 }
 
 module.exports = {
     checkWalls: function(){
-        if(Game.time % 100 == 30){
+        if(true || Game.time % 100 == 30){
             for(var roomName in Game.rooms) {
                 var room = Game.rooms[roomName];
                 if (room.controller && room.controller.my) {
