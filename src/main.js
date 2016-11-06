@@ -151,12 +151,3 @@ module.exports.loop = function () {
     recorder.record();
     tick('RecordStats');
 };
-
-//Game.spawns.Spawn1.createCreep([WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY],'JC', {role: 'builder', extern: false,number:1,roomnumber:0,mainroom:'E43S38'});
-/*
- role: role,
- extern: extern,
- number: number,
- roomnumber: roomnumber,
- mainroom: roomName
- */

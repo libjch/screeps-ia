@@ -18,7 +18,7 @@ function record() {
 
     for(var room of rooms){
         logger.debug(room+' '+room.name,classname);
-        if(room){
+        if(room && room.mode != MODE_SIMULATION){
             if(room.controller.my){
                 Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
                 var roomCreeps = _.filter(Game.creeps, (creep) => creep.memory.mainroom == room.name);
