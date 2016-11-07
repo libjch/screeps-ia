@@ -54,7 +54,7 @@ module.exports.loop = function () {
     }
 
 
-    if(Game.cpu.bucket > 5000 || game.time % 10 == 0){
+    if(Game.cpu.bucket > 5000 || Game.time % 10 == 0){
         spawnDecider = require('spawn.decide');
         spawnDecider.spawn();
         tick('SpawnDecide');
