@@ -77,7 +77,7 @@ module.exports = {
                 }
             } else if(extractors.length < 2){
                 role = 'extractor';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                maxEnergy = maxEnergy > 1100 ? 1100 : maxEnergy;
             }
             else if (upgraders.length < 1) {
                 role = 'upgrader';
