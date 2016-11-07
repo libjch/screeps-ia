@@ -86,10 +86,10 @@ function findWall (creep) {
 
 function run (creep) {
     var target = undefined;
-    if(creep.room.name == creep.memory.mainroom && creep.room.name != creep.memory.target_room ){
+    if(creep.room.name == creep.memory.mainroom && creep.room.name != creep.memory.targetRoom ){
         target = findEnemyCreep(creep);
         if(!target){
-            var exitDir = creep.room.findExitTo(creep.memory.target_room);
+            var exitDir = creep.room.findExitTo(creep.memory.targetRoom);
             var exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(exit);
             logger.log("No creep main room "+exit,classname);
@@ -97,15 +97,15 @@ function run (creep) {
         }
     }
 
-    if(creep.room.name != creep.memory.target_room ){
-        var exitDir = creep.room.findExitTo(creep.memory.target_room);
+    if(creep.room.name != creep.memory.targetRoom ){
+        var exitDir = creep.room.findExitTo(creep.memory.targetRoom);
         var exit = creep.pos.findClosestByRange(exitDir);
         creep.moveTo(exit);
         logger.log("No creep main room "+exit,classname);
         return;
     }
 
-    if(creep.room.name == creep.memory.target_room){
+    if(creep.room.name == creep.memory.targetRoom){
         target = findEnemyStructure(creep);
         logger.info("Enemy structure: "+target,classname);
         if(!target){
