@@ -132,14 +132,12 @@ module.exports = {
                     body.push(CARRY);
                 }else if (role == 'attacker') {
                     var number = Math.floor(maxEnergy / 250);
-                    var rest = maxEnergy % 250;
+                    var rest = maxEnergy % 190;
                     number -= 1;
                     for (var i = 0; i < number; i++) {
                         body.push(TOUGH);
-                        body.push(TOUGH);
                     }
                     for (var i = 0; i < number; i++) {
-                        body.push(MOVE);
                         body.push(MOVE);
                         body.push(MOVE);
                     }
