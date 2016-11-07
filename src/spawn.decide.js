@@ -31,7 +31,7 @@ module.exports = {
             var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
             logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' (' + harvestersOut.length + ') ' +
-                'Builders:' + builders.length + ' (' + buildersOut.length + ')  ' +
+                'Builders:' + builders.length + ' (' + buildersOut.length + ' - ' + buildersHelpers.length + ' ) ' +
                 'Upgraders:' + upgraders.length + ' (' + upgradersOut.length + ')  ' +
                 'Repairers:' + repairers.length + ' (' + repairersOut.length + ')  ' +
                 'Attackers: ' + attackers.length+'  Extractors: '+extractors.length,classname);
