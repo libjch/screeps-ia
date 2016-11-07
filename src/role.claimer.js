@@ -14,7 +14,7 @@ function run (creep) {
     // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true});
 
 
-    var targetRoom = Game.rooms['E44S38'];
+    var targetRoom = Game.rooms['E14N18'];
 
     if(creep.room.name !== targetRoom.name){
         var exitDir = creep.room.findExitTo(targetRoom);
