@@ -64,8 +64,16 @@ function findWall (creep) {
             if ( object.structureType !== STRUCTURE_WALL && object.structureType !== STRUCTURE_RAMPART) {
                 return false;
             }
-            if(object.room.name == 'E44S37' && object.pos.y < 20){
-                return false;
+            if(object.room.name == 'E14N18'){
+                if(object.pos.x < 3) {
+                    return false;
+                }
+                if(object.pos.y < 3) {
+                    return false;
+                }
+                if(object.pos.x < 46) {
+                    return false;
+                }
             }
             return true;
         }
@@ -78,10 +86,10 @@ function findWall (creep) {
 
 function run (creep) {
     var target = undefined;
-    if(creep.room.name == creep.memory.mainroom && creep.room.name != constants.rooms().targets_path[0] ){
+    if(creep.room.name == creep.memory.mainroom && creep.room.name != creep.memory.target_room ){
         target = findEnemyCreep(creep);
         if(!target){
-            var exitDir = creep.room.findExitTo(constants.rooms().targets_path[0]);
+            var exitDir = creep.room.findExitTo(creep.memory.target_room);
             var exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(exit);
             logger.log("No creep main room "+exit,classname);
@@ -89,21 +97,15 @@ function run (creep) {
         }
     }
 
-    for (var i = 0; i < constants.rooms().targets_path.length-1; i++) {
-        if(i < constants.rooms().targets_path.length - 1){
-            if(creep.room.name == constants.rooms().targets_path[i]){
-                directionUtil.moveToRoom(creep,constants.rooms().targets_path[i+1]);
-                logger.debug('move exit: '+creep.moveTo(exit)+'  '+creep.room.name+' '+ (constants.rooms().targets_path[(i+1)])+' '+(i+1),classname);
-                return;
-            }
-        }else{
-            directionUtil.moveToRoom(creep,constants.rooms().targets_final);
-            logger.debug('move exit last '+creep.moveTo(exit),classname);
-            return;
-        }
+    if(creep.room.name != creep.memory.target_room ){
+        var exitDir = creep.room.findExitTo(creep.memory.target_room);
+        var exit = creep.pos.findClosestByRange(exitDir);
+        creep.moveTo(exit);
+        logger.log("No creep main room "+exit,classname);
+        return;
     }
 
-    if(creep.room.name == constants.rooms().targets_final){
+    if(creep.room.name == creep.memory.target_room){
         target = findEnemyStructure(creep);
         logger.info("Enemy structure: "+target,classname);
         if(!target){
