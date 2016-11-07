@@ -61,7 +61,7 @@ function error(message, classname = ''){
 
 
 function trace(message, classname = ''){
-    _log(message,6, classname);
+    _log(message,1, classname);
 }
 
 
