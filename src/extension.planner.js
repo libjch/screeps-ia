@@ -17,42 +17,41 @@ function getAvailableExtensionsNumber(room) {
 
 module.exports = {
     checkExtensions: function(){
-        if(Game.time % 100 == 10){
-            for(var roomName in Game.rooms) {
-                var room = Game.rooms[roomName];
-                if (room.controller && room.controller.my) {
+        for(var roomName in Game.rooms) {
+            var room = Game.rooms[roomName];
+            if (room.controller && room.controller.my) {
 
-                    var number = 0;
-                    var extensions = room.find(FIND_STRUCTURES, {
-                        filter: (structure) => {
-                            return (structure.structureType == STRUCTURE_EXTENSION);
-                        }
-                    });
-                    number += extensions.length;
+                var number = 0;
+                var extensions = room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION);
+                    }
+                });
+                number += extensions.length;
 
-                    var extensionsSites = room.find(FIND_CONSTRUCTION_SITES, {
-                        filter: (csite) => {
-                            return (csite.structureType == STRUCTURE_EXTENSION);
-                        }
-                    });
+                var extensionsSites = room.find(FIND_CONSTRUCTION_SITES, {
+                    filter: (csite) => {
+                        return (csite.structureType == STRUCTURE_EXTENSION);
+                    }
+                });
 
-                    number += extensionsSites.length;
+                number += extensionsSites.length;
 
-                    logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
+                logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
 
-                    //Availables extensions:
-                    var avails = getAvailableExtensionsNumber(room);
+                //Availables extensions:
+                var avails = getAvailableExtensionsNumber(room);
 
-                    if(number < avails){
-                        //Find 1st spot available around spawn:
-                        var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_EXTENSION);
-                        if(res == OK){
-                            number++;
-                        }
+                if(number < avails){
+                    //Find 1st spot available around spawn:
+                    var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_EXTENSION);
+                    if(res == OK){
+                        number++;
                     }
                 }
             }
-
         }
+
+
     }
 };

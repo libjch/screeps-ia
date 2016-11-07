@@ -12,25 +12,24 @@ var classname = 'RoadPlanner';
 
 module.exports = {
     checkRoads: function(){
-        if(Game.time % 100 == 0){
-            for(var roomName in Game.rooms) {
-                var room = Game.rooms[roomName];
-                if (room.controller && room.controller.my) {
-                    var sources = room.find(FIND_SOURCES);
+        for(var roomName in Game.rooms) {
+            var room = Game.rooms[roomName];
+            if (room.controller && room.controller.my) {
+                var sources = room.find(FIND_SOURCES);
 
-                    //Build roads from sources to controller
-                    for (let source of sources) {
-                        var path = room.findPath(source.pos, room.controller.pos, {ignoreCreeps: true});
-                        for (let i = 0; i < 20 && i < path.length; i++) {
-                            var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
-                            if(res != ERR_INVALID_TARGET){
-                                logger.debug("Create road:" +res ,classname);
-                            }
+                //Build roads from sources to controller
+                for (let source of sources) {
+                    var path = room.findPath(source.pos, room.controller.pos, {ignoreCreeps: true});
+                    for (let i = 0; i < 20 && i < path.length; i++) {
+                        var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
+                        if(res != ERR_INVALID_TARGET){
+                            logger.debug("Create road:" +res ,classname);
                         }
                     }
                 }
             }
-
         }
+
+
     }
 };

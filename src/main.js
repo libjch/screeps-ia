@@ -1,25 +1,26 @@
-var roleHarvester = require('role.harvester');
-var roleHarvesterContainer = require('role.harvester.container');
-var roleUpgrader = require('role.upgrader');
-var roleUpgraderContainer =  require('role.upgrader.container');
-var roleBuilder = require('role.builder');
-var roleRepairer = require('role.repairer');
-var roleAttacker = require('role.attacker');
-var roleClaimer = require('role.claimer');
-var roleExtractor = require('role.extractor');
+var roleHarvester;
+var roleHarvesterContainer;
+var roleUpgrader;
+var roleUpgraderContainer;
+var roleBuilder;
+var roleRepairer;
+var roleAttacker;
+var roleClaimer;
+var roleExtractor;
 
-var spawnDecider = require('spawn.decide');
-var towerAttack = require('tower.attack');
+var spawnDecider;
+var towerAttack;
 
-var recorder = require('stats.record');
+var recorder;
 
-var roadPlanner = require('road.planner');
-var extensionPlanner = require('extension.planner');
-var towerPlanner = require('tower.planner');
-var wallPlanner = require('wall.planner');
+var roadPlanner;
+var extensionPlanner;
+var towerPlanner;
+var wallPlanner;
+
+
 
 var logger = require('logger');
-
 var classname = 'Main';
 
 var lastCpu = 0;
@@ -52,26 +53,61 @@ module.exports.loop = function () {
         tick('Cleaned Memory');
     }
 
-    spawnDecider.spawn();
-    tick('SpawnDecide');
+
+    if(Game.cpu.bucket > 5000 || game.time % 10 == 0){
+        spawnDecider = require('spawn.decide');
+        spawnDecider.spawn();
+        tick('SpawnDecide');
+    }
+
+    towerAttack = require('tower.attack');
     towerAttack.attack();
     tick('TowerAttack');
-    roleExtractor.cleanExtractors();
-    tick('Extractors');
-    roadPlanner.checkRoads();
-    tick('CheckRoads');
-    extensionPlanner.checkExtensions();
-    tick('CheckExtensions');
-    towerPlanner.checkTowers();
-    tick('CheckTowers');
 
-    try{
-        wallPlanner.checkWalls();
-
-    }catch(e) {
-        logger.error("ERROR  "+e,classname);
+    if(Game.time % 10 == 1) {
+        roleExtractor = require('role.extractor');
+        roleExtractor.cleanExtractors();
+        tick('Extractors');
     }
-    tick('wallPlanners');
+
+    if(Game.time % 100 == 2) {
+        roadPlanner = require('road.planner');
+        roadPlanner.checkRoads();
+        tick('CheckRoads');
+    }
+
+    if(Game.time % 100 == 3) {
+        extensionPlanner = require('extension.planner');
+        extensionPlanner.checkExtensions();
+        tick('CheckExtensions');
+    }
+
+    if(Game.time % 100 == 4) {
+        towerPlanner = require('tower.planner');
+        towerPlanner.checkTowers();
+        tick('CheckTowers');
+    }
+
+    if(Game.time % 1000 == 5){
+        wallPlanner = require('wall.planner');
+        try{
+            wallPlanner.checkWalls();
+        }catch(e) {
+            logger.error("ERROR  "+e,classname);
+        }
+        tick('wallPlanners');
+    }
+
+    roleHarvester = require('role.harvester');
+    roleHarvesterContainer = require('role.harvester.container');
+    roleUpgrader = require('role.upgrader');
+    roleUpgraderContainer =  require('role.upgrader.container');
+    roleBuilder = require('role.builder');
+    roleRepairer = require('role.repairer');
+    roleAttacker = require('role.attacker');
+    roleClaimer = require('role.claimer');
+    roleExtractor = require('role.extractor');
+    tick('Load creeps scripts');
 
     var creeps = [];
 
@@ -82,7 +118,6 @@ module.exports.loop = function () {
     creeps.sort(function(a, b){
         if(a.memory.mainroom < b.memory.mainroom) return -1;
         if(a.memory.mainroom > b.memory.mainroom) return 1;
-
 
         if(a.memory.role < b.memory.role) return -1;
         if(a.memory.role > b.memory.role) return 1;
@@ -163,6 +198,8 @@ module.exports.loop = function () {
 
         tick('Creep '+creep.name);
     }
+
+    recorder = require('stats.record');
     recorder.record();
     tick('RecordStats');
 };
