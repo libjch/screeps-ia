@@ -30,7 +30,7 @@ function tick(step){
     var nowCpu = Game.cpu.getUsed();
     step = (step+'               ').substr(0,15);
     if(nowCpu - lastCpu > 1){
-        logger.warn('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
+        logger.error('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
     }else{
         logger.trace('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
     }
