@@ -23,8 +23,30 @@ module.exports = {
                     for (let i = 0; i < 20 && i < path.length; i++) {
                         var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
                         if(res != ERR_INVALID_TARGET){
-                            logger.debug("Create road:" +res ,classname);
+                            logger.debug("Create road to controller:" +res ,classname);
                         }
+                    }
+                }
+
+                var roomSpawn = undefined;
+                for(var i in Game.spawns) {
+                    var spawn = Game.spawns[i];
+                    if(spawn.room == room){
+                        roomSpawn = spawn;
+                        break;
+                    }
+                }
+                //Build around spawner
+                if(roomSpawn == undefined){
+                    logger.error('No spawn found for room '+roomName,classname);
+                   continue;
+                }
+
+                var path = room.findPath(roomSpawn.pos, room.controller.pos, {ignoreCreeps: true});
+                for (let i = 0; i < 20 && i < path.length; i++) {
+                    var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
+                    if(res != ERR_INVALID_TARGET){
+                        logger.debug("Create road to spawnCenter:" +res ,classname);
                     }
                 }
             }

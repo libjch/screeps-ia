@@ -56,7 +56,7 @@ module.exports.loop = function () {
     }
 
 
-    if(Game.cpu.bucket > 5000 || Game.time % 10 == 0){
+    if(Game.time % 10 == 0 && Game.cpu.bucket > 1000){
         spawnDecider = require('spawn.decide');
         spawnDecider.spawn();
         tick('SpawnDecide');
@@ -66,31 +66,31 @@ module.exports.loop = function () {
     towerAttack.attack();
     tick('TowerAttack');
 
-    if(Game.time % 10 == 1) {
+    if(Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
         roleExtractor = require('role.extractor');
         roleExtractor.cleanExtractors();
         tick('Extractors');
     }
 
-    if(Game.time % 100 == 2) {
+    if(Game.time % 100 == 22) {
         roadPlanner = require('road.planner');
         roadPlanner.checkRoads();
         tick('CheckRoads');
     }
 
-    if(Game.time % 100 == 3) {
+    if(Game.time % 100 == 33) {
         extensionPlanner = require('extension.planner');
         extensionPlanner.checkExtensions();
         tick('CheckExtensions');
     }
 
-    if(Game.time % 100 == 4) {
+    if(Game.time % 100 == 44) {
         towerPlanner = require('tower.planner');
         towerPlanner.checkTowers();
         tick('CheckTowers');
     }
 
-    if(Game.time % 1000 == 5){
+    if(Game.time % 200 == 55){
         wallPlanner = require('wall.planner');
         try{
             wallPlanner.checkWalls();
