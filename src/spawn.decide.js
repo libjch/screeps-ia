@@ -103,11 +103,12 @@ module.exports = {
             } else if (enableExterns && harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
-            }/* else if (buildersOut.length < 1) { //+1
-             role = 'builder';
-             maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-             extern = true;
-             } else if (repairersOut.length < 1) { //+1
+            } else if (buildersOut.length < 1) { //+1
+                role = 'builder';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                extern = true;
+                targetroom = 'E14N18';
+            }/* else if (repairersOut.length < 1) { //+1
              role = 'repairer';
              maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
              extern = true;

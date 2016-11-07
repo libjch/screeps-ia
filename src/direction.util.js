@@ -11,9 +11,9 @@ module.exports = {
 
 function moveToRoom(creep,targetRoom){
     logger.info('Move from '+creep.room.name+' to '+targetRoom,classname);
-    var exitDir = creep.room.findExitTo(constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+    var exitDir = creep.room.findExitTo(targetRoom);
     var exit = creep.pos.findClosestByPath(exitDir);
-    logger.debug('Change room other: '+ creep.moveTo(exit)+' '+targetPos+' from '+creep.room.name,classname);
+    logger.debug('Change room other: '+ creep.moveTo(exit)+' '+targetRoom+' from '+creep.room.name,classname);
 }
 
 function findSourceInRoom(creep){
