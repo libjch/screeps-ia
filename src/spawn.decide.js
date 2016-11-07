@@ -5,6 +5,13 @@ module.exports = {
 
     spawn(){
         logger.warn('=======Spawns======',classname)
+
+        if(Game.cpu.bucket < 5000){
+            if(Game.time % 10 != 0){
+                return;
+            }
+        }
+
         for(var i in Game.spawns) {
             var spawn = Game.spawns[i];
             var room = spawn.room;
