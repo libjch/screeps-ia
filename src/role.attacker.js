@@ -71,7 +71,7 @@ function findWall (creep) {
                 if(object.pos.y < 3) {
                     return false;
                 }
-                if(object.pos.x < 46) {
+                if(object.pos.x > 46) {
                     return false;
                 }
             }
