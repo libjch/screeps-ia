@@ -104,8 +104,11 @@ module.exports.loop = function () {
 
         var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;
 
+        if(!creep.memory.spawnroom){
+            creep.memory.spawnroom = creep.memory.mainroom;
+        }
         //run roles
-        //try{
+        try{
             var role = creep.memory.role;
 
             if(creep.memory.role_override){
@@ -150,12 +153,12 @@ module.exports.loop = function () {
             }else if(role == 'extractor'){
                 roleExtractor.run(creep);
             }
-        /*}catch(e){
+        }catch(e){
             logger.error('         ',classname)
             logger.error("ERROR  "+e,classname);
             logger.error('         ',classname)
             throw e;
-        }*/
+        }
 
         tick('Creep '+creep.name);
     }

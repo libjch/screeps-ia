@@ -11,22 +11,24 @@ module.exports = {
             var roomName = room.name;
 
 
-            var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' || creep.memory.role == 'harvester-c') && creep.memory.extern == false && creep.memory.mainroom == roomName);
+            var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' || creep.memory.role == 'harvester-c') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
             var harvestersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.extern == true && creep.memory.mainroom == roomName);
 
-            var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.mainroom == roomName);
-            var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true && creep.memory.mainroom == roomName);
-
-            var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader'  || creep.memory.role == 'upgrader-c') && creep.memory.extern == false && creep.memory.mainroom == roomName);
-            var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true && creep.memory.mainroom == roomName);
+            var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
+            var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
+            var buildersHelpers = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.spawnroom == roomName && creep.memory.mainroom != roomName);
 
 
-            var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == false && creep.memory.mainroom == roomName);
-            var repairersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == true && creep.memory.mainroom == roomName);
+            var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader'  || creep.memory.role == 'upgrader-c') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
+            var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
 
-            var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.mainroom == roomName);
 
-            var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.mainroom == roomName);
+            var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
+            var repairersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
+
+            var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.spawnroom == roomName);
+
+            var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
             logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' (' + harvestersOut.length + ') ' +
                 'Builders:' + builders.length + ' (' + buildersOut.length + ')  ' +
@@ -64,6 +66,8 @@ module.exports = {
             var extern = false;
             var roomnumber = undefined;
             var targetroom = undefined;
+
+            var mainroom = roomName;
 
             if(harvesters.length == 0 && energy >= 300){
                 maxEnergy = energy;
@@ -103,11 +107,10 @@ module.exports = {
             } else if (enableExterns && harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
                 extern = true;
-            } else if (buildersOut.length < 1) { //+1
+            } else if (buildersHelpers.length < 1) { //+1
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-                extern = true;
-                targetroom = 'E14N18';
+                mainroom = 'E14N18';
             }/* else if (repairersOut.length < 1) { //+1
              role = 'repairer';
              maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
@@ -213,7 +216,10 @@ module.exports = {
                     extern: extern,
                     number: number,
                     roomnumber: roomnumber,
-                    mainroom: roomName,
+
+                    mainroom: mainroom,
+                    spawnroom: roomName,
+
                     externRoom: externRoomNumber,
                     targetRoom: targetroom
                 });
