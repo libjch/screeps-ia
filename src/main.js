@@ -157,7 +157,7 @@ module.exports.loop = function () {
             logger.error('         ',classname)
             logger.error("ERROR  "+e,classname);
             logger.error('         ',classname)
-            throw e;
+            Game.notify(e);
         }
 
         tick('Creep '+creep.name);
