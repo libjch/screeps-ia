@@ -42,14 +42,15 @@ module.exports.loop = function () {
 
     tick('Start');
 
-
-    for(var i in Memory.creeps) {
-        if(!Game.creeps[i]) {
-            logger.warn("Delete creep:"+Memory.creeps[i]);
-            delete Memory.creeps[i];
+    if(Game.time % 100 == 0){
+        for(var i in Memory.creeps) {
+            if(!Game.creeps[i]) {
+                logger.warn("Delete creep:"+Memory.creeps[i]);
+                delete Memory.creeps[i];
+            }
         }
+        tick('Cleaned Memory');
     }
-    tick('Cleaned Memory');
 
     spawnDecider.spawn();
     tick('SpawnDecide');

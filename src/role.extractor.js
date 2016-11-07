@@ -1,4 +1,4 @@
-var constants = require('global.variables');
+//var constants = require('global.variables');
 var direction = require('direction.util');
 var logger = require('logger');
 var classname = 'RoleExtractor';
@@ -30,6 +30,8 @@ var roleExtractor = {
                 logger.debug('Container : '+target+' '+creep.memory.extractor+' '+creep.memory.extractor.containerId,classname);
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos,classname);
+                }else{
+                    logger.warn("Transfer to container: "+creep.transfer(target, RESOURCE_ENERGY));
                 }
             }else {
                 if (creep.room.name != creep.memory.mainroom) {
@@ -39,7 +41,7 @@ var roleExtractor = {
         }
         else{ //NOT harvesting
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
-                direction.moveToRoom(creep,(constants.rooms().others[creep.memory.mainroom])[creep.memory.externRoom]);
+                direction.moveToRoom(creep,creep.memory.externRoom);
             }else{
                 if(!creep.memory.extractor){
                     creep.memory.extractor = {};
