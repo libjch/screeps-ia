@@ -95,7 +95,7 @@ var roleBuilder = {
         }
         else {
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
-                direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+                direction.moveToRoom(creep,creep.memory.targetRoom);
             }else{
                 direction.findSourceInRoom(creep);
             }
