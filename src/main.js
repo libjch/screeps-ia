@@ -7,12 +7,9 @@ var roleRepairer;
 var roleAttacker;
 var roleClaimer;
 var roleExtractor;
-
 var spawnDecider;
 var towerAttack;
-
 var recorder;
-
 var roadPlanner;
 var extensionPlanner;
 var towerPlanner;
@@ -32,7 +29,11 @@ function printFloat(value){
 function tick(step){
     var nowCpu = Game.cpu.getUsed();
     step = (step+'               ').substr(0,15);
-    logger.trace('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
+    if(nowCpu - lastCpu > 1){
+        logger.trace('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
+    }else{
+        logger.warn('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
+    }
     lastCpu = nowCpu;
 }
 

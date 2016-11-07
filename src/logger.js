@@ -10,7 +10,7 @@ var ScreepsLogger = {
 }
 
 var colors = {
-    '6': '#00DDCC',
+    '6': '#798686',
     '5': '#ff0066',
     '4': '#e65c00',
     '3': '#809fff',
