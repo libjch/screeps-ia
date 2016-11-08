@@ -14,6 +14,7 @@ var roadPlanner;
 var extensionPlanner;
 var towerPlanner;
 var wallPlanner;
+var storagePlanner;
 
 
 
@@ -100,6 +101,12 @@ module.exports.loop = function () {
             logger.error("ERROR  "+e,classname);
         }
         tick('wallPlanners');
+    }
+
+    if(Game.time % 100 == 66) {
+        storagePlanner = require('storage.planner');
+        storagePlanner.checkStorage();
+        tick('CheckStorage');
     }
 
     roleHarvester = require('role.harvester');
