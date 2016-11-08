@@ -76,10 +76,10 @@ module.exports = {
 
             if (harvesters.length < 2) {
                 role = 'harvester';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if(extractors.length < 2){
                 role = 'extractor';
-                maxEnergy = maxEnergy > 1100 ? 1100 : maxEnergy;
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } /*else if (false && (roomName == 'E14N19')  && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
@@ -90,14 +90,14 @@ module.exports = {
 
             else if (upgraders.length < 1) {
                 role = 'upgrader';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }
             else if (constructionsSites.length / 8 > builders.length && builders.length < 1) {
                 role = 'builder';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (repairers.length < 1) {
                 role = 'repairer';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
             } else if (upgraders.length < 2) {
