@@ -28,9 +28,6 @@ function init(){
     for(let name in Memory.logger){
         mutedLogger[name] = true;
     }
-    var classname = 'RoleUpgrader';
-    console.log(classname+" "+mutedLogger[classname])
-
 }
 
 function _log(message, severity, classname = '') {
