@@ -79,7 +79,7 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if(extractors.length < 2){
                 role = 'extractor';
-                maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
+                maxEnergy = maxEnergy > 1000 ? 1000 : maxEnergy;
             } /*else if (false && (roomName == 'E14N19')  && attackers.length < 1) {
                 role = 'attacker';
                 extern = true;
