@@ -6,7 +6,8 @@ var ScreepsLogger = {
     warn: warn,
     error: error,
     trace: trace,
-    highlight: highlight
+    highlight: highlight,
+    init: init
 }
 
 var colors = {
@@ -21,6 +22,14 @@ var colors = {
     'highlight': '#ffff00',
 }
 
+var mutedLogger = {};
+
+function init(){
+    for(let name of Memory.logger){
+        mutedLogger.push(name);
+    }
+}
+
 function _log(message, severity, classname = '') {
     if(severity > 5) {
         severity = 5
@@ -30,7 +39,14 @@ function _log(message, severity, classname = '') {
         severity = 3
     }
 
+    if(classname.length>2){
+        if(mutedLogger[classname]){
+            return;
+        }
+    }
+
     classname = (classname + '                               ').substr(0,20);
+
     console.log('<font color="' + colors['classname'] + '">' + classname + ': ' + '</font><font color="' + colors[severity] + '" severity="' + severity + '">' + message + "</font>")
 }
 

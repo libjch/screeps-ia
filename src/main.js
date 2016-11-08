@@ -41,8 +41,10 @@ module.exports.loop = function () {
     logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
     lastCpu = 0;
     logger.trace('CPU usage:'+Game.cpu.getUsed()+' tickLimit:'+Game.cpu.tickLimit+' bucket:'+Game.cpu.bucket+' limit:'+Game.cpu.limit);
-
     logger.info(Memory.start);
+
+    logger.init();
+
     tick('Memory Loaded');
 
     if(Game.time % 100 == 0){
