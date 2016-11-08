@@ -27,6 +27,7 @@ var mutedLogger = [];
 function init(){
     for(let name in Memory.logger){
         mutedLogger.push(name);
+        console.log("IGNORING "+name);
     }
 }
 
