@@ -25,7 +25,7 @@ var colors = {
 var mutedLogger = {};
 
 function init(){
-    for(let name of Memory.logger){
+    for(let name in Memory.logger){
         mutedLogger.push(name);
     }
 }
