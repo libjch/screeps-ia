@@ -27,7 +27,6 @@ var mutedLogger = [];
 function init(){
     for(let name in Memory.logger){
         mutedLogger.push(name);
-        console.log("IGNORING "+name);
     }
 }
 
@@ -41,7 +40,7 @@ function _log(message, severity, classname = '') {
     }
 
     if(classname.length>2){
-        if(mutedLogger.contains(classname)){
+        if(mutedLogger[classname]){
             return;
         }
     }
