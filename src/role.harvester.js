@@ -3,6 +3,7 @@ var direction = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleHarvester';
 
+
 var roleHarvester = {
 
     /** @param {Creep} creep **/
