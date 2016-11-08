@@ -78,7 +78,7 @@ module.exports.loop = function () {
         tick('CheckRoads');
     }
 
-    if(Game.time % 100 == 71) {
+    if(Game.time % 100 == 33) {
         extensionPlanner = require('extension.planner');
         extensionPlanner.checkExtensions();
         tick('CheckExtensions');
