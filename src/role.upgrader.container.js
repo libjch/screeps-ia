@@ -39,6 +39,11 @@ var roleUpgrader = {
                 return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
             });
             var target = targets[0];
+
+            if(!target){
+                creep.memory.role = 'upgrader';
+                return;
+            }
             if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
