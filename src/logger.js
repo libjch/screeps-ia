@@ -22,11 +22,11 @@ var colors = {
     'highlight': '#ffff00',
 }
 
-var mutedLogger = {};
+var mutedLogger = [];
 
 function init(){
     for(let name in Memory.logger){
-        mutedLogger.add(name,Memory.logger[name]);
+        mutedLogger.push(name);
     }
 }
 
