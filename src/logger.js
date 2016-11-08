@@ -41,7 +41,7 @@ function _log(message, severity, classname = '') {
     }
 
     if(classname.length>2){
-        if(mutedLogger[classname]){
+        if(mutedLogger.contains(classname)){
             return;
         }
     }
