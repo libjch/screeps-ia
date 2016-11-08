@@ -100,8 +100,10 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
                 role = 'upgrader-c';
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (upgraders.length < 2) {
                 role = 'upgrader';
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }
             /*else if (enableExterns && harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
