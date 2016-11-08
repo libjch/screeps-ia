@@ -1,5 +1,5 @@
 var constants = require('global.variables');
-var directionUtil = require('direction.util');
+var directionUtil = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleAttacker';
 

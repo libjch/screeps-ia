@@ -6,7 +6,7 @@ var classname = 'RoadPlanner';
  * module.exports.thing = 'a thing';
  *
  * You can import it from another modules like this:
- * var mod = require('road.planner');
+ * var mod = require('planner.road');
  * mod.thing == 'a thing'; // true
  */
 

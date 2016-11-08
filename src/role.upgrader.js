@@ -2,7 +2,7 @@
  * Created by libjch on 12/07/16.
  */
 var constants = require('global.variables');
-var direction = require('direction.util');
+var direction = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleUpgrader';
 

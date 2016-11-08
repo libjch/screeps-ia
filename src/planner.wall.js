@@ -1,13 +1,13 @@
 
 var logger = require('logger');
-var buildUtil = require('build.util');
+var buildUtil = require('util.build');
 var classname = 'WallPlanner';
 /*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';
  *
  * You can import it from another modules like this:
- * var mod = require('road.planner');
+ * var mod = require('planner.road');
  * mod.thing == 'a thing'; // true
  */
 var spawn = undefined;

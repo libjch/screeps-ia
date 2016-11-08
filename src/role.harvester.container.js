@@ -1,5 +1,5 @@
 var constants = require('global.variables');
-var direction = require('direction.util');
+var direction = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleHarvesterC';
 

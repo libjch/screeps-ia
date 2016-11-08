@@ -76,25 +76,25 @@ module.exports.loop = function () {
     }
 
     if(Game.time % 100 == 22) {
-        roadPlanner = require('road.planner');
+        roadPlanner = require('planner.road');
         roadPlanner.checkRoads();
         tick('CheckRoads');
     }
 
     if(Game.time % 100 == 33) {
-        extensionPlanner = require('extension.planner');
+        extensionPlanner = require('planner.extension');
         extensionPlanner.checkExtensions();
         tick('CheckExtensions');
     }
 
     if(Game.time % 100 == 44) {
-        towerPlanner = require('tower.planner');
+        towerPlanner = require('planer.tower');
         towerPlanner.checkTowers();
         tick('CheckTowers');
     }
 
     if(Game.time % 200 == 55){
-        wallPlanner = require('wall.planner');
+        wallPlanner = require('planner.wall');
         try{
             wallPlanner.checkWalls();
         }catch(e) {
@@ -104,7 +104,7 @@ module.exports.loop = function () {
     }
 
     if(Game.time % 100 == 66) {
-        storagePlanner = require('storage.planner');
+        storagePlanner = require('planner.storage');
         storagePlanner.checkStorage();
         tick('CheckStorage');
     }
