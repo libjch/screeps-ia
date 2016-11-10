@@ -14,7 +14,7 @@ var roleUpgrader = {
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
-        logger.log("Upgrading: "+creep.carry.energy == creep.carryCapacity+" "+creep.carry.energy +"/"+creep.carryCapacity,classname)
+        //logger.log("Upgrading: "+(creep.carry.energy == creep.carryCapacity)+" "+creep.carry.energy +"/"+creep.carryCapacity,classname);
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
@@ -30,6 +30,19 @@ var roleUpgrader = {
             }
         }
         else {
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] >= 50000)
+                }
+            });
+            var target = targets[0];
+            if(target){
+                if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+                return;
+            }
+
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
             }else{

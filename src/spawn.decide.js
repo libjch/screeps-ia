@@ -98,10 +98,7 @@ module.exports = {
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if ((totalEnergyStored > maxEnergyStored * 0.4) && upgraders.length < 2){
-                role = 'upgrader-c';
-                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if (upgraders.length < 2) {
+            }  else if (upgraders.length < 2) {
                 role = 'upgrader';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }

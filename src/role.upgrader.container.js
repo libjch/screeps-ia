@@ -20,7 +20,7 @@ var roleUpgrader = {
         }
 
         if(creep.memory.working) {
-            if(creep.room.controller.my){
+            if(creep.room.controller.my && creep.memory.mainroom == creep.room.name){
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
                 }
@@ -43,21 +43,10 @@ var roleUpgrader = {
                 return;
             }
 
-            targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 10)
-                }
-            });
-            targets.sort(function(a,b){
-                return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
-            });
-            target = targets[0];
-            if(!target){
-                creep.memory.role = 'upgrader';
-                return;
-            }
-            if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
+            if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
+                direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
+            }else{
+                direction.findSourceInRoom(creep);
             }
         }
     }

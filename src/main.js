@@ -17,41 +17,40 @@ var wallPlanner;
 var storagePlanner;
 
 
-
 var logger = require('logger');
 var classname = 'Main';
 
 var lastCpu = 0;
 
-function printFloat(value){
-    return (''+value).substr(0,5);
+function printFloat(value) {
+    return ('' + value).substr(0, 5);
 }
 
-function tick(step){
+function tick(step) {
     var nowCpu = Game.cpu.getUsed();
-    step = (step+'               ').substr(0,15);
-    if(nowCpu - lastCpu > 1){
-        logger.error('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
-    }else{
-        logger.trace('CPU Usage '+step+': '+ printFloat(nowCpu - lastCpu)+' total:'+printFloat(nowCpu));
+    step = (step + '               ').substr(0, 15);
+    if (nowCpu - lastCpu > 1) {
+        logger.error('CPU Usage ' + step + ': ' + printFloat(nowCpu - lastCpu) + ' total:' + printFloat(nowCpu));
+    } else {
+        logger.trace('CPU Usage ' + step + ': ' + printFloat(nowCpu - lastCpu) + ' total:' + printFloat(nowCpu));
     }
     lastCpu = nowCpu;
 }
 
 module.exports.loop = function () {
-    logger.highlight('========== NEW TURN '+Game.time+' ============',classname);
+    logger.highlight('========== NEW TURN ' + Game.time + ' ============', classname);
     lastCpu = 0;
-    logger.trace('CPU usage:'+Game.cpu.getUsed()+' tickLimit:'+Game.cpu.tickLimit+' bucket:'+Game.cpu.bucket+' limit:'+Game.cpu.limit);
+    logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
     logger.info(Memory.start);
 
     logger.init();
 
     tick('Memory Loaded');
 
-    if(Game.time % 100 == 0){
-        for(var i in Memory.creeps) {
-            if(!Game.creeps[i]) {
-                logger.warn("Delete creep:"+Memory.creeps[i]);
+    if (Game.time % 100 == 0) {
+        for (var i in Memory.creeps) {
+            if (!Game.creeps[i]) {
+                logger.warn("Delete creep:" + Memory.creeps[i]);
                 delete Memory.creeps[i];
             }
         }
@@ -59,7 +58,7 @@ module.exports.loop = function () {
     }
 
 
-    if(Game.time % 10 == 0 && Game.cpu.bucket > 1000){
+    if (Game.time % 10 == 0 && Game.cpu.bucket > 1000) {
         spawnDecider = require('spawn.decide');
         spawnDecider.spawn();
         tick('SpawnDecide');
@@ -69,41 +68,41 @@ module.exports.loop = function () {
     towerAttack.attack();
     tick('TowerAttack');
 
-    if(Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
+    if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
         roleExtractor = require('role.extractor');
         roleExtractor.cleanExtractors();
         tick('Extractors');
     }
 
-    if(Game.time % 100 == 22) {
+    if (Game.time % 100 == 22) {
         roadPlanner = require('planner.road');
         roadPlanner.checkRoads();
         tick('CheckRoads');
     }
 
-    if(Game.time % 100 == 33) {
+    if (Game.time % 100 == 33) {
         extensionPlanner = require('planner.extension');
         extensionPlanner.checkExtensions();
         tick('CheckExtensions');
     }
 
-    if(Game.time % 100 == 44) {
+    if (Game.time % 100 == 44) {
         towerPlanner = require('planer.tower');
         towerPlanner.checkTowers();
         tick('CheckTowers');
     }
 
-    if(Game.time % 200 == 55){
+    if (Game.time % 200 == 55) {
         wallPlanner = require('planner.wall');
-        try{
+        try {
             wallPlanner.checkWalls();
-        }catch(e) {
-            logger.error("ERROR  "+e,classname);
+        } catch (e) {
+            logger.error("ERROR  " + e, classname);
         }
         tick('wallPlanners');
     }
 
-    if(Game.time % 100 == 66) {
+    if (Game.time % 100 == 66) {
         storagePlanner = require('planner.storage');
         storagePlanner.checkStorage();
         tick('CheckStorage');
@@ -112,7 +111,6 @@ module.exports.loop = function () {
     roleHarvester = require('role.harvester');
     roleHarvesterContainer = require('role.harvester.container');
     roleUpgrader = require('role.upgrader');
-    roleUpgraderContainer =  require('role.upgrader.container');
     roleBuilder = require('role.builder');
     roleRepairer = require('role.repairer');
     roleAttacker = require('role.attacker');
@@ -122,92 +120,88 @@ module.exports.loop = function () {
 
     var creeps = [];
 
-    for(var name in Game.creeps) {
+    for (var name in Game.creeps) {
         creeps.push(Game.creeps[name]);
     }
 
-    creeps.sort(function(a, b){
-        if(a.memory.mainroom < b.memory.mainroom) return -1;
-        if(a.memory.mainroom > b.memory.mainroom) return 1;
+    creeps.sort(function (a, b) {
+        if (a.memory.mainroom < b.memory.mainroom) return -1;
+        if (a.memory.mainroom > b.memory.mainroom) return 1;
 
-        if(a.memory.role < b.memory.role) return -1;
-        if(a.memory.role > b.memory.role) return 1;
+        if (a.memory.role < b.memory.role) return -1;
+        if (a.memory.role > b.memory.role) return 1;
         return 0;
     });
 
 
     tick('StartCreeps');
-    for(let creep of creeps) {
+    for (let creep of creeps) {
 
         //pickup dropped enery;
         if (creep.carry.energy < creep.carryCapacity) {
-            var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY,1);
+            var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY, 1);
             if (energy.length) {
-                for(let e of energy) {
+                for (let e of energy) {
                     creep.pickup(e);
                 }
             }
         }
 
-        var place = creep.room.name+'-'+creep.pos.x+'-'+creep.pos.y;
+        var place = creep.room.name + '-' + creep.pos.x + '-' + creep.pos.y;
 
-        if(!creep.memory.spawnroom){
+        if (!creep.memory.spawnroom) {
             creep.memory.spawnroom = creep.memory.mainroom;
         }
         //run roles
-        try{
+        try {
             var role = creep.memory.role;
 
-            if(creep.memory.role_override){
+            if (creep.memory.role_override) {
                 role = creep.memory.role_override;
             }
 
-            if(creep.memory.role_override_time < Game.time){
+            if (creep.memory.role_override_time < Game.time) {
                 creep.memory.role_override = undefined;
             }
 
-            if(creep.ticksToLive == 100){
+            if (creep.ticksToLive == 100) {
                 creep.memory.working = true;
             }
-            if(creep.ticksToLive < 50){
+            if (creep.ticksToLive < 50) {
                 creep.memory.working = true;
             }
 
-            if(role == 'harvester') {
+            if (role == 'harvester') {
                 roleHarvester.run(creep);
             }
-            else if(role == 'harvester-c' || role == 'harvester.c') {
+            else if (role == 'harvester-c' || role == 'harvester.c') {
                 roleHarvesterContainer.run(creep);
             }
-            else if(role == 'upgrader') {
+            else if (role == 'upgrader' || role == 'upgrader-c' || role == 'upgrader.c') {
                 roleUpgrader.run(creep);
             }
-            else if(role == 'upgrader-c' || role == 'upgrader.c') {
-                //roleUpgrader.run(creep);
-                roleUpgraderContainer.run(creep);
-            }
-            else if(role == 'builder') {
+            else if (role == 'builder') {
                 roleBuilder.run(creep);
             }
-            else if(role == 'repairer') {
+            else if (role == 'repairer') {
                 roleRepairer.run(creep);
             }
-            else if(role == 'attacker') {
+            else if (role == 'attacker') {
                 roleAttacker.run(creep);
             }
-            else if(role == 'claimer') {
+            else if (role == 'claimer') {
                 roleClaimer.run(creep);
-            }else if(role == 'extractor'){
+            } else if (role == 'extractor') {
                 roleExtractor.run(creep);
             }
-        }catch(e){
-            logger.error('         ',classname)
-            logger.error("ERROR  "+e,classname);
-            logger.error('         ',classname)
+        } catch (e) {
+            logger.error('         ', classname)
+            logger.error("ERROR  " + e, classname);
+            logger.error('         ', classname)
             Game.notify(e);
         }
 
-        tick('Creep '+creep.name);
+        tick('Creep ' + creep.name);
     }
 
     recorder = require('stats.record');
