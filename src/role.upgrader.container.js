@@ -32,14 +32,26 @@ var roleUpgrader = {
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] >= 50000)
+                }
+            });
+            var target = targets[0];
+            if(target){
+                if(target.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+                return;
+            }
+
+            targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= 10)
                 }
             });
             targets.sort(function(a,b){
                 return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
             });
-            var target = targets[0];
-
+            target = targets[0];
             if(!target){
                 creep.memory.role = 'upgrader';
                 return;
