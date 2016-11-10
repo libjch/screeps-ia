@@ -160,7 +160,7 @@ module.exports = {
                     if (rest >= 50) {
                         body.push(MOVE);
                     }
-                } else if (role == 'harvester-c' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
+                } else if (role == 'harvester' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
                     body.push(CARRY);
                     body.push(CARRY);
                     body.push(CARRY);

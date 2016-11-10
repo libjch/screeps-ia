@@ -44,7 +44,7 @@ var roleHarvester = {
                     logger.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ creep.pos,classname);
 
                     if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        var res = logger.log('g '+creep.moveTo(targets[0]),classname);
+                        var res = logger.log('refill '+creep.moveTo(targets[0]),classname);
                         if(res == -2){
                             logger.log('a '+creep.moveTo(7,45),classname);
                         }
@@ -66,7 +66,7 @@ var roleHarvester = {
                         logger.log('    target: '+targets[0].structureType + ' ' + creep.pos.getRangeTo(targets[0]),classname);
 
                         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            logger.log('b '+creep.moveTo(targets[0]),classname);
+                            logger.log('refill '+creep.moveTo(targets[0]),classname);
                         }
                     }else{
                         if(creep.room.name != creep.memory.mainroom){
