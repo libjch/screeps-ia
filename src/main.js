@@ -86,7 +86,7 @@ module.exports.loop = function () {
         tick('CheckExtensions');
     }
 
-    if (true || Game.time % 100 == 44) {
+    if (Game.time % 100 == 44) {
         towerPlanner = require('planner.tower');
         towerPlanner.checkTowers();
         tick('CheckTowers');
