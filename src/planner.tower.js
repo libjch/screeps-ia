@@ -37,7 +37,7 @@ module.exports = {
 
                 number += extensionsSites.length;
 
-                logger.log("Number of towsers: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
+                logger.log("Number of towers: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
 
                 //Availables extensions:
                 var avails = getAvailableTowersNumber(room);
