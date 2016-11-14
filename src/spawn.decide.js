@@ -90,7 +90,7 @@ module.exports = {
 
             else if (upgraders.length < 1) {
                 role = 'upgrader';
-                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                //maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }
             else if (constructionsSites.length / 8 > builders.length && builders.length < 1) {
                 role = 'builder';
@@ -100,7 +100,7 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if (upgraders.length < 2) {
                 role = 'upgrader';
-                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                //maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }
             /*else if (enableExterns && harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
