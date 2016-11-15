@@ -41,12 +41,21 @@ module.exports = {
             var totalEnergyStored = 0;
             var maxEnergyStored = 0;
 
+            var storageEnergy = 0;
+
             var containers = room.find(FIND_STRUCTURES, {
                 filter: { structureType: STRUCTURE_CONTAINER }
             });
             for(let container of containers){
                 totalEnergyStored += container.store[RESOURCE_ENERGY];
                 maxEnergyStored += container.storeCapacity;
+            }
+
+            var storages = room.find(FIND_STRUCTURES, {
+                filter: { structureType: STRUCTURE_STORAGE }
+            });
+            for(let storage of storages){
+                storageEnergy += storage.store[RESOURCE_ENERGY];
             }
 
             var energy = room.energyAvailable;
@@ -90,7 +99,9 @@ module.exports = {
 
             else if (upgraders.length < 1) {
                 role = 'upgrader';
-                //maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                if(storageEnergy < 100000){
+                    maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                }
             }
             else if (constructionsSites.length / 8 > builders.length && builders.length < 1) {
                 role = 'builder';
@@ -100,7 +111,9 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if (upgraders.length < 2) {
                 role = 'upgrader';
-                //maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                if(storageEnergy < 100000){
+                    maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                }
             }
             /*else if (enableExterns && harvestersOut.length < externalSources) { //+2
                 role = 'harvester';
