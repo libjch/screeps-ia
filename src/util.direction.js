@@ -52,6 +52,15 @@ function findSourceInRoom(creep){
             }
             return;
         }
+
+        if(creep.room.storage){
+            if(creep.room.storage.store[RESOURCE_ENERGY] > 1000){
+                if(creep.room.storage.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.storage);
+                }
+                return;
+            }
+        }
     }
     logger.info('No sources from exractor',classname);
 
