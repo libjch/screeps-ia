@@ -57,13 +57,11 @@ var roleRepairer = {
                 if(target && target.room.name == creep.room.name){
                     if(target && target.hits < target.hitsMax){
                         if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                            creep.memory.lastRepairId = undefined;
-                            logger.warn('Repair not in range',classname);
                             creep.moveToFatigue(target);
-                        }else{
-                            logger.log('Continue repairing : '+target,classname);
-                            return ;
                         }
+                        return ;
+                    }else{
+                        creep.memory.lastRepairId = undefined;
                     }
                 }else{
                     creep.memory.lastRepairId = undefined;
