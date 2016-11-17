@@ -195,7 +195,7 @@ module.exports.loop = function () {
             }
         } catch (e) {
             logger.error('         ', classname)
-            logger.error("ERROR  " + JSON.stringify(e), classname);
+            logger.error("ERROR  " + e, classname);
             logger.error('         ', classname)
             Game.notify(e);
         }
