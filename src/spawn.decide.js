@@ -185,6 +185,8 @@ module.exports = {
 
                 //get least used extern room
                 var externRoomNumber = undefined;
+                var roomnumber = undefined;
+                var targetroom = undefined;
 
                 logger.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body,classname);
 
