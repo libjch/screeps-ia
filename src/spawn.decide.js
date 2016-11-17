@@ -13,7 +13,7 @@ module.exports = {
 
 
             var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
-            var smallHarvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.spawnroom == roomName && creep.body.length < 6)).length;
+            var smallHarvesters = _.filter(harvesters, (creep) => (creep.body.length < 6));
 
             var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
             var buildersHelpers = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.spawnroom == roomName && creep.memory.mainroom != roomName);
@@ -59,7 +59,7 @@ module.exports = {
             if (harvesters.length == 0) {
                 maxEnergy = energy > 300 ? energy : 300;
             }
-            if (harvesters.length == 1 && maxEnergy >= 600) {
+            if (harvesters.length == 1 && maxEnergy >= 600 && smallHarvesters.length == 1) {
                 maxEnergy = energy > 700 ? energy : 700;
             }
 
@@ -74,7 +74,7 @@ module.exports = {
             if (harvesters.length < 2) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if (harvesters.length == 2 && smallHarvesters >0) {
+            } else if (harvesters.length == 2 && smallHarvesters.length >0) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if(extractors.length < 2){
