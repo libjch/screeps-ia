@@ -15,23 +15,19 @@ var roleExtractor = {
         }
         if(creep.memory.working && creep.memory.extractor ) {
             //Transfer to closest container
-
-
             if(creep.room.name == creep.memory.mainroom) {
                 var target = Game.getObjectById(creep.memory.extractor.containerId);
-
                 var sourceId = creep.memory.extractor.sourceId;
                 if(target == undefined && Memory.extractors[sourceId].containerCS){
                     target = Game.getObjectById(Memory.extractors[sourceId].containerCS);
                     if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target);
+                        creep.moveToFatigue(target);
                     }
+                    logger.log('Extrator building container '+target);
+                    return;
                 }
-                logger.debug('Container : '+target+' '+creep.memory.extractor+' '+creep.memory.extractor.containerId,classname);
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    logger.error('extractor  move ' + creep.moveTo(target) + ' ' + creep.pos + ' ' + target.pos,classname);
-                }else{
-                    logger.warn("Transfer to container: "+creep.transfer(target, RESOURCE_ENERGY));
+                    logger.error('extractor  move ' + creep.moveToFatigue(target) + ' ' + creep.pos + ' ' + target.pos,classname);
                 }
             }else {
                 if (creep.room.name != creep.memory.mainroom) {
@@ -39,38 +35,32 @@ var roleExtractor = {
                 }
             }
         }
-        else{ //NOT harvesting
+        else{ //NOT buidling/transfering
             if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,creep.memory.externRoom);
             }else{
                 if(!creep.memory.extractor){
                     creep.memory.extractor = {};
                 }
-
                 if(!creep.memory.extractor.sourceId){
-
+                    logger.warn('Assigning source to extractor');
                     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return Memory.extractors[source.id].creep == undefined}});
                     if(sources.length){
                         var source = sources[0];
                         Memory.extractors[source.id].creep = creep.id;
                         creep.memory.extractor.sourceId = source.id;
-
-                        logger.error("Container id "+Memory.extractors[source.id].container,classname);
-
                         creep.memory.extractor.containerId = Memory.extractors[source.id].container;
-
                         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(source);
+                            creep.moveToFatigue(source);
                         }
                     }
                 }else{
                     var source = Game.getObjectById(creep.memory.extractor.sourceId);
                     Memory.extractors[source.id].creep = creep.id;
                     if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source);
+                        creep.moveToFatigue(source);
                     }
                 }
-                //direction.findSourceInRoom(creep);
             }
         }
     },
