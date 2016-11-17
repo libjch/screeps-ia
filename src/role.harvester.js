@@ -96,7 +96,7 @@ var roleHarvester = {
                                 if (creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                     creep.moveToFatigue(creep.room.storage);
                                 }
-                                creep.memory.lastHarvestId = targets[0].id;
+                                creep.memory.lastHarvestId = creep.room.storage.id;
                             }else{
                                 logger.debug('No target',classname);
                                 creep.memory.role_override = 'upgrader';
