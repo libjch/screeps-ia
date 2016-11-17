@@ -13,10 +13,10 @@ module.exports = {
 
 
             var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
+            var smallHarvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.spawnroom == roomName && creep.body.length < 6)).length;
 
             var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
             var buildersHelpers = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.spawnroom == roomName && creep.memory.mainroom != roomName);
-
 
             var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
 
@@ -26,7 +26,7 @@ module.exports = {
 
             var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
-            logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' () ' +
+            logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' ('+smallHarvesters.length+') ' +
                 'Builders:' + builders.length + ' (' + buildersHelpers.length + ' ) ' +
                 'Upgraders:' + upgraders.length + ' ()  ' +
                 'Repairers:' + repairers.length + ' ()  ' +
@@ -59,8 +59,8 @@ module.exports = {
             if (harvesters.length == 0) {
                 maxEnergy = energy > 300 ? energy : 300;
             }
-            if (harvesters.length == 1 && maxEnergy >= 500) {
-                maxEnergy = energy > 500 ? energy : 500;
+            if (harvesters.length == 1 && maxEnergy >= 600) {
+                maxEnergy = energy > 700 ? energy : 700;
             }
 
             var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
@@ -70,14 +70,14 @@ module.exports = {
 
             var mainroom = roomName;
 
-            if(harvesters.length == 0 && energy >= 300){
-                maxEnergy = energy;
-            }
 
             if (harvesters.length < 2) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if(extractors.length < 2){
+            } else if (harvesters.length == 2 && smallHarvesters >0) {
+                role = 'harvester';
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+            }  else if(extractors.length < 2){
                 role = 'extractor';
                 maxEnergy = maxEnergy > 900 ? 900 : maxEnergy;
             } else if (upgraders.length < 1) {
