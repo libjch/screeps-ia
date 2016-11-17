@@ -9,6 +9,20 @@ module.exports = {
 };
 
 
+Creep.prototype.moveToFatigue = function(obj){
+        if(!this.fatigue){
+            this.moveTo(obj);
+        }
+}
+
+Creep.prototype.moveToFatigue = function(x,y){
+    if(!this.fatigue){
+        this.moveTo(x,y);
+    }
+}
+
+
+
 function moveToRoom(creep,targetRoom){
     logger.info('Move from '+creep.room.name+' to '+targetRoom,classname);
     var exitDir = creep.room.findExitTo(targetRoom);

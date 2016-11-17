@@ -17,33 +17,14 @@ function contains(list, obj) {
     return false;
 }
 
-function repairRoads(creep,filterTops){
-    //var targets = [];
+function repairRoads(creep){
     var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return ((structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_CONTAINER)  && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
         }
     });
 
-    /*if(filterTops) {
-        var topRoads = getSortedKeys(Memory.roadPlaces);
-
-        if (topRoads.length > 400) {
-            topRoads = topRoads.slice(0, 400);
-        }
-
-
-        for (var target of targetRoads) {
-            var place = target.room.name + '-' + target.pos.x + '-' + target.pos.y;
-            if (contains(topRoads, place)) {
-                targets.push(target);
-            }
-        }
-    }else{
-        targets = targetRoads;
-    }*/
-
-    if(targets.length != 0){
+    if(targets.length > 0){
         targets.sort(function(a,b){
             return (a.hits  + 50 * creep.pos.getRangeTo(a)) - (b.hits + 50 * creep.pos.getRangeTo(b));
         });
@@ -52,10 +33,9 @@ function repairRoads(creep,filterTops){
         var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
         logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target)+' '+Memory.roadPlaces[place],classname);
         if(creep.repair(target) == ERR_NOT_IN_RANGE){
-            creep.moveTo(target);
-        }else{
-            creep.memory.lastRepairId = target.id;
+            creep.moveToFatigue(target);
         }
+        creep.memory.lastRepairId = target.id;
         return true;
     }
     return false;
@@ -79,6 +59,7 @@ var roleRepairer = {
                         if(creep.repair(target) == ERR_NOT_IN_RANGE){
                             creep.memory.lastRepairId = undefined;
                             logger.warn('Repair not in range',classname);
+                            creep.moveTo(target);
                         }else{
                             logger.log('Continue repairing : '+target,classname);
                             return ;
@@ -93,7 +74,7 @@ var roleRepairer = {
             //1 Fix strucures with less than 10k
             if(creep.room.controller && creep.room.controller.my){
                 if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.x ==49){
-                    creep.moveTo(30+(creep.memory.number%15),6);
+                    creep.moveTo(creep.room.controller);
                     return;
                 }
 
@@ -105,7 +86,7 @@ var roleRepairer = {
 
                 if(targets.length == 0){
                     //2 fix top roads with less than 50%
-                    if(!repairRoads(creep,true)){
+                    if(!repairRoads(creep)){
                         //3 Fix structures according to priority and hitpoints %
                         targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
@@ -124,15 +105,10 @@ var roleRepairer = {
 
                         if(target){
                             logger.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target),classname);
-
-                            if(creep.pos.x == 49){
-                                creep.moveTo(30+creep.memory.number,6);
+                            if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                                creep.moveToFatigue(target);
                             }
-                            else if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                                creep.moveTo(target);
-                            }else{
-                                creep.memory.lastRepairId = target.id;
-                            }
+                            creep.memory.lastRepairId = target.id;
                         }else{
                             logger.debug('No target',classname);
                             creep.memory.role_override = 'upgrader';
@@ -143,16 +119,15 @@ var roleRepairer = {
                 }else{ //repair targets
                     targets.sort(function(a,b){
                         return (a.hits  + 200 * creep.pos.getRangeTo(a)) - (b.hits + 200 * creep.pos.getRangeTo(b));
-                    })
+                    });
 
                     var target = targets[0];
                     logger.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target),classname);
 
                     if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                        creep.moveTo(target);
-                    }else{
-                        creep.memory.lastRepairId = target.id;
+                        creep.moveToFatigue(target);
                     }
+                    creep.memory.lastRepairId = target.id;
                 }
             }else{
                 //NOT in current room
@@ -162,12 +137,12 @@ var roleRepairer = {
             }
         }
         else {
-            //console.log(constants.rooms().others[creep.memory.externRoom]);
-            if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
+            //TODO NOT IMPLEMENTED
+            /*if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
             }else{
                 direction.findSourceInRoom(creep);
-            }
+            }*/
         }
     }
 }
