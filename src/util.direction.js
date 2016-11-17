@@ -34,7 +34,7 @@ function findSourceInRoom(creep){
     logger.info("FindSourceInRange",classname);
 
     if(creep.room.controller.my){
-        var sources = creep.room.find(FIND_SOURCES);
+        var sources = creep.room.find(FIND_SOURCES); //to remove
 
         var targetContainer = undefined;
         var targetContainerScore = 0;
@@ -46,8 +46,6 @@ function findSourceInRoom(creep){
                 logger.error('Unknow source: '+source.id,classname);
             }
             else if(Memory.extractors[source.id].container){
-                //
-                logger.info('Source with extractor found: '+Memory.extractors[source.id].container,classname)
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
 
@@ -59,58 +57,50 @@ function findSourceInRoom(creep){
                 }
             }
         }
-        logger.info('Target : '+targetContainer+' '+targetContainerScore,classname);
         if(targetContainer && targetContainerScore > 0){
-            if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targetContainer);
+            if(creep.withdraw(targetContainer,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveToFatigue(targetContainer);
             }
             return;
         }
-
         if(creep.room.storage){
             if(creep.room.storage.store[RESOURCE_ENERGY] > 1000){
-                if(creep.room.storage.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if(creep.withdraw(creep.room.storage,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.storage);
                 }
                 return;
             }
         }
     }
-    logger.info('No sources from exractor',classname);
+    logger.warn('No sources from extractor',classname);
+
+    if(!creep.room.controller.my && creep.room.controller.owner) {
+        var targets = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0);
+            }
+        });
+        if(targets){
+            var targetContainer = targets[0];
+            if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveToFatigue(targetContainer);
+            }
+            return;
+        }
+    }
 
     var sources = creep.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});//Memory.extractors[source.id].creep == undefined}});
     if(sources.length){
-
         var sourceNumber = creep.memory.number % sources.length;
         var source = sources[sourceNumber];
-
         logger.info('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+creep.memory.number+' '+sources.length,classname);
         if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(creep.pos) > 4){
             sourceNumber = (sourceNumber + 1) % sources.length;
         }
-
-
-        //console.log('x ' + sources + ' ' + sources[creep.memory.number % sources.length]);
         var res = creep.harvest(sources[sourceNumber]);
         logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1),classname);
-
-        logger.warn(creep.room.controller.my +' '+creep.room.controller.owner,classname);
-        if(!creep.room.controller.my && creep.room.controller.owner) {
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0);
-                }
-            });
-
-            if(targets){
-                var targetContainer = targets[0];
-                if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targetContainer);
-                }
-            }
-        }
-        else if(res == ERR_NOT_IN_RANGE) {
-            creep.moveTo(sources[sourceNumber]);
+        if(res == ERR_NOT_IN_RANGE) {
+            creep.moveToFatigue(sources[sourceNumber]);
         }
     }
 }
