@@ -113,6 +113,13 @@ var roleHarvester = {
             }
         }
         else{ //NOT harvesting
+
+            if(creep.room.storage && creep.room.storage.store[RESOURCE_ENERGY] >= 5000 && creep.body.length < 14) {
+                if (creep.withdraw(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveToFatigue(creep.room.storage);
+                }
+                return;
+            }
             direction.findSourceInRoom(creep);
         }
     }
