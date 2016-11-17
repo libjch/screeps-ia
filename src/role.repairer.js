@@ -135,6 +135,7 @@ var roleRepairer = {
             }
         }
         else {
+            creep.memory.lastRepairId = undefined;
             //TODO NOT IMPLEMENTED
             /*if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
                 direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
