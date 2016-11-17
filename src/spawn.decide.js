@@ -12,29 +12,29 @@ module.exports = {
             var roomName = room.name;
 
 
-            var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' || creep.memory.role == 'harvester-c') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
-            var harvestersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.extern == true && creep.memory.mainroom == roomName);
+            var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
+            //var harvestersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.extern == true && creep.memory.mainroom == roomName);
 
             var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
-            var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
+            //var buildersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
             var buildersHelpers = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.spawnroom == roomName && creep.memory.mainroom != roomName);
 
 
-            var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader'  || creep.memory.role == 'upgrader-c') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
-            var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
+            var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
+            //var upgradersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
 
 
             var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
-            var repairersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
+            //var repairersOut = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == true && creep.memory.spawnroom == roomName);
 
             var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.spawnroom == roomName);
 
             var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
-            logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' (' + harvestersOut.length + ') ' +
-                'Builders:' + builders.length + ' (' + buildersOut.length + ' - ' + buildersHelpers.length + ' ) ' +
-                'Upgraders:' + upgraders.length + ' (' + upgradersOut.length + ')  ' +
-                'Repairers:' + repairers.length + ' (' + repairersOut.length + ')  ' +
+            logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' () ' +
+                'Builders:' + builders.length + ' (' + buildersHelpers.length + ' ) ' +
+                'Upgraders:' + upgraders.length + ' ()  ' +
+                'Repairers:' + repairers.length + ' ()  ' +
                 'Attackers: ' + attackers.length+'  Extractors: '+extractors.length,classname);
 
 
@@ -64,18 +64,14 @@ module.exports = {
             if (harvesters.length == 0) {
                 maxEnergy = energy > 300 ? energy : 300;
             }
-            if (harvesters.length == 1 && harvestersOut.length == 0 && maxEnergy >= 500) {
+            if (harvesters.length == 1 && maxEnergy >= 500) {
                 maxEnergy = energy > 500 ? energy : 500;
             }
 
             var constructionsSites = room.find(FIND_CONSTRUCTION_SITES);
 
-            var enableExterns = false;
-
             var role = undefined;
             var extern = false;
-            var roomnumber = undefined;
-            var targetroom = undefined;
 
             var mainroom = roomName;
 
@@ -88,22 +84,14 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if(extractors.length < 2){
                 role = 'extractor';
-                maxEnergy = maxEnergy > 1000 ? 1000 : maxEnergy;
-            } /*else if (false && (roomName == 'E14N19')  && attackers.length < 1) {
-                role = 'attacker';
-                extern = true;
-                maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
-                targetroom = 'E14N18';
-            }*/
-
-
-            else if (upgraders.length < 1) {
+                maxEnergy = maxEnergy > 900 ? 900 : maxEnergy;
+            } else if (upgraders.length < 1) {
                 role = 'upgrader';
                 if(storageEnergy < 100000){
                     maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
                 }
             }
-            else if (constructionsSites.length / 8 > builders.length && builders.length < 1) {
+            else if (constructionsSites.length / 11 > builders.length && builders.length < 1) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (repairers.length < 1) {
@@ -117,25 +105,6 @@ module.exports = {
             } else if (upgraders.length < 4 && storageEnergy > 300000) {
                 role = 'upgrader';
             }
-            /*else if (enableExterns && harvestersOut.length < externalSources) { //+2
-                role = 'harvester';
-                extern = true;
-            } else if (buildersHelpers.length < 0 && (roomName == 'E14N19') ) { //+1
-                role = 'builder';
-                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-                mainroom = 'E14N18';
-            } else if (repairersOut.length < 1) { //+1
-             role = 'repairer';
-             maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-             extern = true;
-             } else if (harvestersOut.length < 0) { //+2
-             role = 'harvester';
-             maxEnergy = maxEnergy > 1300 ? 3500 : maxEnergy;
-             extern = true;
-             } else if (enableExterns && upgradersOut.length < externalSources) { //+4
-                role = 'upgrader';
-                extern = true;
-            }*/
 
             //MOVE 50
             //WORK 100
@@ -175,7 +144,7 @@ module.exports = {
                     if (rest >= 50) {
                         body.push(MOVE);
                     }
-                } else if (role == 'harvester' && extern == false && extractors.length > 0 && maxEnergy > 1000) {
+                } else if (role == 'harvester' && extractors.length > 0 && maxEnergy > 1000) {
                     body.push(CARRY);
                     body.push(CARRY);
                     body.push(CARRY);
@@ -242,7 +211,6 @@ module.exports = {
                 } else {
                     logger.warn(res,classname);
                 }
-
             }
         }
     }
