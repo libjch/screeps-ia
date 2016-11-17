@@ -11,7 +11,7 @@ var classname = 'WallPlanner';
  * mod.thing == 'a thing'; // true
  */
 
-function getAvailableTowersNumber(room) {
+function getAvailableStorageNumber(room) {
     return CONTROLLER_STRUCTURES.storage[room.controller.level];
 }
 
@@ -19,37 +19,24 @@ module.exports = {
     checkStorage: function(){
         for(var roomName in Game.rooms) {
             var room = Game.rooms[roomName];
-            if (room.controller && room.controller.my && room.controller.level >= 4) {
-
+            if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
                 var number = 0;
-                var storages = room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_STORAGE);
-                    }
-                });
-
-                number += storages.length;
-                if (number > getAvailableTowersNumber(room)) {
+                var storage = room.storage;
+                if(storage){
                     return;
                 }
-
                 var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
                     filter: (csite) => {
-                        return (csite.structureType == STRUCTURE_TOWER);
+                        return (csite.structureType == STRUCTURE_STORAGE);
                     }
                 });
-
                 number += storagesSites.length;
 
-                if (number > getAvailableTowersNumber(room)) {
+                if (number >= getAvailableTowersNumber(room)) {
                     return;
                 }
-
-                //Find 1st spot available around spawn:
-                var res = buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
+                buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
             }
         }
-
     }
-
 };
