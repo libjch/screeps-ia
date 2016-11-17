@@ -134,21 +134,3 @@ function run (creep) {
         logger.info("Atack "+creep.attack(target),classname);
     }
 }
-
-
-/*
-function containsEnnemyStructure(creep){
-    var targets = creep.room.find(FIND_STRUCTURES, {
-        filter: function(object) {
-            if (object.my) {
-                return false;
-            }
-            if (object.structureType !== STRUCTURE_TOWER && object.structureType !== STRUCTURE_SPAWN && object.structureType !== STRUCTURE_EXTENSION) {
-                return false;
-            }
-            return true;
-        }
-    });
-    return targets.length > 0;
-}*/
-
