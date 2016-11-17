@@ -32,7 +32,7 @@ module.exports = {
                 });
                 number += storagesSites.length;
 
-                if (number >= getAvailableTowersNumber(room)) {
+                if (number >= getAvailableStorageNumber(room)) {
                     return;
                 }
                 buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
