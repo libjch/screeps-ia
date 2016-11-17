@@ -34,12 +34,18 @@ function findSourceInRoom(creep){
     logger.info("FindSourceInRange",classname);
 
     if(creep.room.controller.my){
-        var sources = creep.room.find(FIND_SOURCES); //to remove
+        if(!creep.room.memory.sources){
+            creep.room.memory.sources = [];
+            for(let source of creep.room.find(FIND_SOURCES)){
+                creep.room.memory.sources.push(source.id);
+            }
+        }
 
         var targetContainer = undefined;
         var targetContainerScore = 0;
 
-        for(let source of sources){
+        for(let sourceId of creep.room.memory.sources){
+            var source = Game.getObjectById(sourceId);
             //logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
 
             if(!Memory.extractors[source.id]){
