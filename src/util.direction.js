@@ -70,7 +70,7 @@ function findSourceInRoom(creep){
             return;
         }
         if(creep.room.storage){
-            if(creep.room.storage.store[RESOURCE_ENERGY] > 1000){
+            if(creep.room.storage.store[RESOURCE_ENERGY] > 100000){
                 if(creep.withdraw(creep.room.storage,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.storage);
                 }
