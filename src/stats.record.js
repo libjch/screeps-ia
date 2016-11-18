@@ -57,8 +57,9 @@ function record() {
 
 
             Memory.stats["room." + room.name+".invaders.count"] = room.find(FIND_HOSTILE_CREEPS).length;//_.filter(Game.creeps, (creep) => !creep.my).length;
-
-            Memory.stats["room." + room.name +".storage.energy"] = room.storage.store[RESOURCE_ENERGY];
+            if(room.storage) {
+                Memory.stats["room." + room.name + ".storage.energy"] = room.storage.store[RESOURCE_ENERGY];
+            }
         }
     }
 
