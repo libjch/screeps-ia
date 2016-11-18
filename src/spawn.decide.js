@@ -74,7 +74,7 @@ module.exports = {
             if (harvesters.length < sources) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if (harvesters.length == sources && smallHarvesters.length >0) {
+            } else if (harvesters.length == sources && smallHarvesters.length >0 && room.controller.level > 3) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if(extractors.length < sources){
