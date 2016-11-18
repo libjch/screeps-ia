@@ -152,7 +152,7 @@ module.exports.loop = function () {
             creep.memory.spawnroom = creep.memory.mainroom;
         }
         //run roles
-        try {
+        //try {
             var role = creep.memory.role;
 
             if (creep.memory.role_override) {
@@ -193,12 +193,12 @@ module.exports.loop = function () {
             } else if (role == 'extractor') {
                 roleExtractor.run(creep);
             }
-        } catch (e) {
-            logger.error('         ', classname)
-            logger.error("ERROR  " + e, classname);
-            logger.error('         ', classname)
-            Game.notify(e);
-        }
+        // } catch (e) {
+        //     logger.error('         ', classname)
+        //     logger.error("ERROR  " + e, classname);
+        //     logger.error('         ', classname)
+        //     Game.notify(e);
+        // }
 
         tick('Creep ' + creep.name);
     }
