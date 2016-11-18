@@ -10,7 +10,7 @@ module.exports = {
             var spawn = Game.spawns[i];
             var room = spawn.room;
             var roomName = room.name;
-
+            var sources = room.find(FIND_SOURCES).length;
 
             var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
             var smallHarvesters = _.filter(harvesters, (creep) => (creep.body.length < 6));
@@ -71,13 +71,13 @@ module.exports = {
             var mainroom = roomName;
 
 
-            if (harvesters.length < 2) {
+            if (harvesters.length < sources) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            } else if (harvesters.length == 2 && smallHarvesters.length >0) {
+            } else if (harvesters.length == sources && smallHarvesters.length >0) {
                 role = 'harvester';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            }  else if(extractors.length < 2){
+            }  else if(extractors.length < sources){
                 role = 'extractor';
                 maxEnergy = maxEnergy > 900 ? 900 : maxEnergy;
             } else if (upgraders.length < 1) {
@@ -92,12 +92,12 @@ module.exports = {
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            }  else if (upgraders.length < 2) {
+            }  else if (upgraders.length < sources) {
                 role = 'upgrader';
                 if(storageEnergy < 100000){
                     maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
                 }
-            } else if (upgraders.length < 4 && storageEnergy > 300000) {
+            } else if (upgraders.length < (2*sources) && storageEnergy > 300000) {
                 role = 'upgrader';
             }
 
