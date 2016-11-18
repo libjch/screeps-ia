@@ -23,6 +23,10 @@ function record() {
         logger.debug(room+' '+room.name,classname);
         if(room){
             if(room.controller.my){
+                if(!Memory.stats){
+                    Memory.stats = {};
+                }
+
                 Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
                 Memory.stats["room." + room.name + ".controllerProgressTotal"] = room.controller.progressTotal;
 
