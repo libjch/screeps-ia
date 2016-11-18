@@ -43,8 +43,6 @@ module.exports.loop = function () {
     logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
     logger.info(Memory.start);
 
-    return;
-
     logger.init();
 
     tick('Memory Loaded');
