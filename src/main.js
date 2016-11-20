@@ -81,7 +81,7 @@ module.exports.loop = function () {
         tick('Extractors');
     }
 
-    if (true || Game.time % 100 == 22) {
+    if (Game.time % 100 == 22) {
         roadPlanner = require('planner.road');
         roadPlanner.checkRoads();
         tick('CheckRoads');
