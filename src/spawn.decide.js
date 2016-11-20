@@ -90,6 +90,10 @@ module.exports = {
             else if (constructionsSites.length / 11 > builders.length && builders.length < 1) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+            } else if (buildersHelpers.length < 1 && (roomName == 'W68S31') ) { //+1
+                role = 'builder';
+                maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+                mainroom = 'W68S31';
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
