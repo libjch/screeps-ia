@@ -13,12 +13,12 @@ function run (creep) {
     //spawn claimer:
     // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true, claimroom: 'E14N18' });
 
-    var targetRoom ='W68S31';
+    var targetRoom = Game.rooms[creep.memory.claimroom];
 
-    if(!targetRoom || creep.room.name !== targetRoom){
-        var exitDir = creep.room.findExitTo(targetRoom);
+    if(!targetRoom || creep.room.name !== targetRoom.name){
+        var exitDir = creep.room.findExitTo(creep.memory.claimroom);
 
-        logger.log(exitDir+' '+targetRoom+' '+creep.memory.claimroom,classname);
+        logger.log(exitDir,classname);
         var exit = creep.pos.findClosestByRange(exitDir);
         logger.log(creep.moveToFatigue(exit),classname);
         return true;
