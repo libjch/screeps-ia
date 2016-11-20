@@ -96,18 +96,18 @@ function run (creep) {
 
     if(creep.room.name == creep.memory.targetRoom){
         target = findEnemyStructure(creep);
-        logger.info("Enemy structure: "+target,classname);
+        logger.debug("Enemy structure: "+target,classname);
         if(!target){
             target = findEnemyCreep(creep);
-            logger.info("Enemy creep: "+target,classname);
+            logger.debug("Enemy creep: "+target,classname);
         }
         if(!target){
             target = findWall(creep);
-            logger.info("Enemy wall: "+target,classname);
+            logger.debug("Enemy wall: "+target,classname);
         }
         if(!target) {
             target = findConstructionSite(creep);
-            logger.info("Enemy Construction site: " + target,classname);
+            logger.debug("Enemy Construction site: " + target,classname);
             if (target) {
                 creep.moveTo(target);
                 return;
