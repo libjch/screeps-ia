@@ -13,6 +13,10 @@ function run (creep) {
     //spawn claimer:
     // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true, claimroom: 'E14N18' });
 
+    //Clean the room:
+    //Game.rooms['W68S31'].find(FIND_STRUCTURES).forEach((s) => s.destroy());
+
+
     var targetRoom = Game.rooms[creep.memory.claimroom];
 
     if(!targetRoom || creep.room.name !== targetRoom.name){
