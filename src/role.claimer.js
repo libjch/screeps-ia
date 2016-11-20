@@ -18,7 +18,7 @@ function run (creep) {
     if(!targetRoom || creep.room.name !== targetRoom.name){
         var exitDir = creep.room.findExitTo(targetRoom);
 
-        logger.log(exitDir,classname);
+        logger.log(exitDir+' '+targetRoom+' '+creep.memory.claimroom,classname);
         var exit = creep.pos.findClosestByRange(exitDir);
         logger.log(creep.moveToFatigue(exit),classname);
         return true;
