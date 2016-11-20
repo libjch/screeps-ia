@@ -20,7 +20,7 @@ module.exports = {
                 //Build roads from sources to controller
                 for (let source of sources) {
                     var path = room.findPath(source.pos, room.controller.pos, {ignoreCreeps: true});
-                    for (let i = 0; i < 20 && i < path.length; i++) {
+                    for (let i = 0; i < 40 && i < path.length; i++) {
                         var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
                         if(res != ERR_INVALID_TARGET){
                             logger.debug("Create road to controller:" +res ,classname);
@@ -30,8 +30,9 @@ module.exports = {
 
                 var roomSpawn = undefined;
                 for(var i in Game.spawns) {
+                    logger.warn(i+" "+Game.spawns[i]);
                     var spawn = Game.spawns[i];
-                    if(spawn.room == room){
+                    if(spawn.room.name == room.name){
                         roomSpawn = spawn;
                         break;
                     }
@@ -43,7 +44,7 @@ module.exports = {
                 }
 
                 var path = room.findPath(roomSpawn.pos, room.controller.pos, {ignoreCreeps: true});
-                for (let i = 0; i < 30 && i < path.length; i++) {
+                for (let i = 0; i < 40 && i < path.length; i++) {
                     var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
                     if(res != ERR_INVALID_TARGET){
                         logger.debug("Create road to spawnCenter:" +res ,classname);
