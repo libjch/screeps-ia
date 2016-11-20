@@ -92,6 +92,9 @@ module.exports = {
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+            } else if (Memory.attacker.target && attackers.length < 1) {
+                role = 'attacker';
+                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if (upgraders.length < sources) {
                 role = 'upgrader';
                 if(storageEnergy < 100000){

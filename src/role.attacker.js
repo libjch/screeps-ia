@@ -64,17 +64,6 @@ function findWall (creep) {
             if ( object.structureType !== STRUCTURE_WALL && object.structureType !== STRUCTURE_RAMPART) {
                 return false;
             }
-            if(object.room.name == 'E14N18'){
-                if(object.pos.x < 3) {
-                    return false;
-                }
-                if(object.pos.y < 3) {
-                    return false;
-                }
-                if(object.pos.x > 46) {
-                    return false;
-                }
-            }
             return true;
         }
     });
@@ -131,6 +120,6 @@ function run (creep) {
         logger.info("Move "+creep.moveTo(target),classname);
         logger.info("Attack "+creep.attack(target),classname);
     } else {
-        logger.info("Atack "+creep.attack(target),classname);
+        logger.info("Attack "+creep.attack(target),classname);
     }
 }
