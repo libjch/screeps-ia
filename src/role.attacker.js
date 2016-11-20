@@ -30,7 +30,17 @@ function findEnemyStructure(creep){
         }
     });
 
-    var priorities = {STRUCTURE_TOWER:1,STRUCTURE_EXTENSION:3,STRUCTURE_SPAWN:2};
+    //1 try with towers:
+    for(let structType in [STRUCTURE_TOWER,STRUCTURE_SPAWN,STRUCTURE_EXTENSION]){
+        var targs = _.filter(targets, (t) => t.structureType == structType);
+        var best = return creep.pos.findClosestByPath(targs);
+        if(best){
+            return best;
+        }
+    }
+    return undefined;
+    /*
+    var priorities = {tower:1,extension:2,spawn:3};
     targets.sort(function(a,b){
         var pA = priorities[a.structureType];
         var pB = priorities[b.structureType];
@@ -43,7 +53,7 @@ function findEnemyStructure(creep){
     if(targets){
         return creep.pos.findClosestByPath(targets);
     }
-    return undefined;
+    return undefined;*/
 }
 
 function findConstructionSite(creep){
