@@ -38,6 +38,7 @@ function findEnemyStructure(creep){
             return best;
         }
     }
+    logger.warn("No eney struct found: "+targets+' / '+ _.filter(targets, (t) => t.structureType == 'tower'));
     return undefined;
     /*
     var priorities = {tower:1,extension:2,spawn:3};
