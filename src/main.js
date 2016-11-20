@@ -43,6 +43,10 @@ module.exports.loop = function () {
     logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
     logger.info(Memory.start);
 
+    if(Game.time > (15435544 + 5000)){
+        Memory.attacker.target = undefined;
+    }
+
     if(!Memory.extractors){
         Memory.extractors = {};
     }
