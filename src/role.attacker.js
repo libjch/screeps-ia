@@ -101,17 +101,17 @@ function run (creep) {
             target = findEnemyCreep(creep);
             logger.debug("Enemy creep: "+target,classname);
         }
-        if(!target){
-            target = findWall(creep);
-            logger.debug("Enemy wall: "+target,classname);
-        }
         if(!target) {
             target = findConstructionSite(creep);
-            logger.debug("Enemy Construction site: " + target,classname);
+            logger.debug("Enemy Construction site: " + target, classname);
             if (target) {
                 creep.moveTo(target);
                 return;
             }
+        }
+        if(!target){
+            target = findWall(creep);
+            logger.debug("Enemy wall: "+target,classname);
         }
     }
     logger.debug("Target : "+target+' '+target.pos,classname);
