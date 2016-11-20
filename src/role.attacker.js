@@ -33,7 +33,7 @@ function findEnemyStructure(creep){
     //1 try with towers:
     for(let structType in [STRUCTURE_TOWER,STRUCTURE_SPAWN,STRUCTURE_EXTENSION]){
         var targs = _.filter(targets, (t) => t.structureType == structType);
-        var best = return creep.pos.findClosestByPath(targs);
+        var best = creep.pos.findClosestByPath(targs);
         if(best){
             return best;
         }
