@@ -68,6 +68,12 @@ var roleBuilder = {
                     if (targets.length) {
                         var target = targets[0];
                         var res = creep.build(target);
+
+                        if(target.structureType == STRUCTURE_RAMPART && res == OK){
+                            creep.memory.role_override = 'repairer';
+                            creep.memory.role_override_time = Game.time + 10;
+                        }
+
                         if (res == ERR_NOT_IN_RANGE) {
                             creep.moveToFatigue(target);
                         } else {

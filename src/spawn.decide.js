@@ -80,7 +80,7 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if(extractors.length < sources){
                 role = 'extractor';
-                maxEnergy = maxEnergy > 900 ? 900 : maxEnergy;
+                maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
             } else if (upgraders.length < 1) {
                 role = 'upgrader';
                 if(storageEnergy < 100000){
