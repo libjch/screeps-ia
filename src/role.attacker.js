@@ -30,7 +30,7 @@ function findEnemyStructure(creep){
         }
     });
 
-    var priorities = {tower:1,extension:2,spawn:3};
+    var priorities = {STRUCTURE_TOWER:1,STRUCTURE_EXTENSION:3,STRUCTURE_SPAWN:2};
     targets.sort(function(a,b){
         var pA = priorities[a.structureType];
         var pB = priorities[b.structureType];
