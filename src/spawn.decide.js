@@ -69,6 +69,7 @@ module.exports = {
             var extern = false;
 
             var mainroom = roomName;
+            var targetroom = undefined;
 
 
             if (harvesters.length < sources) {
@@ -94,6 +95,7 @@ module.exports = {
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (Memory.attacker.target && attackers.length < 1) {
                 role = 'attacker';
+                targetroom = Memory.attacker.target;
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             }  else if (upgraders.length < sources) {
                 role = 'upgrader';
@@ -189,7 +191,6 @@ module.exports = {
                 //get least used extern room
                 var externRoomNumber = undefined;
                 var roomnumber = undefined;
-                var targetroom = undefined;
 
                 logger.log('Suggested role: ' + role + (extern ? ' (E)' : ' ') + ' energy: ' + energy + '/' + room.energyCapacityAvailable + " " + body,classname);
 

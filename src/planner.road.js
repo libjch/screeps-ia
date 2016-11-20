@@ -43,7 +43,7 @@ module.exports = {
                 }
 
                 var path = room.findPath(roomSpawn.pos, room.controller.pos, {ignoreCreeps: true});
-                for (let i = 0; i < 20 && i < path.length; i++) {
+                for (let i = 0; i < 30 && i < path.length; i++) {
                     var res = room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
                     if(res != ERR_INVALID_TARGET){
                         logger.debug("Create road to spawnCenter:" +res ,classname);
