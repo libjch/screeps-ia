@@ -29,7 +29,7 @@ function printFloat(value) {
 function tick(step) {
     var nowCpu = Game.cpu.getUsed();
     step = (step + '               ').substr(0, 15);
-    if (nowCpu - lastCpu > 1) {
+    if (nowCpu - lastCpu > 0.5) {
         logger.error('CPU Usage ' + step + ': ' + printFloat(nowCpu - lastCpu) + ' total:' + printFloat(nowCpu));
     } else {
         logger.trace('CPU Usage ' + step + ': ' + printFloat(nowCpu - lastCpu) + ' total:' + printFloat(nowCpu));
