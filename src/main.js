@@ -191,10 +191,10 @@ module.exports.loop = function () {
             else if (role == 'upgrader' || role == 'upgrader-c' || role == 'upgrader.c') {
                 roleUpgrader.run(creep);
             }
-            else if (role == 'builder') {
+            else if (role == 'builder' && Game.cpu.bucket > 2500) {
                 roleBuilder.run(creep);
             }
-            else if (role == 'repairer') {
+            else if (role == 'repairer' && Game.cpu.bucket > 2500) {
                 roleRepairer.run(creep);
             }
             else if (role == 'attacker') {
