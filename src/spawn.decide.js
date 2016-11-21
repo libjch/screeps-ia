@@ -86,14 +86,14 @@ module.exports = {
                 if(storageEnergy < 100000){
                     maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
                 }
-            }
-            else if (constructionsSites.length / 11 > builders.length && builders.length < 1) {
+            } else if (constructionsSites.length / 11 > builders.length && builders.length < 1) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (buildersHelpers.length < 2 && (roomName == 'W68S32') ) { //+1
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 mainroom = 'W68S33';
+
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
