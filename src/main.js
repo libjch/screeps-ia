@@ -86,7 +86,7 @@ module.exports.loop = function () {
         tick('Extractors');
     }
 
-    if (Game.time % 100 == 22) {
+    if (Game.time % 100 == 22  && Game.cpu.bucket > 3000) {
         roadPlanner = require('planner.road');
         roadPlanner.checkRoads();
         tick('CheckRoads');
@@ -104,7 +104,7 @@ module.exports.loop = function () {
         tick('CheckTowers');
     }
 
-    if (Game.time % 200 == 55) {
+    if (Game.time % 200 == 55  && Game.cpu.bucket > 5000) {
         wallPlanner = require('planner.wall');
         try {
             wallPlanner.checkWalls();
