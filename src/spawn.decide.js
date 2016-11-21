@@ -93,7 +93,7 @@ module.exports = {
             } else if (buildersHelpers.length < 1 && (roomName == 'W68S32') ) { //+1
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
-                mainroom = 'W68S31';
+                mainroom = 'W68S33';
             } else if (repairers.length < 1) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
