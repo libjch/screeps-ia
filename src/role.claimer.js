@@ -16,6 +16,8 @@ function run (creep) {
     //Clean the room:
     //Game.rooms['W68S3X'].find(FIND_STRUCTURES).forEach((s) => s.destroy());
 
+    //Add builder helper by defining: Memory.spawner.target
+
 
     var targetRoom = Game.rooms[creep.memory.claimroom];
 
