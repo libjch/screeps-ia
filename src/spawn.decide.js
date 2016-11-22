@@ -86,14 +86,14 @@ module.exports = {
                 if(storageEnergy < 100000){
                     maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
                 }
-            } else if (constructionsSites.length / 11 > builders.length && builders.length < 1) {
+            } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
                 role = 'builder';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (Memory.spawner.target && buildersHelpers.length < 1 && (roomName == 'W68S32') ) { //+1
                 role = 'builder';
                 maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
                 mainroom = Memory.spawner.target;
-            } else if (repairers.length < 1) {
+            } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
                 role = 'repairer';
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
             } else if (Memory.attacker.target && attackers.length < 1) {
@@ -105,7 +105,7 @@ module.exports = {
                 if(storageEnergy < 100000){
                     maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
                 }
-            } else if (upgraders.length < (2*sources) && storageEnergy > 300000) {
+            } else if (upgraders.length < (2*sources) && storageEnergy > 300000 && Game.cpu.bucket > 3000) {
                 role = 'upgrader';
             }
 
