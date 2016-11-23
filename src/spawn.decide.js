@@ -148,22 +148,14 @@ module.exports = {
                         body.push(MOVE);
                     }
                 } else if (role == 'harvester' && extractors.length > 0 && maxEnergy > 1000) {
-                    body.push(CARRY);
-                    body.push(CARRY);
-                    body.push(CARRY);
-                    body.push(CARRY);
-                    body.push(CARRY);
-                    body.push(MOVE);
-                    body.push(MOVE);
-                    body.push(MOVE);
-                    body.push(MOVE);
-                    body.push(MOVE);
-
-                    maxEnergy = maxEnergy - 500;
-                    var number = Math.floor(maxEnergy / 200);
-                    number = number > 10 ? 10 : number;
-                    for (var i = 0; i < number; i++) {
+                    if(!room.storage){
                         body.push(WORK);
+                        body.push(WORK);
+                        maxEnergy = maxEnergy - 200;
+                    }
+                    var number = Math.floor(maxEnergy / 100);
+                    number = number > 12 ? 12 : number;
+                    for (var i = 0; i < number; i++) {
                         body.push(CARRY);
                         body.push(MOVE);
                     }
