@@ -21,7 +21,7 @@ module.exports = {
         for(var roomName in Game.rooms) {
             var room = Game.rooms[roomName];
 
-            //logger.debug('Room: '+room.name,classname);
+            logger.debug('Room: '+room.name,classname);
 
             if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
                 var number = 0;
