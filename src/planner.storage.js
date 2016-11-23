@@ -1,7 +1,7 @@
 
 var logger = require('logger');
 var buildUtil = require('util.build');
-var classname = 'WallPlanner';
+var classname = 'StoragePlanner';
 /*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';
@@ -17,18 +17,18 @@ function getAvailableStorageNumber(room) {
 
 module.exports = {
     checkStorage: function(){
-        logger.debug('Check Storage!',classname);
+        //logger.debug('Check Storage!',classname);
         for(var roomName in Game.rooms) {
             var room = Game.rooms[roomName];
 
-            logger.debug('Room: '+room.name,classname);
+            //logger.debug('Room: '+room.name,classname);
 
             if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
                 var number = 0;
                 var storage = room.storage;
                 if(storage)
-                    logger.debug('Storage already exists',classname);
-                return;
+                    logger.debug('Storage already exists '+roomName,classname);
+                continue;
             }
             var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
                 filter: (csite) => {
@@ -38,8 +38,8 @@ module.exports = {
             number += storagesSites.length;
 
             if (number >= getAvailableStorageNumber(room)) {
-                logger.debug('Storage CSite already exists',classname);
-                return;
+                logger.debug('Storage CSite already exists '+roomName,classname);
+                continue;
             }
             buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
         }
