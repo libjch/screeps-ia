@@ -26,23 +26,24 @@ module.exports = {
             if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
                 var number = 0;
                 var storage = room.storage;
-                if(storage)
+                if(storage){
                     logger.debug('Storage already exists '+roomName,classname);
-                continue;
-            }
-            var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
-                filter: (csite) => {
-                    return (csite.structureType == STRUCTURE_STORAGE);
+                    continue;
                 }
-            });
-            number += storagesSites.length;
+                var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
+                    filter: (csite) => {
+                        return (csite.structureType == STRUCTURE_STORAGE);
+                    }
+                });
+                number += storagesSites.length;
 
-            if (number >= getAvailableStorageNumber(room)) {
-                logger.debug('Storage CSite already exists '+roomName,classname);
-                continue;
+                if (number >= getAvailableStorageNumber(room)) {
+                    logger.debug('Storage CSite already exists '+roomName,classname);
+                    continue;
+                }
+                logger.debug('Build storage! '+roomName,classname);
+                buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
             }
-            logger.debug('Build storage! '+roomName,classname);
-            buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
         }
     }
 };
