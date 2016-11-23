@@ -41,6 +41,7 @@ module.exports = {
                 logger.debug('Storage CSite already exists '+roomName,classname);
                 continue;
             }
+            logger.debug('Build storage! '+roomName,classname);
             buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
         }
     }
