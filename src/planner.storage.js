@@ -19,10 +19,14 @@ module.exports = {
     checkStorage: function(){
         for(var roomName in Game.rooms) {
             var room = Game.rooms[roomName];
+
+            logger.debug('Room: '+room.name);
+
             if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
                 var number = 0;
                 var storage = room.storage;
-                if(storage){
+                if(storage)
+                    logger.debug('Storage already exists');
                     return;
                 }
                 var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
@@ -33,6 +37,7 @@ module.exports = {
                 number += storagesSites.length;
 
                 if (number >= getAvailableStorageNumber(room)) {
+                    logger.debug('Storage CSite already exists');
                     return;
                 }
                 buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);

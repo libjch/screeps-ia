@@ -114,7 +114,7 @@ module.exports.loop = function () {
         tick('wallPlanners');
     }
 
-    if (Game.time % 100 == 66) {
+    if (true || Game.time % 100 == 66) {
         storagePlanner = require('planner.storage');
         storagePlanner.checkStorage();
         tick('CheckStorage');
