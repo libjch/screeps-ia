@@ -1,25 +1,25 @@
-var roleHarvester;
-var roleHarvesterContainer;
-var roleUpgrader;
-var roleUpgraderContainer;
-var roleBuilder;
-var roleRepairer;
-var roleAttacker;
-var roleClaimer;
-var roleExtractor;
-var spawnDecider;
-var towerAttack;
-var recorder;
-var roadPlanner;
-var extensionPlanner;
-var towerPlanner;
-var wallPlanner;
-var storagePlanner;
+
+var roleHarvester = require('role.harvester');
+var roleUpgrader = require('role.upgrader');
+var roleBuilder = require('role.builder');
+var roleRepairer = require('role.repairer');
+var roleAttacker = require('role.attacker');
+var roleClaimer = require('role.claimer');
+var roleExtractor = require('role.extractor');
+var spawnDecider = require('spawn.decide');
+var towerAttack = require('tower.attack');
+var recorder = require('stats.record');
+var roadPlanner = require('planner.road');
+var extensionPlanner = require('planner.extension');
+var towerPlanner = require('planner.tower');
+var wallPlanner = require('planner.wall');
+var storagePlanner = require('planner.storage');
 
 
 var logger = require('logger');
-var classname = 'Main';
 
+var profiler = require('screeps-profiler');
+var classname = 'Main';
 
 var lastCpu = 0;
 
@@ -38,133 +38,125 @@ function tick(step) {
     lastCpu = nowCpu;
 }
 
-module.exports.loop = function () {
-    logger.highlight('========== NEW TURN ' + Game.time + ' ============', classname);
-    lastCpu = 0;
-    logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
-    logger.info(Memory.start);
 
-    if(Game.time > (15435544 + 5000)){
-        Memory.attacker.target = undefined;
-    }
+// This line monkey patches the global prototypes.
+profiler.enable();
+module.exports.loop = function() {
+    profiler.wrap(function() {
 
-    if(!Memory.extractors){
-        Memory.extractors = {};
-    }
-    if(!Memory.containers){
-        Memory.containers = {};
-    }
+        logger.highlight('========== NEW TURN ' + Game.time + ' ============', classname);
 
-    logger.init();
 
-    tick('Memory Loaded');
+        lastCpu = 0;
+        logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
+        logger.info(Memory.start);
 
-    if (Game.time % 100 == 0) {
-        for (var i in Memory.creeps) {
-            if (!Game.creeps[i]) {
-                logger.warn("Delete creep:" + Memory.creeps[i]);
-                delete Memory.creeps[i];
-            }
+        if(Game.time > (15435544 + 5000)){
+            Memory.attacker.target = undefined;
         }
-        tick('Cleaned Memory');
-    }
 
-
-    if (Game.time % 10 == 0 && Game.cpu.bucket > 1000) {
-        spawnDecider = require('spawn.decide');
-        spawnDecider.spawn();
-        tick('SpawnDecide');
-    }
-
-    towerAttack = require('tower.attack');
-    towerAttack.attack();
-    tick('TowerAttack');
-
-    if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
-        roleExtractor = require('role.extractor');
-        roleExtractor.cleanExtractors();
-        tick('Extractors');
-    }
-
-    if (Game.time % 100 == 22  && Game.cpu.bucket > 3000) {
-        roadPlanner = require('planner.road');
-        roadPlanner.checkRoads();
-        tick('CheckRoads');
-    }
-
-    if (Game.time % 100 == 33) {
-        extensionPlanner = require('planner.extension');
-        extensionPlanner.checkExtensions();
-        tick('CheckExtensions');
-    }
-
-    if (Game.time % 100 == 44) {
-        towerPlanner = require('planner.tower');
-        towerPlanner.checkTowers();
-        tick('CheckTowers');
-    }
-
-    if (Game.time % 200 == 55  && Game.cpu.bucket > 5000) {
-        wallPlanner = require('planner.wall');
-        try {
-            wallPlanner.checkWalls();
-        } catch (e) {
-            logger.error("ERROR  " + e, classname);
+        if(!Memory.extractors){
+            Memory.extractors = {};
         }
-        tick('wallPlanners');
-    }
+        if(!Memory.containers){
+            Memory.containers = {};
+        }
 
-    if (Game.time % 200 == 66) {
-        storagePlanner = require('planner.storage');
-        storagePlanner.checkStorage();
-        tick('CheckStorage');
-    }
+        logger.init();
 
-    roleHarvester = require('role.harvester');
-    roleUpgrader = require('role.upgrader');
-    roleBuilder = require('role.builder');
-    roleRepairer = require('role.repairer');
-    roleAttacker = require('role.attacker');
-    roleClaimer = require('role.claimer');
-    roleExtractor = require('role.extractor');
-    tick('Load creeps scripts');
+        tick('Memory Loaded');
 
-    var creeps = [];
-
-    for (var name in Game.creeps) {
-        creeps.push(Game.creeps[name]);
-    }
-
-    creeps.sort(function (a, b) {
-        if (a.memory.mainroom < b.memory.mainroom) return -1;
-        if (a.memory.mainroom > b.memory.mainroom) return 1;
-
-        if (a.memory.role < b.memory.role) return -1;
-        if (a.memory.role > b.memory.role) return 1;
-        return 0;
-    });
-
-
-    tick('StartCreeps');
-    for (let creep of creeps) {
-
-        //pickup dropped enery;
-        if (creep.carry.energy < creep.carryCapacity) {
-            var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY, 1);
-            if (energy.length) {
-                for (let e of energy) {
-                    creep.pickup(e);
+        if (Game.time % 100 == 0) {
+            for (var i in Memory.creeps) {
+                if (!Game.creeps[i]) {
+                    logger.warn("Delete creep:" + Memory.creeps[i]);
+                    delete Memory.creeps[i];
                 }
             }
+            tick('Cleaned Memory');
         }
 
-        var place = creep.room.name + '-' + creep.pos.x + '-' + creep.pos.y;
 
-        if (!creep.memory.spawnroom) {
-            creep.memory.spawnroom = creep.memory.mainroom;
+        if (Game.time % 10 == 0 && Game.cpu.bucket > 1000) {
+            spawnDecider.spawn();
+            tick('SpawnDecide');
         }
-        //run roles
-        //try {
+
+        towerAttack.attack();
+        tick('TowerAttack');
+
+        if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
+            roleExtractor.cleanExtractors();
+            tick('Extractors');
+        }
+
+        if (Game.time % 100 == 22  && Game.cpu.bucket > 3000) {
+            roadPlanner.checkRoads();
+            tick('CheckRoads');
+        }
+
+        if (Game.time % 100 == 33) {
+            extensionPlanner.checkExtensions();
+            tick('CheckExtensions');
+        }
+
+        if (Game.time % 100 == 44) {
+            towerPlanner.checkTowers();
+            tick('CheckTowers');
+        }
+
+        if (Game.time % 200 == 55  && Game.cpu.bucket > 5000) {
+            try {
+                wallPlanner.checkWalls();
+            } catch (e) {
+                logger.error("ERROR  " + e, classname);
+            }
+            tick('wallPlanners');
+        }
+
+        if (Game.time % 200 == 66) {
+            storagePlanner.checkStorage();
+            tick('CheckStorage');
+        }
+
+        tick('Load creeps scripts');
+
+        var creeps = [];
+
+        for (var name in Game.creeps) {
+            creeps.push(Game.creeps[name]);
+        }
+
+        creeps.sort(function (a, b) {
+            if (a.memory.mainroom < b.memory.mainroom) return -1;
+            if (a.memory.mainroom > b.memory.mainroom) return 1;
+
+            if (a.memory.role < b.memory.role) return -1;
+            if (a.memory.role > b.memory.role) return 1;
+            return 0;
+        });
+
+
+        tick('StartCreeps');
+        for (let creep of creeps) {
+
+            //pickup dropped enery;
+            if (creep.carry.energy < creep.carryCapacity) {
+                var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY, 1);
+                if (energy.length) {
+                    for (let e of energy) {
+                        creep.pickup(e);
+                    }
+                }
+            }
+
+            var place = creep.room.name + '-' + creep.pos.x + '-' + creep.pos.y;
+
+            if (!creep.memory.spawnroom) {
+                creep.memory.spawnroom = creep.memory.mainroom;
+            }
+            //run roles
+            //try {
             var role = creep.memory.role;
 
             if (creep.memory.role_override) {
@@ -205,17 +197,17 @@ module.exports.loop = function () {
             } else if (role == 'extractor') {
                 roleExtractor.run(creep);
             }
-        // } catch (e) {
-        //     logger.error('         ', classname)
-        //     logger.error("ERROR  " + e, classname);
-        //     logger.error('         ', classname)
-        //     Game.notify(e);
-        // }
+            // } catch (e) {
+            //     logger.error('         ', classname)
+            //     logger.error("ERROR  " + e, classname);
+            //     logger.error('         ', classname)
+            //     Game.notify(e);
+            // }
 
-        tick('Creep ' + creep.name);
-    }
+            tick('Creep ' + creep.name);
+        }
+        recorder.record();
+        tick('RecordStats');
+    });
+}
 
-    recorder = require('stats.record');
-    recorder.record();
-    tick('RecordStats');
-};
