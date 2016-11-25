@@ -46,14 +46,9 @@ module.exports.loop = function() {
 
         logger.highlight('========== NEW TURN ' + Game.time + ' ============', classname);
 
-
         lastCpu = 0;
         logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
         logger.info(Memory.start);
-
-        if(Game.time > (15435544 + 5000)){
-            Memory.attacker.target = undefined;
-        }
 
         if(!Memory.extractors){
             Memory.extractors = {};
@@ -82,7 +77,10 @@ module.exports.loop = function() {
             tick('SpawnDecide');
         }
 
-        towerAttack.attack();
+        for(let roomName in Game.rooms){
+            var room = Game.rooms[roomName];
+            room.runTowers();
+        }
         tick('TowerAttack');
 
         if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {

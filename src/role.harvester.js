@@ -121,7 +121,7 @@ var roleHarvester = {
                 }
                 return;
             }
-            direction.findSourceInRoom(creep);
+            creep.findSourceInRoom(creep);
         }
     }
 };

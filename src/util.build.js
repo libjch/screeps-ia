@@ -3,10 +3,6 @@ var logger = require('logger');
 
 var classname = 'BuildUtil';
 
-module.exports = {
-    findBuildPositionInRoom: findBuildPositionInRoom
-};
-
 
 function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
     var x = roomSpawn.pos.x + (dx);
@@ -19,20 +15,20 @@ function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
     }
 }
 
-function findBuildPositionInRoom(room,structureType){
-    logger.debug("Find Build spot in room: "+room,classname);
+Room.prototype.findBuildPositionInRoom = function(structureType){
+    logger.debug("Find Build spot in room: "+this,classname);
 
     var roomSpawn = undefined;
     for(var i in Game.spawns) {
         var spawn = Game.spawns[i];
-        if(spawn.room == room){
+        if(spawn.room == this){
             roomSpawn = spawn;
             break;
         }
     }
     //Build around spawner
     if(roomSpawn == undefined){
-        logger.error('No spawn found for room '+roomName,classname);
+        logger.error('No spawn found for room '+this,classname);
         return ERR_NOT_OWNER;
     }
 
@@ -61,6 +57,4 @@ function findBuildPositionInRoom(room,structureType){
             }
         }
     }
-
-
 }

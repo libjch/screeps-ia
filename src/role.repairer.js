@@ -142,7 +142,7 @@ var roleRepairer = {
             }else{
                 direction.findSourceInRoom(creep);
             }*/
-            direction.findSourceInRoom(creep);
+            creep.findSourceInRoom(creep);
         }
     }
 }

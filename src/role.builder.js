@@ -90,7 +90,7 @@ var roleBuilder = {
         }
         else {
             creep.memory.lastBuildId = undefined;
-            direction.findSourceInRoom(creep);
+            creep.findSourceInRoom(creep);
         }
     }
 };
