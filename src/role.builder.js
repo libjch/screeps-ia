@@ -51,11 +51,12 @@ Creep.prototype.workBuild = function(){
                 this.memory.role_override_time = Game.time + 300;
                 return;
             } else {
+                var _this = this;
                 targets.sort(function (a, b) {
                     var pA = priorities[a.structureType];
                     var pB = priorities[b.structureType];
                     if (pA == pB) {
-                        return (this.pos.getRangeTo(a)) - (this.pos.getRangeTo(b));
+                        return (_this.pos.getRangeTo(a)) - (_this.pos.getRangeTo(b));
                     } else {
                         return pA - pB;
                     }

@@ -49,12 +49,12 @@ Creep.prototype.workHarvest = function(){
                 }
             });
             var priorities = {tower:1,extension:2,spawn:2,container:4};
-            var creep = this;
+            var _this = this;
             targets.sort(function(a,b){
                 var pA = priorities[a.structureType];
                 var pB = priorities[b.structureType];
                 if(pA == pB){
-                    return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
+                    return (_this.pos.getRangeTo(a)) - (_this.pos.getRangeTo(b));
                 }else{
                     return pA - pB;
                 }
@@ -75,9 +75,9 @@ Creep.prototype.workHarvest = function(){
                         && !Memory.containers[structure.id])
                     }
                 });
-
+                var _this = this;
                 targets.sort(function(a,b){
-                    return (this.pos.getRangeTo(a)) - (this.pos.getRangeTo(b));
+                    return (_this.pos.getRangeTo(a)) - (_this.pos.getRangeTo(b));
                 });
 
                 if(targets.length > 0) {
