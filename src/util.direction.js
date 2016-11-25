@@ -3,16 +3,17 @@ var classname = 'DirectionUtil';
 
 Creep.prototype.moveToFatigue = function(obj){
         if(!this.fatigue){
-            this.moveTo(obj);
+            this.moveTo(obj,{reusePath: 10});
         }
 }
 
 Creep.prototype.moveToFatigue = function(x,y){
     if(!this.fatigue){
-        this.moveTo(x,y);
+        return this.moveTo(x,y,{reusePath: 10});
+    }else{
+        return ERR_TIRED;
     }
 }
-
 
 
 Creep.prototype.moveToRoom = function(targetRoom){
