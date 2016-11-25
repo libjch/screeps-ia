@@ -15,43 +15,32 @@ function getAvailableExtensionsNumber(room) {
     return CONTROLLER_STRUCTURES.extension[room.controller.level];
 }
 
-module.exports = {
-    checkExtensions: function(){
-        for(var roomName in Game.rooms) {
-            var room = Game.rooms[roomName];
-            if (room.controller && room.controller.my) {
-
-                var number = 0;
-                var extensions = room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION);
-                    }
-                });
-                number += extensions.length;
-
-                var extensionsSites = room.find(FIND_CONSTRUCTION_SITES, {
-                    filter: (csite) => {
-                        return (csite.structureType == STRUCTURE_EXTENSION);
-                    }
-                });
-
-                number += extensionsSites.length;
-
-                logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
-
-                //Availables extensions:
-                var avails = getAvailableExtensionsNumber(room);
-
-                if(number < avails){
-                    //Find 1st spot available around spawn:
-                    var res = buildUtil.findBuildPositionInRoom(room,STRUCTURE_EXTENSION);
-                    if(res == OK){
-                        number++;
-                    }
-                }
+Room.prototype.checkExtensions =function(){
+    if (this.controller && this.controller.my) {
+        var number = 0;
+        var extensions = this.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return (structure.structureType == STRUCTURE_EXTENSION);
             }
+        });
+        number += extensions.length;
+
+        var extensionsSites = this.find(FIND_CONSTRUCTION_SITES, {
+            filter: (csite) => {
+                return (csite.structureType == STRUCTURE_EXTENSION);
+            }
+        });
+
+        number += extensionsSites.length;
+
+        logger.log("Number of extensions: " + number + " (" + extensions.length + ',' + extensionsSites.length + ')', classname);
+
+        //Availables extensions:
+        var avails = getAvailableExtensionsNumber(this);
+
+        if(number < avails){
+            //Find 1st spot available around spawn:
+            this.findBuildPositionInRoom(STRUCTURE_EXTENSION);
         }
-
-
     }
 };

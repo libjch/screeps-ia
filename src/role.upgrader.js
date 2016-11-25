@@ -5,37 +5,31 @@ var direction = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleUpgrader';
 
-var roleUpgrader = {
 
-    /** @param {Creep} creep **/
-    run: function(creep) {
+Creep.prototype.workUpgrade = function(){
+    if(this.memory.working && this.carry.energy == 0) {
+        this.memory.working = false;
+    }
+    if(!this.memory.working && this.carry.energy == this.carryCapacity) {
+        this.memory.working = true;
+    }
 
-        if(creep.memory.working && creep.carry.energy == 0) {
-            creep.memory.working = false;
-        }
-        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.working = true;
-        }
-
-        if(creep.memory.working) {
-            if(creep.room.controller.my && creep.memory.mainroom == creep.room.name){
-                if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                    creep.moveToFatigue(creep.room.controller);
-                }
-            }else{
-                direction.moveToRoom(creep,creep.memory.mainroom);
+    if(this.memory.working) {
+        if(this.room.controller.my && this.memory.mainroom == this.room.name){
+            if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
+                this.moveToFatigue(this.room.controller);
             }
-        }
-        else {
-            if(creep.room.storage && creep.room.storage.store[RESOURCE_ENERGY] >= 50000) {
-                if (creep.withdraw(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveToFatigue(creep.room.storage);
-                }
-                return;
-            }
-            creep.findSourceInRoom(creep);
+        }else{
+            this.moveToRoom(this.memory.mainroom);
         }
     }
+    else {
+        if(this.room.storage && this.room.storage.store[RESOURCE_ENERGY] >= 50000) {
+            if (this.withdraw(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                this.moveToFatigue(this.room.storage);
+            }
+            return;
+        }
+        this.findSourceInRoom();
+    }
 };
-
-module.exports = roleUpgrader;

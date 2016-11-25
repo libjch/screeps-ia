@@ -3,22 +3,16 @@ var directionUtil = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleAttacker';
 
-
-module.exports = {
-    run: run
-};
-
-
-function findEnemyCreep(creep){
-    var targets = creep.room.find(FIND_HOSTILE_CREEPS);//, {filter: function(enemy){!enemy.my}});
+Creep.prototype.findEnemyCreep = function(){
+    var targets = this.room.find(FIND_HOSTILE_CREEPS);//, {filter: function(enemy){!enemy.my}});
     if(targets){
-        return creep.pos.findClosestByPath(targets);
+        return this.pos.findClosestByPath(targets);
     }
     return undefined;
-}
+};
 
-function findEnemyStructure(creep){
-    var targets = creep.room.find(FIND_STRUCTURES, {
+Creep.prototype.findEnemyStructure = function(){
+    var targets = this.room.find(FIND_STRUCTURES, {
         filter: function(object) {
             if (object.my) {
                 return false;
@@ -33,41 +27,26 @@ function findEnemyStructure(creep){
     //1 try with towers:
     for(let structType of [STRUCTURE_TOWER,STRUCTURE_SPAWN,STRUCTURE_EXTENSION]){
         var targs = _.filter(targets, (t) => t.structureType == structType);
-        var best = creep.pos.findClosestByPath(targs);
+        var best = this.pos.findClosestByPath(targs);
         if(best){
             return best;
         }
     }
     logger.warn("No eney struct found: "+targets+' / '+ _.filter(targets, (t) => t.structureType == 'tower'));
     return undefined;
-    /*
-    var priorities = {tower:1,extension:2,spawn:3};
-    targets.sort(function(a,b){
-        var pA = priorities[a.structureType];
-        var pB = priorities[b.structureType];
-        if(pA == pB){
-            return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
-        }else{
-            return pA - pB;
-        }
-    });
-    if(targets){
-        return creep.pos.findClosestByPath(targets);
-    }
-    return undefined;*/
-}
+};
 
-function findConstructionSite(creep){
-    var targets = creep.room.find(FIND_HOSTILE_CONSTRUCTION_SITES);
+Creep.prototype.findEnemyConstructionSite = function(){
+    var targets = this.room.find(FIND_HOSTILE_CONSTRUCTION_SITES);
 
-    logger.warn('targets '+targets+' '+creep,classname);
+    logger.warn('targets '+targets+' '+this,classname);
     if(targets){
-        return creep.pos.findClosestByPath(targets);
+        return this.pos.findClosestByPath(targets);
     }
     return undefined;
-}
-function findWall (creep) {
-    var targets = creep.room.find(FIND_STRUCTURES, {
+};
+Creep.prototype.findEnemyWall  = function() {
+    var targets = this.room.find(FIND_STRUCTURES, {
         filter: function(object) {
             if (object.my) {
                 return false;
@@ -79,58 +58,54 @@ function findWall (creep) {
         }
     });
     if(targets){
-        return creep.pos.findClosestByPath(targets);
+        return this.pos.findClosestByPath(targets);
     }
-}
+};
 
 
-function run (creep) {
+Creep.prototype.workAttack = function(){
     var target = undefined;
-    if(creep.room.name == creep.memory.mainroom && creep.room.name != creep.memory.targetRoom ){
-        target = findEnemyCreep(creep);
+    if(this.room.name == this.memory.mainroom && this.room.name != this.memory.targetRoom ){
+        target = this.findEnemyCreep();
         if(!target){
-            var exitDir = creep.room.findExitTo(creep.memory.targetRoom);
-            var exit = creep.pos.findClosestByRange(exitDir);
-            creep.moveTo(exit);
+            var exitDir = this.room.findExitTo(this.memory.targetRoom);
+            var exit = this.pos.findClosestByRange(exitDir);
+            this.moveToFatigue(exit);
             logger.log("No creep main room "+exit,classname);
             return;
         }
     }
 
-    if(creep.room.name != creep.memory.targetRoom ){
-        var exitDir = creep.room.findExitTo(creep.memory.targetRoom);
-        var exit = creep.pos.findClosestByRange(exitDir);
-        creep.moveTo(exit);
+    if(this.room.name != this.memory.targetRoom ){
+        var exitDir = this.room.findExitTo(this.memory.targetRoom);
+        var exit = this.pos.findClosestByRange(exitDir);
+        this.moveToFatigue(exit);
         logger.log("No creep main room "+exit,classname);
         return;
     }
 
-    if(creep.room.name == creep.memory.targetRoom){
-        target = findEnemyStructure(creep);
+    if(this.room.name == this.memory.targetRoom){
+        target = this.findEnemyStructure();
         logger.debug("Enemy structure: "+target,classname);
         if(!target){
-            target = findEnemyCreep(creep);
+            target = this.findEnemyCreep();
             logger.debug("Enemy creep: "+target,classname);
         }
         if(!target) {
-            target = findConstructionSite(creep);
+            target = this.findEnemyConstructionSite();
             logger.debug("Enemy Construction site: " + target, classname);
-            if (target) {
-                creep.moveTo(target);
-                return;
-            }
         }
         if(!target){
-            target = findWall(creep);
+            target = this.findEnemyWall();
             logger.debug("Enemy wall: "+target,classname);
         }
     }
     logger.debug("Target : "+target+' '+target.pos,classname);
 
-    if (!creep.pos.isNearTo(target)) {
-        logger.info("Move "+creep.moveTo(target),classname);
-        logger.info("Attack "+creep.attack(target),classname);
+    if (!this.pos.isNearTo(target)) {
+        logger.info("Move "+this.moveToFatigue(target),classname);
+        logger.info("Attack "+this.attack(target),classname);
     } else {
-        logger.info("Attack "+creep.attack(target),classname);
+        logger.info("Attack "+this.attack(target),classname);
     }
-}
+};

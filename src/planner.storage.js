@@ -15,35 +15,26 @@ function getAvailableStorageNumber(room) {
     return CONTROLLER_STRUCTURES.storage[room.controller.level];
 }
 
-module.exports = {
-    checkStorage: function(){
-        //logger.debug('Check Storage!',classname);
-        for(var roomName in Game.rooms) {
-            var room = Game.rooms[roomName];
-
-            logger.debug('Room: '+room.name,classname);
-
-            if (room.controller && room.controller.my && getAvailableStorageNumber(room) > 0) {
-                var number = 0;
-                var storage = room.storage;
-                if(storage){
-                    logger.debug('Storage already exists '+roomName,classname);
-                    continue;
-                }
-                var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
-                    filter: (csite) => {
-                        return (csite.structureType == STRUCTURE_STORAGE);
-                    }
-                });
-                number += storagesSites.length;
-
-                if (number >= getAvailableStorageNumber(room)) {
-                    logger.debug('Storage CSite already exists '+roomName,classname);
-                    continue;
-                }
-                logger.debug('Build storage! '+roomName,classname);
-                buildUtil.findBuildPositionInRoom(room, STRUCTURE_STORAGE);
-            }
+Room.prototype.checkStorage = function(){
+    if (this.controller && this.controller.my && getAvailableStorageNumber(this) > 0) {
+        var number = 0;
+        var storage = this.storage;
+        if(storage){
+            logger.debug('Storage already exists '+this.name,classname);
+            return;
         }
+        var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
+            filter: (csite) => {
+                return (csite.structureType == STRUCTURE_STORAGE);
+            }
+        });
+        number += storagesSites.length;
+
+        if (number >= getAvailableStorageNumber(this)) {
+            logger.debug('Storage CSite already exists '+this.name,classname);
+            return;
+        }
+        logger.debug('Build storage! '+this.name,classname);
+        this.findBuildPositionInRoom(STRUCTURE_STORAGE);
     }
 };

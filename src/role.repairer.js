@@ -3,22 +3,9 @@ var direction = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleRepairer';
 
-function getSortedKeys(obj) {
-    var keys = []; for(var key in obj) keys.push(key);
-    return keys.sort(function(a,b){return obj[b]-obj[a]});
-}
 
-function contains(list, obj) {
-    for (var i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function repairRoads(creep){
-    var targets = creep.room.find(FIND_STRUCTURES, {
+Creep.prototype.repairRoads = function(){
+    var targets = this.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return ((structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_CONTAINER)  && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.5));
         }
@@ -26,125 +13,122 @@ function repairRoads(creep){
 
     if(targets.length > 0){
         targets.sort(function(a,b){
-            return (a.hits  + 50 * creep.pos.getRangeTo(a)) - (b.hits + 50 * creep.pos.getRangeTo(b));
+            return (a.hits  + 50 * this.pos.getRangeTo(a)) - (b.hits + 50 * this.pos.getRangeTo(b));
         });
 
         var target = targets[0];
         var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
-        logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target)+' '+Memory.roadPlaces[place],classname);
-        if(creep.repair(target) == ERR_NOT_IN_RANGE){
-            creep.moveToFatigue(target);
+        logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ this.pos.getRangeTo(target)+' '+Memory.roadPlaces[place],classname);
+        if(this.repair(target) == ERR_NOT_IN_RANGE){
+            this.moveToFatigue(target);
         }
-        creep.memory.lastRepairId = target.id;
+        this.memory.lastRepairId = target.id;
         return true;
     }
     return false;
 }
 
-var roleRepairer = {
-    run: function(creep) {
-        if(creep.memory.working && creep.carry.energy == 0) {
-            creep.memory.working = false;
-        }
-        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.working = true;
+
+Creep.prototype.workRepair =function(){
+    if(this.memory.working && this.carry.energy == 0) {
+        this.memory.working = false;
+    }
+    if(!this.memory.working && this.carry.energy == this.carryCapacity) {
+        this.memory.working = true;
+    }
+
+    if(this.memory.working) {
+        //0 continue repair
+        if(this.memory.lastRepairId){
+            var target = Game.getObjectById(this.memory.lastRepairId);
+            if(target && target.room.name == this.room.name){
+                if(target && target.hits < target.hitsMax){
+                    if(this.repair(target) == ERR_NOT_IN_RANGE){
+                        this.moveToFatigue(target);
+                    }
+                    return ;
+                }else{
+                    this.memory.lastRepairId = undefined;
+                }
+            }else{
+                this.memory.lastRepairId = undefined;
+            }
         }
 
-        if(creep.memory.working) {
-            //0 continue repair
-            if(creep.memory.lastRepairId){
-                var target = Game.getObjectById(creep.memory.lastRepairId);
-                if(target && target.room.name == creep.room.name){
-                    if(target && target.hits < target.hitsMax){
-                        if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                            creep.moveToFatigue(target);
-                        }
-                        return ;
-                    }else{
-                        creep.memory.lastRepairId = undefined;
-                    }
-                }else{
-                    creep.memory.lastRepairId = undefined;
-                }
+
+        //1 Fix strucures with less than 10k
+        if(this.room.controller && this.room.controller.my){
+            if(this.pos.x == 49 || this.pos.y==49 || this.pos.x ==0 || this.pos.x ==49){
+                this.moveToFatigue(this.room.controller);
+                return;
             }
 
-
-            //1 Fix strucures with less than 10k
-            if(creep.room.controller && creep.room.controller.my){
-                if(creep.pos.x == 49 || creep.pos.y==49 || creep.pos.x ==0 || creep.pos.x ==49){
-                    creep.moveToFatigue(creep.room.controller);
-                    return;
+            var targets = this.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return ((structure.hits < 10000) && (structure.hits > 0) && structure.hits < (structure.hitsMax*0.8) && structure.structureType != STRUCTURE_ROAD)
                 }
+            });
 
-                var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return ((structure.hits < 10000) && (structure.hits > 0) && structure.hits < (structure.hitsMax*0.8) && structure.structureType != STRUCTURE_ROAD)
-                    }
-                });
-
-                if(targets.length == 0){
-                    //2 fix top roads with less than 50%
-                    if(!repairRoads(creep)){
-                        //3 Fix structures according to priority and hitpoints %
-                        targets = creep.room.find(FIND_STRUCTURES, {
-                            filter: (structure) => {
-                                return (structure.hits > 0 && structure.hits < (structure.hitsMax * 0.8) && structure.structureType != STRUCTURE_ROAD)
-                            }
-                        });
-
-                        var priorities = {tower:1.0,extension:1.0,constructedWall:5,rampart:4.5,road:2,container:3};
-
-                        targets.sort(function(a,b){
-                            return (priorities[a.structureType] * (a.hits + 200 * creep.pos.getRangeTo(a))) - (priorities[b.structureType] * (b.hits + 200 * creep.pos.getRangeTo(b)));
-                        });
-
-
-                        var target = targets[0];
-
-                        if(target){
-                            logger.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * creep.pos.getRangeTo(target)) + ' '+ creep.pos.getRangeTo(target),classname);
-                            if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                                creep.moveToFatigue(target);
-                            }
-                            creep.memory.lastRepairId = target.id;
-                        }else{
-                            logger.debug('No target',classname);
-                            creep.memory.role_override = 'builder';
-                            creep.memory.role_override_time = Game.time + 300;
-                            return;
+            if(targets.length == 0){
+                //2 fix top roads with less than 50%
+                if(!this.repairRoads()){
+                    //3 Fix structures according to priority and hitpoints %
+                    targets = this.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.hits > 0 && structure.hits < (structure.hitsMax * 0.8) && structure.structureType != STRUCTURE_ROAD)
                         }
-                    }
-                }else{ //repair targets
-                    targets.sort(function(a,b){
-                        return (a.hits  + 200 * creep.pos.getRangeTo(a)) - (b.hits + 200 * creep.pos.getRangeTo(b));
                     });
 
-                    var target = targets[0];
-                    logger.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ creep.pos.getRangeTo(target),classname);
+                    var priorities = {tower:1.0,extension:1.0,constructedWall:5,rampart:4.5,road:2,container:3};
 
-                    if(creep.repair(target) == ERR_NOT_IN_RANGE){
-                        creep.moveToFatigue(target);
+                    targets.sort(function(a,b){
+                        return (priorities[a.structureType] * (a.hits + 200 * this.pos.getRangeTo(a))) - (priorities[b.structureType] * (b.hits + 200 * this.pos.getRangeTo(b)));
+                    });
+
+
+                    var target = targets[0];
+
+                    if(target){
+                        logger.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * this.pos.getRangeTo(target)) + ' '+ this.pos.getRangeTo(target),classname);
+                        if(this.repair(target) == ERR_NOT_IN_RANGE){
+                            this.moveToFatigue(target);
+                        }
+                        this.memory.lastRepairId = target.id;
+                    }else{
+                        logger.debug('No target',classname);
+                        this.memory.role_override = 'builder';
+                        this.memory.role_override_time = Game.time + 300;
+                        return;
                     }
-                    creep.memory.lastRepairId = target.id;
                 }
-            }else{
-                //NOT in current room
-                if(!repairRoads(creep,false)){
-                    direction.moveToRoom(creep,creep.memory.mainroom);
+            }else{ //repair targets
+                targets.sort(function(a,b){
+                    return (a.hits  + 200 * this.pos.getRangeTo(a)) - (b.hits + 200 * this.pos.getRangeTo(b));
+                });
+
+                var target = targets[0];
+                logger.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ this.pos.getRangeTo(target),classname);
+
+                if(this.repair(target) == ERR_NOT_IN_RANGE){
+                    this.moveToFatigue(target);
                 }
+                this.memory.lastRepairId = target.id;
+            }
+        }else{
+            //NOT in current room
+            if(!this.repairRoads()){
+                this.moveToRoom(this.memory.mainroom);
             }
         }
-        else {
-            creep.memory.lastRepairId = undefined;
-            //TODO NOT IMPLEMENTED
-            /*if(creep.memory.extern && creep.room.name == creep.memory.mainroom){
-                direction.moveToRoom(creep,constants.rooms().others[creep.memory.mainroom][creep.memory.externRoom]);
-            }else{
-                direction.findSourceInRoom(creep);
-            }*/
-            creep.findSourceInRoom(creep);
-        }
     }
-}
-
-module.exports = roleRepairer;
+    else {
+        this.memory.lastRepairId = undefined;
+        //TODO NOT IMPLEMENTED
+        /*if(this.memory.extern && this.room.name == this.memory.mainroom){
+         direction.moveToRoom(creep,constants.rooms().others[this.memory.mainroom][this.memory.externRoom]);
+         }else{
+         direction.findSourceInRoom(creep);
+         }*/
+        this.findSourceInRoom();
+    }
+};

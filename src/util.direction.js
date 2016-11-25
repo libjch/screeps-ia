@@ -19,7 +19,7 @@ Creep.prototype.moveToRoom = function(targetRoom){
     logger.info('Move from '+this.room.name+' to '+targetRoom,classname);
     var exitDir = this.room.findExitTo(targetRoom);
     var exit = this.pos.findClosestByPath(exitDir);
-    logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name,classname);
+    logger.debug('Change room other: '+ this.moveToFatigue(exit)+' '+targetRoom+' from '+this.room.name,classname);
 }
 
 Creep.prototype.findSourceInRoom = function(){

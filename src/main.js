@@ -71,41 +71,56 @@ module.exports.loop = function() {
             tick('Cleaned Memory');
         }
 
+        var rooms = [];
+        for(let roomName in Game.rooms){
+            rooms.push(Game.rooms[roomName]);
+        }
+
 
         if (Game.time % 10 == 0 && Game.cpu.bucket > 1000) {
-            spawnDecider.spawn();
             tick('SpawnDecide');
         }
 
-        for(let roomName in Game.rooms){
-            var room = Game.rooms[roomName];
+
+        for(let room of rooms){
             room.runTowers();
         }
         tick('TowerAttack');
 
         if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
-            roleExtractor.cleanExtractors();
+            Memory.containers = {};
+            for(let room of rooms){
+                room.cleanExtractors();
+            }
             tick('Extractors');
         }
 
         if (Game.time % 100 == 22  && Game.cpu.bucket > 3000) {
-            roadPlanner.checkRoads();
+            for(let room of rooms){
+                room.checkRoads();
+            }
             tick('CheckRoads');
         }
 
         if (Game.time % 100 == 33) {
-            extensionPlanner.checkExtensions();
+            for(let room of rooms){
+                room.checkExtensions();
+            }
             tick('CheckExtensions');
         }
 
         if (Game.time % 100 == 44) {
-            towerPlanner.checkTowers();
+            for(let room of rooms){
+                room.checkTowers();
+            }
             tick('CheckTowers');
         }
 
         if (Game.time % 200 == 55  && Game.cpu.bucket > 5000) {
             try {
-                wallPlanner.checkWalls();
+                for(let room of rooms){
+                    room.checkWalls();
+                }
             } catch (e) {
                 logger.error("ERROR  " + e, classname);
             }
@@ -113,7 +128,9 @@ module.exports.loop = function() {
         }
 
         if (Game.time % 200 == 66) {
-            storagePlanner.checkStorage();
+            for(let room of rooms){
+                room.checkStorage();
+            }
             tick('CheckStorage');
         }
 
@@ -148,8 +165,6 @@ module.exports.loop = function() {
                 }
             }
 
-            var place = creep.room.name + '-' + creep.pos.x + '-' + creep.pos.y;
-
             if (!creep.memory.spawnroom) {
                 creep.memory.spawnroom = creep.memory.mainroom;
             }
@@ -173,27 +188,24 @@ module.exports.loop = function() {
             }
 
             if (role == 'harvester') {
-                roleHarvester.run(creep);
-            }
-            else if (role == 'harvester-c' || role == 'harvester.c') {
-                roleHarvesterContainer.run(creep);
+                creep.workHarvest();
             }
             else if (role == 'upgrader' || role == 'upgrader-c' || role == 'upgrader.c') {
-                roleUpgrader.run(creep);
+                creep.workUpgrade();
             }
             else if (role == 'builder' && Game.cpu.bucket > 2200) {
-                roleBuilder.run(creep);
+                creep.workBuild();
             }
             else if (role == 'repairer' && Game.cpu.bucket > 2500) {
-                roleRepairer.run(creep);
+                creep.workRepair();
             }
             else if (role == 'attacker') {
-                roleAttacker.run(creep);
+                creep.workAttack();
             }
             else if (role == 'claimer') {
-                roleClaimer.run(creep);
+                creep.workClaim();
             } else if (role == 'extractor') {
-                roleExtractor.run(creep);
+                creep.workExtract();
             }
             // } catch (e) {
             //     logger.error('         ', classname)

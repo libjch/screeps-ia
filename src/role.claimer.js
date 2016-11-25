@@ -5,11 +5,8 @@ var constants = require('global.variables');
 var logger = require('logger');
 var classname = 'RoleClaimer';
 
-module.exports = {
-    run: run
-};
 
-function run (creep) {
+Creep.prototype.workClaim = function(){
     //spawn claimer:
     // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true, claimroom: 'E14N18' });
 
@@ -18,29 +15,21 @@ function run (creep) {
 
     //Add builder helper by defining: Memory.spawner.target
 
+    var targetRoom = Game.rooms[this.memory.claimroom];
 
-    var targetRoom = Game.rooms[creep.memory.claimroom];
-
-    if(!targetRoom || creep.room.name !== targetRoom.name){
-        var exitDir = creep.room.findExitTo(creep.memory.claimroom);
-
-        logger.log(exitDir,classname);
-        var exit = creep.pos.findClosestByRange(exitDir);
-        logger.log(creep.moveToFatigue(exit),classname);
+    if(!targetRoom || this.room.name !== targetRoom.name){
+        this.moveToRoom(this.memory.claimroom);
         return true;
     }
 
-    if(creep.room.name == targetRoom.name){
-        logger.log('a '+creep.room.controller,classname);
-        creep.moveToFatigue(creep.room.controller);
-        if(creep.room.controller) {
-            var res = creep.claimController(creep.room.controller);
-            logger.log('b '+res,classname)
+    if(this.room.name == targetRoom.name){
+        this.moveToFatigue(this.room.controller);
+        if(this.room.controller) {
+            var res = this.claimController(this.room.controller);
             if(res == ERR_NOT_IN_RANGE) {
                 return true;
             }
         }
     }
-
     return false;
 }
