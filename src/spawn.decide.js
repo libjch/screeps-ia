@@ -4,7 +4,7 @@ var classname = 'Spanwer';
 
 
 
-RoomObject.prototype.spawnDecide = function(){
+Room.prototype.spawnDecide = function(){
     logger.warn('=======Spawns======',classname);
     var roomName = this.name;
     var spawns = [];
