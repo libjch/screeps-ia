@@ -49,11 +49,12 @@ Creep.prototype.workHarvest = function(){
                 }
             });
             var priorities = {tower:1,extension:2,spawn:2,container:4};
+            var creep = this;
             targets.sort(function(a,b){
                 var pA = priorities[a.structureType];
                 var pB = priorities[b.structureType];
                 if(pA == pB){
-                    return (this.pos.getRangeTo(a)) - (this.pos.getRangeTo(b));
+                    return (creep.pos.getRangeTo(a)) - (creep.pos.getRangeTo(b));
                 }else{
                     return pA - pB;
                 }
