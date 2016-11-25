@@ -153,8 +153,13 @@ module.exports.loop = function() {
 
 
         tick('StartCreeps');
+        var lastRoom = '';
         for (let creep of creeps) {
 
+            if(lastRoom != creep.room.name){
+                logger.log("===="+creep.room.name+"====");
+                lastRoom = creep.room.name;
+            }
             //pickup dropped enery;
             if (creep.carry.energy < creep.carryCapacity) {
                 var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY, 1);
