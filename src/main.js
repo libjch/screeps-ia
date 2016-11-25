@@ -78,6 +78,9 @@ module.exports.loop = function() {
 
 
         if (Game.time % 10 == 0 && Game.cpu.bucket > 1000) {
+            for(let room of rooms){
+                room.spawnDecide();
+            }
             tick('SpawnDecide');
         }
 
