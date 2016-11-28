@@ -16,12 +16,14 @@ Creep.prototype.workHarvest = function(){
             var target = Game.getObjectById(this.memory.lastHarvestId);
             if(target && target.room.name == this.room.name) {
                 if (target.structureType == STRUCTURE_EXTENSION || target.structureType == STRUCTURE_SPAWN || target.structureType == STRUCTURE_TOWER) {
+                    logger.log("Going to the same place");
                     if (target.energy < target.energyCapacity) {
                         if (this.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             this.moveToFatigue(target);
                         }
                         return;
                     } else {
+                        logger.log("Previous target already full");
                         this.memory.lastHarvestId = undefined;
                     }
                 } else if (target.structureType == STRUCTURE_CONTAINER || target.structureType == STRUCTURE_STORAGE) {
@@ -31,10 +33,12 @@ Creep.prototype.workHarvest = function(){
                         }
                         return;
                     } else {
+                        logger.log("Previous target already full 2");
                         this.memory.lastHarvestId = undefined;
                     }
                 }
             } else{
+                logger.log("Previous target not in room");
                 this.memory.lastHarvestId = undefined;
             }
         }
