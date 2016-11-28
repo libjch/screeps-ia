@@ -28,6 +28,7 @@ Creep.prototype.workHarvest = function(){
                     }
                 } else if (target.structureType == STRUCTURE_CONTAINER || target.structureType == STRUCTURE_STORAGE) {
                     if (target.store[RESOURCE_ENERGY] < target.storeCapacity) {
+                        logger.log("Going to the same place 2");
                         if (this.transfer(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             this.moveToFatigue(this.room.storage);
                         }
@@ -115,6 +116,7 @@ Creep.prototype.workHarvest = function(){
         }
     }
     else{ //NOT harvesting
+        logger.log("Need to refill");
         this.memory.lastHarvestId = undefined;
 
         if(this.room.storage && this.room.storage.store[RESOURCE_ENERGY] >= 5000 && this.body.length < 14) {
