@@ -17,7 +17,7 @@ Creep.prototype.workUpgrade = function(){
     if(this.memory.working) {
         if(this.room.controller.my && this.memory.mainroom == this.room.name){
             if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
-                this.moveToFatigue(this.room.controller);
+                this.moveTo(this.room.controller);
             }
         }else{
             this.moveToRoom(this.memory.mainroom);
@@ -26,7 +26,7 @@ Creep.prototype.workUpgrade = function(){
     else {
         if(this.room.storage && this.room.storage.store[RESOURCE_ENERGY] >= 50000) {
             if (this.withdraw(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                this.moveToFatigue(this.room.storage);
+                this.moveTo(this.room.storage);
             }
             return;
         }

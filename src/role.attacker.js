@@ -70,7 +70,7 @@ Creep.prototype.workAttack = function(){
         if(!target){
             var exitDir = this.room.findExitTo(this.memory.targetRoom);
             var exit = this.pos.findClosestByRange(exitDir);
-            this.moveToFatigue(exit);
+            this.moveTo(exit);
             logger.log("No creep main room "+exit,classname);
             return;
         }
@@ -79,7 +79,7 @@ Creep.prototype.workAttack = function(){
     if(this.room.name != this.memory.targetRoom ){
         var exitDir = this.room.findExitTo(this.memory.targetRoom);
         var exit = this.pos.findClosestByRange(exitDir);
-        this.moveToFatigue(exit);
+        this.moveTo(exit);
         logger.log("No creep main room "+exit,classname);
         return;
     }
@@ -103,7 +103,7 @@ Creep.prototype.workAttack = function(){
     logger.debug("Target : "+target+' '+target.pos,classname);
 
     if (!this.pos.isNearTo(target)) {
-        logger.info("Move "+this.moveToFatigue(target),classname);
+        logger.info("Move "+this.moveTo(target),classname);
         logger.info("Attack "+this.attack(target),classname);
     } else {
         logger.info("Attack "+this.attack(target),classname);

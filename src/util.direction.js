@@ -1,15 +1,19 @@
 var logger = require('logger');
 var classname = 'DirectionUtil';
 
-Creep.prototype.moveToFatigue = function(obj){
+
+Creep.prototype._moveTo = Creep.prototype.moveTo;
+
+
+Creep.prototype.moveTo = function(obj){
         if(!this.fatigue){
-            this.moveTo(obj,{reusePath: 10});
+            this._moveTo(obj,{reusePath: 10});
         }
 }
 
-Creep.prototype.moveToFatigue = function(x,y){
+Creep.prototype.moveTo = function(x,y){
     if(!this.fatigue){
-        return this.moveTo(x,y,{reusePath: 10});
+        return this._moveTo(x,y,{reusePath: 10});
     }else{
         return ERR_TIRED;
     }
@@ -20,7 +24,7 @@ Creep.prototype.moveToRoom = function(targetRoom){
     logger.info('Move from '+this.room.name+' to '+targetRoom,classname);
     var exitDir = this.room.findExitTo(targetRoom);
     var exit = this.pos.findClosestByPath(exitDir);
-    logger.debug('Change room other: '+ this.moveToFatigue(exit)+' '+targetRoom+' from '+this.room.name,classname);
+    logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name,classname);
 }
 
 Creep.prototype.findSourceInRoom = function(){
@@ -56,7 +60,7 @@ Creep.prototype.findSourceInRoom = function(){
         }
         if(targetContainer && targetContainerScore > 0){
             if(this.withdraw(targetContainer,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                this.moveToFatigue(targetContainer);
+                this.moveTo(targetContainer);
             }
             return;
         }
@@ -80,7 +84,7 @@ Creep.prototype.findSourceInRoom = function(){
         if(targets){
             var targetContainer = targets[0];
             if(targetContainer.transfer(creep,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                this.moveToFatigue(targetContainer);
+                this.moveTo(targetContainer);
             }
             return;
         }
@@ -97,7 +101,7 @@ Creep.prototype.findSourceInRoom = function(){
         var res = this.harvest(sources[sourceNumber]);
         logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1),classname);
         if(res == ERR_NOT_IN_RANGE) {
-            this.moveToFatigue(sources[sourceNumber]);
+            this.moveTo(sources[sourceNumber]);
         }
     }
 }

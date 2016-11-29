@@ -20,13 +20,13 @@ Creep.prototype.workExtract = function(){
             if(target == undefined && Memory.extractors[sourceId].containerCS){
                 target = Game.getObjectById(Memory.extractors[sourceId].containerCS);
                 if(this.build(target) == ERR_NOT_IN_RANGE) {
-                    this.moveToFatigue(target);
+                    this.moveTo(target);
                 }
                 logger.log('Extrator building container '+target);
                 return;
             }
             if (this.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                logger.error('extractor  move ' + this.moveToFatigue(target) + ' ' + this.pos + ' ' + target.pos,classname);
+                logger.error('extractor  move ' + this.moveTo(target) + ' ' + this.pos + ' ' + target.pos,classname);
             }
         }else {
             if (this.room.name != this.memory.mainroom) {
@@ -50,14 +50,14 @@ Creep.prototype.workExtract = function(){
                     this.memory.extractor.sourceId = source.id;
                     this.memory.extractor.containerId = Memory.extractors[source.id].container;
                     if(this.harvest(source) == ERR_NOT_IN_RANGE) {
-                        this.moveToFatigue(source);
+                        this.moveTo(source);
                     }
                 }
             }else{
                 var source = Game.getObjectById(this.memory.extractor.sourceId);
                 Memory.extractors[source.id].creep = this.id;
                 if(this.harvest(source) == ERR_NOT_IN_RANGE) {
-                    this.moveToFatigue(source);
+                    this.moveTo(source);
                 }
             }
         }

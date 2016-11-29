@@ -21,7 +21,7 @@ Creep.prototype.repairRoads = function(){
         var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
         logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ this.pos.getRangeTo(target)+' '+Memory.roadPlaces[place],classname);
         if(this.repair(target) == ERR_NOT_IN_RANGE){
-            this.moveToFatigue(target);
+            this.moveTo(target);
         }
         this.memory.lastRepairId = target.id;
         return true;
@@ -45,7 +45,7 @@ Creep.prototype.workRepair =function(){
             if(target && target.room.name == this.room.name){
                 if(target && target.hits < target.hitsMax){
                     if(this.repair(target) == ERR_NOT_IN_RANGE){
-                        this.moveToFatigue(target);
+                        this.moveTo(target);
                     }
                     return ;
                 }else{
@@ -60,7 +60,7 @@ Creep.prototype.workRepair =function(){
         //1 Fix strucures with less than 10k
         if(this.room.controller && this.room.controller.my){
             if(this.pos.x == 49 || this.pos.y==49 || this.pos.x ==0 || this.pos.x ==49){
-                this.moveToFatigue(this.room.controller);
+                this.moveTo(this.room.controller);
                 return;
             }
 
@@ -92,7 +92,7 @@ Creep.prototype.workRepair =function(){
                     if(target){
                         logger.log('    target: '+target+' ' + target.hits + ' ' + (target.hits + 200 * this.pos.getRangeTo(target)) + ' '+ this.pos.getRangeTo(target),classname);
                         if(this.repair(target) == ERR_NOT_IN_RANGE){
-                            this.moveToFatigue(target);
+                            this.moveTo(target);
                         }
                         this.memory.lastRepairId = target.id;
                     }else{
@@ -112,7 +112,7 @@ Creep.prototype.workRepair =function(){
                 logger.log('    target: '+target+' ' + target.hits + ' ' + target.hitsMax+ ' '+ this.pos.getRangeTo(target),classname);
 
                 if(this.repair(target) == ERR_NOT_IN_RANGE){
-                    this.moveToFatigue(target);
+                    this.moveTo(target);
                 }
                 this.memory.lastRepairId = target.id;
             }

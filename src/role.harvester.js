@@ -19,7 +19,7 @@ Creep.prototype.workHarvest = function(){
                     logger.log("Going to the same place");
                     if (target.energy < target.energyCapacity) {
                         if (this.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            this.moveToFatigue(target);
+                            this.moveTo(target);
                         }
                         return;
                     } else {
@@ -30,7 +30,7 @@ Creep.prototype.workHarvest = function(){
                     if (target.store[RESOURCE_ENERGY] < target.storeCapacity) {
                         logger.log("Going to the same place 2");
                         if (this.transfer(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            this.moveToFatigue(this.room.storage);
+                            this.moveTo(this.room.storage);
                         }
                         return;
                     } else {
@@ -70,7 +70,7 @@ Creep.prototype.workHarvest = function(){
             if(targets.length > 0) {
                 logger.log('    target: '+targets[0].structureType + ' ' + this.pos.getRangeTo(targets[0]) +' '+ targets[0].pos+ ' '+ this.pos,classname);
                 if(this.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    this.moveToFatigue(targets[0]);
+                    this.moveTo(targets[0]);
                 }
                 this.memory.lastHarvestId = targets[0].id;
             }else{
@@ -88,7 +88,7 @@ Creep.prototype.workHarvest = function(){
                 if(targets.length > 0) {
                     logger.log('    target: '+targets[0].structureType + ' ' + this.pos.getRangeTo(targets[0]),classname);
                     if(this.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        this.moveToFatigue(targets[0]);
+                        this.moveTo(targets[0]);
                     }
                     this.memory.lastHarvestId = targets[0].id;
                 }else{
@@ -97,7 +97,7 @@ Creep.prototype.workHarvest = function(){
                     }else {
                         if (this.room.storage) {
                             if (this.transfer(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                this.moveToFatigue(this.room.storage);
+                                this.moveTo(this.room.storage);
                             }
                             this.memory.lastHarvestId = this.room.storage.id;
                         }else{
@@ -117,11 +117,12 @@ Creep.prototype.workHarvest = function(){
     }
     else{ //NOT harvesting
         logger.log("Need to refill");
-        this.memory.lastHarvestId = undefined;
+        if(this.memory.lastHarvestId)
+            this.memory.lastHarvestId = undefined;
 
         if(this.room.storage && this.room.storage.store[RESOURCE_ENERGY] >= 5000 && this.body.length < 14) {
             if (this.withdraw(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                this.moveToFatigue(this.room.storage);
+                this.moveTo(this.room.storage);
             }
             return;
         }

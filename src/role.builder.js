@@ -13,7 +13,7 @@ Creep.prototype.workBuild = function(){
 
     if(this.memory.working) {
         if( this.pos.x == 49 || this.pos.y==49 || this.pos.x ==0 || this.pos.y==0){
-            logger.log('escape '+this.moveToFatigue(this.room.controller),classname);
+            logger.log('escape '+this.moveTo(this.room.controller),classname);
             return;
         }
 
@@ -21,7 +21,7 @@ Creep.prototype.workBuild = function(){
             var target = Game.getObjectById(this.memory.lastBuildId);
             if(target && target.progress){
                 if(this.build(target) == ERR_NOT_IN_RANGE){
-                    this.moveToFatigue(target);
+                    this.moveTo(target);
                 }
                 return ;
             }else{
@@ -72,7 +72,7 @@ Creep.prototype.workBuild = function(){
                     }
 
                     if (res == ERR_NOT_IN_RANGE) {
-                        this.moveToFatigue(target);
+                        this.moveTo(target);
                     } else {
                         logger.warn('Cant build: ' + target + " with res:" + res, classname);
                     }

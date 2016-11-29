@@ -23,7 +23,7 @@ Creep.prototype.workClaim = function(){
     }
 
     if(this.room.name == targetRoom.name){
-        this.moveToFatigue(this.room.controller);
+        this.moveTo(this.room.controller);
         if(this.room.controller) {
             var res = this.claimController(this.room.controller);
             if(res == ERR_NOT_IN_RANGE) {
