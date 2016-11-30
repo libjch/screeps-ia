@@ -90,7 +90,7 @@ Creep.prototype.findSourceInRoom = function(){
         }
     }
 
-    var sources = this.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});//Memory.extractors[source.id].creep == undefined}});
+    var sources = this.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
     if(sources.length){
         var sourceNumber = this.memory.number % sources.length;
         var source = sources[sourceNumber];
@@ -98,9 +98,7 @@ Creep.prototype.findSourceInRoom = function(){
         if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(this.pos) > 4){
             sourceNumber = (sourceNumber + 1) % sources.length;
         }
-        var res = this.harvest(sources[sourceNumber]);
-        logger.log('source:'+sources[sourceNumber]+' '+res+' '+(res == -1),classname);
-        if(res == ERR_NOT_IN_RANGE) {
+        if(this.harvest(sources[sourceNumber]) == ERR_NOT_IN_RANGE) {
             this.moveTo(sources[sourceNumber]);
         }
     }

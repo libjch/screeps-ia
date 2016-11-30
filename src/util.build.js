@@ -9,9 +9,17 @@ function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
     var y = roomSpawn.pos.y + (dy);
     logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2),classname);
     if(Math.abs(dx%2) == Math.abs(dy%2)){ //on the grid
-        var res = roomSpawn.room.createConstructionSite(x, y, structureType);
+        if(this.lookForAt(LOOK_FLAGS,x,y).length){
+            return ERR_INVALID_TARGET;
+        }
+        var res = this.createConstructionSite(x, y, structureType);
         logger.warn("Create " + structureType+ " at:"+x+' '+y+' '+res,classname);
         return res;
+    }else{
+        //Is is swamp?
+        if(Game.map.getTerrainAt(x, y, this.name) == swamp){
+            this.createConstructionSite(x, y, STRUCTURE_ROAD);
+        }
     }
 }
 

@@ -14,7 +14,7 @@ var spawn = undefined;
 
 Room.prototype.checkAndBuild = function(x,y,type){
     var existing = this.lookForAt(LOOK_TERRAIN,x,y);
-    if(existing == 'wall'){
+    if(existing.length && existing[0] == 'wall'){
         return;
     }
 
