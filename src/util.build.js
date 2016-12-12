@@ -17,7 +17,7 @@ function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
         return res;
     }else{
         //Is is swamp?
-        if(Game.map.getTerrainAt(x, y, this.name) == swamp){
+        if(Game.map.getTerrainAt(x, y, this.name) == 'swamp'){
             this.createConstructionSite(x, y, STRUCTURE_ROAD);
         }
     }

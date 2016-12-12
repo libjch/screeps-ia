@@ -40,7 +40,7 @@ Room.prototype.checkTowers = function(){
 
         if(number < avails){
             //Find 1st spot available around spawn:
-            buildUtil.findBuildPositionInRoom(this,STRUCTURE_TOWER);
+            this.findBuildPositionInRoom(STRUCTURE_TOWER);
         }
     }
 };
