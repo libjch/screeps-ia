@@ -4,7 +4,7 @@ var logger = require('logger');
 var classname = 'BuildUtil';
 
 
-function tryBuildAtPosition(roomSpawn,dx,dy,structureType){
+Room.prototype.tryBuildAtPosition = function(roomSpawn,dx,dy,structureType){
     var x = roomSpawn.pos.x + (dx);
     var y = roomSpawn.pos.y + (dy);
     logger.debug("position: "+x+' '+y+' '+(dx%2 == dy%2),classname);
@@ -46,7 +46,7 @@ Room.prototype.findBuildPositionInRoom = function(structureType){
             var dx = dist;
             for(let dy = 0; dy <= dist; dy++) {
                 for (let dys = -1; dys < 2; dys += 2) { //search both way
-                    if(tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
+                    if(this.tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
                         return OK;
                     }
                 }
@@ -58,7 +58,7 @@ Room.prototype.findBuildPositionInRoom = function(structureType){
             var dy = dist;
             for(let dx = 0; dx <= dist; dx++) {
                 for (let dxs = -1; dxs < 2; dxs += 2) { //search both ways
-                    if(tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
+                    if(this.tryBuildAtPosition(roomSpawn,dx*dxs,dy*dys,structureType)==OK){
                         return OK;
                     }
                 }
