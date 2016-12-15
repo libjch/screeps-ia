@@ -49,12 +49,13 @@ Creep.prototype.findSourceInRoom = function(){
             else if(Memory.extractors[source.id].container){
                 //get resource from container:
                 var container = Game.getObjectById(Memory.extractors[source.id].container);
-
-                var score = container.store[RESOURCE_ENERGY] - 15 * this.pos.getRangeTo(container);
-                //logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+this.pos.getRangeTo(container));
-                if(score > targetContainerScore){
-                    targetContainerScore = score;
-                    targetContainer = container;
+                if(container) {
+                    var score = container.store[RESOURCE_ENERGY] - 15 * this.pos.getRangeTo(container);
+                    //logger.info('Score :'+score+' '+container.store[RESOURCE_ENERGY]+'  '+this.pos.getRangeTo(container));
+                    if (score > targetContainerScore) {
+                        targetContainerScore = score;
+                        targetContainer = container;
+                    }
                 }
             }
         }
