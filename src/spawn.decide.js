@@ -67,6 +67,9 @@ Room.prototype.spawnDecide = function(){
         var mainroom = roomName;
         var targetroom = undefined;
 
+        if(maxEnergy > 3000){
+            maxEnergy = 3000;
+        }
 
         if (harvesters.length < sources) {
             role = 'harvester';
