@@ -182,6 +182,10 @@ Room.prototype.spawnDecide = function(){
             var number = Memory.global_id;
 
 
+            if(body.length >50){
+                body = body.slice(0,50);
+            }
+
             //get least used extern room
             var externRoomNumber = undefined;
             var roomnumber = undefined;
