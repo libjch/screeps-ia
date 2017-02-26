@@ -90,7 +90,7 @@ Room.prototype.spawnDecide = function(){
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
         } else if (Memory.spawner.target && buildersHelpers.length < 1 && (roomName == 'W68S32') ) { //+1
             role = 'builder';
-            maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+            maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
             mainroom = Memory.spawner.target;
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
