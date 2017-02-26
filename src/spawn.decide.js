@@ -47,6 +47,7 @@ Room.prototype.spawnDecide = function(){
             maxEnergyStored += container.storeCapacity;
         }
 
+        if(this.storage)
         storageEnergy = this.storage.store[RESOURCE_ENERGY];
         var constructionsSites = this.find(FIND_CONSTRUCTION_SITES);
 
