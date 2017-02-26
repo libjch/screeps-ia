@@ -88,7 +88,7 @@ Room.prototype.spawnDecide = function(){
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-        } else if (Memory.spawner.target && buildersHelpers.length < 1 && (roomName == 'W68S32') ) { //+1
+        } else if (Memory.spawner.target && buildersHelpers.length < 2 && (roomName == 'W68S32') ) { //+1
             role = 'builder';
             maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
             mainroom = Memory.spawner.target;
