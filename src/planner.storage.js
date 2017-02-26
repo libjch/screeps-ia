@@ -23,7 +23,7 @@ Room.prototype.checkStorage = function(){
             logger.debug('Storage already exists '+this.name,classname);
             return;
         }
-        var storagesSites = room.find(FIND_CONSTRUCTION_SITES, {
+        var storagesSites = this.find(FIND_CONSTRUCTION_SITES, {
             filter: (csite) => {
                 return (csite.structureType == STRUCTURE_STORAGE);
             }
