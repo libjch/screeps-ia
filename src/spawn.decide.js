@@ -99,7 +99,7 @@ Room.prototype.spawnDecide = function(){
         } else if (Memory.attacker.target && attackers.length < 1) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
-            maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+            maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
         }  else if (upgraders.length < sources) {
             role = 'upgrader';
             if(storageEnergy < 100000){
