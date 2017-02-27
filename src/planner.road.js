@@ -36,7 +36,7 @@ Room.prototype.checkRoads = function(){
         }
         //Build around spawner
         if(roomSpawn == undefined){
-            logger.error('No spawn found for room '+roomName,classname);
+            logger.error('No spawn found for room '+this.name,classname);
             return;
         }
 
