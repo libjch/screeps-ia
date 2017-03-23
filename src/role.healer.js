@@ -7,7 +7,7 @@ var classname = 'RoleHealer';
 
 
 Creep.prototype.workHeal = function(){
-    var damagedCreep = this.pos.findClosestByPath(Game.MY_CREEPS, {
+    var damagedCreep = this.room.find(FIND_MY_CREEPS,{//this.pos.findClosestByPath(Game.MY_CREEPS, {
         filter: function(object) {
             return object !== this && object.hits < object.hitsMax;
         }
