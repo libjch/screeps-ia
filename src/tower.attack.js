@@ -28,6 +28,13 @@ Room.prototype.runTowers = function () {
             }
         }
     }
+
+    var myCreeps = this.find( FIND_MY_CREEPS, { filter: (creep) => {return ( creep.hits < creep.hitsMax ); } } );
+    if(myCreeps.length){
+        for(let t of towers){
+            t.workHeal(myCreeps);
+        }
+    }
 }
 
 StructureTower.prototype.workAttack = function(targets){
@@ -52,5 +59,12 @@ StructureTower.prototype.workRepair = function(targets){
     logger.info('Targets '+targets,classname);
     if(targets.length){
         this.repair(targets[0]);
+    }
+}
+
+StructureTower.prototype.workHeal = function(targets){
+    logger.info('Targets '+targets,classname);
+    if(targets.length){
+        this.heal(targets[0]);
     }
 }
