@@ -83,6 +83,11 @@ Creep.prototype.workAttack = function(){
         }
     }
 
+    target = this.findEnemyCreep();
+    if(target){
+        this.kill(target);
+    }
+
     if(Game.flags['attack-target-1']){
         logger.warn("FLAG FOUND!" +Game.flags['attack-target-1']);
         if(this.room.name == this.memory.targetRoom){
