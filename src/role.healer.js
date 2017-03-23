@@ -12,6 +12,9 @@ Creep.prototype.workHeal = function(){
             return object !== this && object.hits < object.hitsMax;
         }
     });
+
+    logger.warn("Damaged creep?",damagedCreep);
+
     if (this.hits < this.hitsMax - 100 /* no more heal */) {
         this.moveTo(Game.spawns.Spawn1);
         this.heal(damagedCreep);
