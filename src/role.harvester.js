@@ -120,7 +120,7 @@ Creep.prototype.workHarvest = function(){
         if(this.memory.lastHarvestId)
             this.memory.lastHarvestId = undefined;
 
-        if(this.room.storage && this.room.storage.store[RESOURCE_ENERGY] >= 5000 && this.body.length < 14) {
+        if(this.room.storage && (this.room.storage.store[RESOURCE_ENERGY] >= 5000 && this.body.length < 14) || (Memory.attacker.target && this.room.energyAvailable < this.room.energyCapacityAvailable)) {
             if (this.withdraw(this.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 this.moveTo(this.room.storage);
             }
