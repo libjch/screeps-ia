@@ -65,6 +65,41 @@ Creep.prototype.findEnemyWall  = function() {
 
 Creep.prototype.workAttack = function(){
     var target = undefined;
+
+    if(!Memory.spawner.ready){
+        this.moveTo(Game.flags['attack-meeting']);
+        return;
+    }
+
+
+    if(Game.flags['attack-target-1']){
+        if(this.room.name == Game.flags['attack-target-1'].room.name){
+            var targets = this.room.lookAt(Game.flags['attack-target-1'].pos);
+            if(targets.length){
+                this.kill(targets[0]);
+                return;
+            }
+        }else{
+            this.moveToRoom(Game.flags['attack-target-1'].room.name);
+            return;
+        }
+    }
+
+    if(Game.flags['attack-target-2']){
+        if(this.room.name == Game.flags['attack-target-2'].room.name){
+            var targets = this.room.lookAt(Game.flags['attack-target-2'].pos);
+            if(targets.length){
+                this.kill(targets[0]);
+                return;
+            }
+        }else{
+            this.moveToRoom(Game.flags['attack-target-2'].room.name);
+            return;
+        }
+    }
+
+    return;
+
     if(this.room.name == this.memory.mainroom && this.room.name != this.memory.targetRoom ){
         target = this.findEnemyCreep();
         if(!target){
@@ -102,10 +137,14 @@ Creep.prototype.workAttack = function(){
     }
     logger.debug("Target : "+target+' '+target.pos,classname);
 
+    this.kill(target);
+};
+
+Creep.prototype.kill = function(target){
     if (!this.pos.isNearTo(target)) {
         logger.info("Move "+this.moveTo(target),classname);
         logger.info("Attack "+this.attack(target),classname);
     } else {
         logger.info("Attack "+this.attack(target),classname);
     }
-};
+}

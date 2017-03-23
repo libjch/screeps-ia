@@ -26,6 +26,7 @@ Room.prototype.spawnDecide = function(){
         var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
         var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.spawnroom == roomName);
+        var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healers' && creep.memory.spawnroom == roomName);
         var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
         logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' ('+smallHarvesters.length+') ' +
@@ -81,6 +82,18 @@ Room.prototype.spawnDecide = function(){
         }  else if(extractors.length < sources){
             role = 'extractor';
             maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
+        }  else if (Memory.attacker.target && attackers.length < 1) {
+            role = 'attacker';
+            targetroom = Memory.attacker.target;
+            //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
+        } else if (Memory.attacker.target && healers.length < 1) {
+            role = 'healer';
+            targetroom = Memory.attacker.target;
+            //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
+        } else if (Memory.attacker.target && attackers.length < 1) {
+            role = 'attacker';
+            targetroom = Memory.attacker.target;
+            //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
         } else if (upgraders.length < 1) {
             role = 'upgrader';
             if(storageEnergy < 100000){
@@ -89,18 +102,14 @@ Room.prototype.spawnDecide = function(){
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-        } else if (Memory.spawner.target && buildersHelpers.length < 2 && (roomName == 'W68S32') ) { //+1
+        } else if (Memory.spawner.target && buildersHelpers.length < 2) { //+1
             role = 'builder';
             maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
             mainroom = Memory.spawner.target;
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-        } else if (Memory.attacker.target && attackers.length < 1) {
-            role = 'attacker';
-            targetroom = Memory.attacker.target;
-            maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
-        }  else if (upgraders.length < sources) {
+        } else if (upgraders.length < sources) {
             role = 'upgrader';
             if(storageEnergy < 100000){
                 maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
