@@ -127,7 +127,7 @@ Room.prototype.spawnDecide = function(){
                 body.push(CARRY);
             }else if (role == 'attacker') {
                 var number = Math.floor(maxEnergy / 140);
-                var rest = maxEnergy % 190;
+                var rest = maxEnergy % 140;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
                     body.push(TOUGH);
@@ -140,7 +140,7 @@ Room.prototype.spawnDecide = function(){
                 }
             } else if (role == 'healer') {
                 var number = Math.floor(maxEnergy / 310);
-                var rest = maxEnergy % 190;
+                var rest = maxEnergy % 310;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
                     body.push(TOUGH);
