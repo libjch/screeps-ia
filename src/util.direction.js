@@ -20,9 +20,16 @@ Creep.prototype.moveTo = function(x,y){
 }
 
 
+Room.prototype.findExitTo2 = function(target){
+    if(target == 'E82N83'){
+        return this.room.getPositionAt(0,21);
+    }
+    return this.findExitTo(target);
+}
+
 Creep.prototype.moveToRoom = function(targetRoom){
     logger.info('Move from '+this.room.name+' to '+targetRoom,classname);
-    var exitDir = this.room.findExitTo(targetRoom);
+    var exitDir = this.room.findExitTo2(targetRoom);
     var exit = this.pos.findClosestByPath(exitDir);
     logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name,classname);
 }
