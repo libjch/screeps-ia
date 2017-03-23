@@ -26,14 +26,14 @@ Room.prototype.spawnDecide = function(){
         var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
         var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker' && creep.memory.spawnroom == roomName);
-        var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healers' && creep.memory.spawnroom == roomName);
+        var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healer' && creep.memory.spawnroom == roomName);
         var extractors = _.filter(Game.creeps, (creep) => (creep.memory.role == 'extractor') && creep.memory.extern == false && creep.memory.spawnroom == roomName);
 
         logger.warn('Room '+roomName+' Harvesters:' + harvesters.length + ' ('+smallHarvesters.length+') ' +
             'Builders:' + builders.length + ' (' + buildersHelpers.length + ' ) ' +
             'Upgraders:' + upgraders.length + ' ()  ' +
             'Repairers:' + repairers.length + ' ()  ' +
-            'Attackers: ' + attackers.length+'  Extractors: '+extractors.length,classname);
+            'Attackers: ' + attackers.length+'Healers: ' + healers.length+'  Extractors: '+extractors.length,classname);
 
 
         var totalEnergyStored = 0;
@@ -126,7 +126,7 @@ Room.prototype.spawnDecide = function(){
                 body.push(MOVE);
                 body.push(CARRY);
             }else if (role == 'attacker') {
-                var number = Math.floor(maxEnergy / 250);
+                var number = Math.floor(maxEnergy / 140);
                 var rest = maxEnergy % 190;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
@@ -139,7 +139,7 @@ Room.prototype.spawnDecide = function(){
                     body.push(ATTACK);
                 }
             } else if (role == 'healer') {
-                var number = Math.floor(maxEnergy / 250);
+                var number = Math.floor(maxEnergy / 310);
                 var rest = maxEnergy % 190;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
