@@ -111,7 +111,6 @@ Creep.prototype.workAttack = function(){
         }
     }*/
 
-    return;*/
 
 
     if(this.room.name != this.memory.targetRoom ){
