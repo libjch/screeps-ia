@@ -24,11 +24,16 @@ Creep.prototype.workHeal = function(){
         return;
     }
 
-    if(this.room.name != this.memory.targetRoom){
-        var exitDir = this.room.findExitTo(this.memory.targetRoom);
-        var exit = this.pos.findClosestByRange(exitDir);
-        this.moveTo(exit);
-        logger.log("No creep main room "+exit,classname);
-        return;
+    if(Memory.attacker.ready){
+        if(this.room.name != this.memory.targetRoom){
+            var exitDir = this.room.findExitTo(this.memory.targetRoom);
+            var exit = this.pos.findClosestByRange(exitDir);
+            this.moveTo(exit);
+            logger.log("No creep main room "+exit,classname);
+            return;
+        }
+    }else{
+        this.moveTo(Game.flags['attack-meeting']);
     }
+
 };
