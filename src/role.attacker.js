@@ -66,7 +66,7 @@ Creep.prototype.findEnemyWall  = function() {
 Creep.prototype.workAttack = function(){
     var target = undefined;
 
-    if(!Memory.spawner.ready){
+    if(!Memory.attacker.ready){
         this.moveTo(Game.flags['attack-meeting']);
         return;
     }
