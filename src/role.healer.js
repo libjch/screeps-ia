@@ -13,7 +13,7 @@ Creep.prototype.workHeal = function(){
         }
     });
 
-    logger.warn("Damaged creep?",damagedCreep);
+    logger.warn("Damaged creep?"+damagedCreep);
 
     if (this.hits < this.hitsMax - 100 /* no more heal */) {
         this.moveTo(Game.spawns.Spawn1);
@@ -22,8 +22,8 @@ Creep.prototype.workHeal = function(){
     }
 
     if(damagedCreep) {
-        this.moveTo(damagedCreep);
-        this.heal(damagedCreep);
+        this.moveTo(damagedCreep[0]);
+        this.heal(damagedCreep[0]);
         return;
     }
 
