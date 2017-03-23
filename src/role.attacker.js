@@ -74,7 +74,7 @@ Creep.prototype.workAttack = function(){
 
     if(Game.flags['attack-target-1']){
         if(this.room.name == Game.flags['attack-target-1'].room.name){
-            var targets = this.room.lookAt(Game.flags['attack-target-1'].pos);
+            var targets = this.room.lookAt(Game.flags['attack-target-1'].pos.x,Game.flags['attack-target-1'].pos.y);
             if(targets.length){
                 this.kill(targets[0]);
                 return;
@@ -87,7 +87,7 @@ Creep.prototype.workAttack = function(){
 
     if(Game.flags['attack-target-2']){
         if(this.room.name == Game.flags['attack-target-2'].room.name){
-            var targets = this.room.lookAt(Game.flags['attack-target-2'].pos);
+            var targets = this.room.lookAt(Game.flags['attack-target-2'].pos.x,Game.flags['attack-target-2'].pos.y);
             if(targets.length){
                 this.kill(targets[0]);
                 return;

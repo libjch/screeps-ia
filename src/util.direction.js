@@ -66,7 +66,7 @@ Creep.prototype.findSourceInRoom = function(){
             return;
         }
         if(this.room.storage){
-            if(this.room.storage.store[RESOURCE_ENERGY] > 100000){
+            if(this.room.storage.store[RESOURCE_ENERGY] > 100000 || Memory.attacker.target){
                 if(this.withdraw(this.room.storage,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     this.moveTo(this.room.storage);
                 }

@@ -86,11 +86,11 @@ Room.prototype.spawnDecide = function(){
             role = 'attacker';
             targetroom = Memory.attacker.target;
             //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
-        } else if (Memory.attacker.target && healers.length < 1) {
+        } else if (Memory.attacker.target && healers.length < 0) {
             role = 'healer';
             targetroom = Memory.attacker.target;
             //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
-        } else if (Memory.attacker.target && attackers.length < 1) {
+        } else if (Memory.attacker.target && attackers.length < 4) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
             //maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
