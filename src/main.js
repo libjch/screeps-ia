@@ -4,6 +4,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attacker');
+var roleHealer = require('role.healer');
 var roleClaimer = require('role.claimer');
 var roleExtractor = require('role.extractor');
 var spawnDecider = require('spawn.decide');
