@@ -126,10 +126,12 @@ Room.prototype.spawnDecide = function(){
                 body.push(MOVE);
                 body.push(CARRY);
             }else if (role == 'attacker') {
-                var number = Math.floor(maxEnergy / 140);
-                var rest = maxEnergy % 140;
+                var number = Math.floor(maxEnergy / 240);
+                var rest = maxEnergy % 240;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
+                    body.push(TOUGH);
+                    body.push(TOUGH);
                     body.push(TOUGH);
                 }
                 for (var i = 0; i < number; i++) {
@@ -137,18 +139,22 @@ Room.prototype.spawnDecide = function(){
                 }
                 for (var i = 0; i < number; i++) {
                     body.push(ATTACK);
+                    body.push(ATTACK);
                 }
             } else if (role == 'healer') {
-                var number = Math.floor(maxEnergy / 310);
-                var rest = maxEnergy % 310;
+                var number = Math.floor(maxEnergy / 580);
+                var rest = maxEnergy % 580;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
+                    body.push(TOUGH);
+                    body.push(TOUGH);
                     body.push(TOUGH);
                 }
                 for (var i = 0; i < number; i++) {
                     body.push(MOVE);
                 }
                 for (var i = 0; i < number; i++) {
+                    body.push(HEAL);
                     body.push(HEAL);
                 }
             }else if (role == 'extractor') {
