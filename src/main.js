@@ -210,6 +210,9 @@ module.exports.loop = function() {
             else if (role == 'attacker') {
                 creep.workAttack();
             }
+            else if (role == 'healer') {
+                creep.workHeal();
+            }
             else if (role == 'claimer') {
                 creep.workClaim();
             } else if (role == 'extractor') {

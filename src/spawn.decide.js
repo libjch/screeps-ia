@@ -85,7 +85,7 @@ Room.prototype.spawnDecide = function(){
         }  else if (Memory.attacker.target && attackers.length < 1) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
-        } else if (Memory.attacker.target && healers.length < 0) {
+        } else if (Memory.attacker.target && healers.length < 1) {
             role = 'healer';
             targetroom = Memory.attacker.target;
         } else if (Memory.attacker.target && attackers.length < 4) {
@@ -138,7 +138,20 @@ Room.prototype.spawnDecide = function(){
                 for (var i = 0; i < number; i++) {
                     body.push(ATTACK);
                 }
-            } else if (role == 'extractor') {
+            } else if (role == 'healer') {
+                var number = Math.floor(maxEnergy / 250);
+                var rest = maxEnergy % 190;
+                number -= 1;
+                for (var i = 0; i < number; i++) {
+                    body.push(TOUGH);
+                }
+                for (var i = 0; i < number; i++) {
+                    body.push(MOVE);
+                }
+                for (var i = 0; i < number; i++) {
+                    body.push(HEAL);
+                }
+            }else if (role == 'extractor') {
                 body.push(CARRY);
                 body.push(CARRY);
                 body.push(MOVE);
