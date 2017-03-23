@@ -83,10 +83,10 @@ Creep.prototype.workAttack = function(){
         }
     }
 
-    if(Game.flags['attack-target-1']){
+    /*if(Game.flags['attack-target-1']){
         logger.warn("FLAG FOUND!" +Game.flags['attack-target-1']);
         if(this.room.name == Game.flags['attack-target-1'].room.name){
-            var targets = this.room.lookAt(Game.flags['attack-target-1'].pos.x,Game.flags['attack-target-1'].pos.y);
+            var targets = this.room.lookAt(Game.flags['attack-target-1'].pos);
             logger.warn("Targets: "+targets);
             if(targets.length){
                 this.kill(targets[0]);
@@ -111,7 +111,7 @@ Creep.prototype.workAttack = function(){
         }
     }
 
-    return;
+    return;*/
 
 
     if(this.room.name != this.memory.targetRoom ){
