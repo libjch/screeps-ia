@@ -69,7 +69,7 @@ Room.prototype.spawnDecide = function(){
         var mainroom = roomName;
         var targetroom = undefined;
 
-        if(maxEnergy > 3000){
+        if(maxEnergy > 3000 && !Memory.attacker.target){
             maxEnergy = 3000;
         }
 
