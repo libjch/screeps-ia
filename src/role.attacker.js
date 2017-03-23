@@ -72,6 +72,17 @@ Creep.prototype.workAttack = function(){
     }
 
 
+    if(this.room.name == this.memory.mainroom && this.room.name != this.memory.targetRoom ){
+        target = this.findEnemyCreep();
+        if(!target){
+            var exitDir = this.room.findExitTo(this.memory.targetRoom);
+            var exit = this.pos.findClosestByRange(exitDir);
+            this.moveTo(exit);
+            logger.log("No creep main room "+exit,classname);
+            return;
+        }
+    }
+
     if(Game.flags['attack-target-1']){
         if(this.room.name == Game.flags['attack-target-1'].room.name){
             var targets = this.room.lookAt(Game.flags['attack-target-1'].pos.x,Game.flags['attack-target-1'].pos.y);
@@ -100,16 +111,6 @@ Creep.prototype.workAttack = function(){
 
     return;
 
-    if(this.room.name == this.memory.mainroom && this.room.name != this.memory.targetRoom ){
-        target = this.findEnemyCreep();
-        if(!target){
-            var exitDir = this.room.findExitTo(this.memory.targetRoom);
-            var exit = this.pos.findClosestByRange(exitDir);
-            this.moveTo(exit);
-            logger.log("No creep main room "+exit,classname);
-            return;
-        }
-    }
 
     if(this.room.name != this.memory.targetRoom ){
         var exitDir = this.room.findExitTo(this.memory.targetRoom);
