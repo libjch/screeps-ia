@@ -169,7 +169,7 @@ module.exports.loop = function() {
             }
             //pickup dropped enery;
             if (creep.carry.energy < creep.carryCapacity) {
-                var energy = creep.pos.findInRange(FIND_DROPPED_ENERGY, 1);
+                var energy = creep.pos.findInRange(FIND_DROPPED_RESOURCES, 1);
                 if (energy.length) {
                     for (let e of energy) {
                         creep.pickup(e);
