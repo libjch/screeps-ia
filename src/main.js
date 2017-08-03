@@ -160,6 +160,9 @@ module.exports.loop = function() {
         var lastRoom = '';
         for (let creep of creeps) {
 
+            if(!creep.memory.number){
+                creep.memory.number = 1;
+            }
             if(lastRoom != creep.room.name){
                 logger.log("===="+creep.room.name+"====");
                 lastRoom = creep.room.name;
