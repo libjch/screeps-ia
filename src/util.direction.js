@@ -100,7 +100,7 @@ Creep.prototype.findSourceInRoom = function(){
 
     var sources = this.room.find(FIND_SOURCES,{filter: (source) => { return source.energy > 0}});
 
-    logger.info("Sources",sources);
+    logger.info('Sources' +sources);
     if(sources.length){
         var sourceNumber = this.memory.number % sources.length;
         var source = sources[sourceNumber];
