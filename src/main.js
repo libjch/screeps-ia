@@ -123,7 +123,7 @@ module.exports.loop = function() {
         if (Game.time % 200 == 55  && Game.cpu.bucket > 5000) {
             try {
                 for(let room of rooms){
-                    room.checkWalls();
+                    //room.checkWalls();
                 }
             } catch (e) {
                 logger.error("ERROR  " + e, classname);
