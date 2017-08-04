@@ -15,6 +15,7 @@ var extensionPlanner = require('planner.extension');
 var towerPlanner = require('planner.tower');
 var wallPlanner = require('planner.wall');
 var storagePlanner = require('planner.storage');
+var removeConstructionSites = require('planner.ennemies');
 
 
 var logger = require('logger');
@@ -134,6 +135,14 @@ module.exports.loop = function() {
         if (Game.time % 200 == 66) {
             for(let room of rooms){
                 room.checkStorage();
+            }
+            tick('CheckStorage');
+        }
+
+
+        if (Game.time % 200 == 66) {
+            for(let room of rooms){
+                room.removeEnnemyConstructionSites();
             }
             tick('CheckStorage');
         }
