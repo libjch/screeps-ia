@@ -16,15 +16,15 @@ Room.prototype.removeEnnemyConstructionSites = function(){
         var number = 0;
         var constructionSites = this.find(FIND_CONSTRUCTION_SITES, {
             filter: (structure) => {
-                return (structure.owner.username != 'libjch');
+                return (!structure.my);
             }
         });
 
 
         for (let constructionSite of constructionSites) {
             //room.checkWalls();
-            logger.warn("Removing " + constructionSite+" "+constructionSite.owner.username);
-            constructionSite.remove();
+            var res = constructionSite.remove();
+            logger.warn("Removing " + constructionSite+" "+constructionSite.owner.username+" => "+res);
         }
     }
 };
