@@ -140,7 +140,7 @@ module.exports.loop = function() {
         }
 
 
-        if (true) {
+        if (Game.time % 100 == 77) {
             for(let room of rooms){
                 room.removeEnnemyConstructionSites();
             }
