@@ -23,7 +23,7 @@ Room.prototype.removeEnnemyConstructionSites = function(){
 
         for (let constructionSite of constructionSites) {
             //room.checkWalls();
-            logger.warn("Removing " + constructionSite);
+            logger.warn("Removing " + constructionSite+" "+constructionSite.owner);
             constructionSite.remove();
         }
     }
