@@ -16,6 +16,7 @@ var towerPlanner = require('planner.tower');
 var wallPlanner = require('planner.wall');
 var storagePlanner = require('planner.storage');
 var removeConstructionSites = require('planner.ennemies');
+var checkSafemode = require('planner.safemode');
 
 
 var logger = require('logger');
@@ -139,10 +140,24 @@ module.exports.loop = function() {
             tick('CheckStorage');
         }
 
+        if (Game.time % 200 == 66) {
+            for(let room of rooms){
+                room.checkSafeMode();
+            }
+            tick('CheckSafeMode');
+        }
+
 
         if (Game.time % 100 == 77) {
             for(let room of rooms){
                 room.removeEnnemyConstructionSites();
+            }
+            tick('CheckRemoveOtherConstructions');
+        }
+
+        if (Game.time % 10 == 3) {
+            for(let room of rooms){
+                room.checkSafeMode();
             }
             tick('CheckRemoveOtherConstructions');
         }
