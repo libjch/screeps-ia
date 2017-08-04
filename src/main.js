@@ -140,11 +140,11 @@ module.exports.loop = function() {
         }
 
 
-        if (Game.time % 200 == 66) {
+        if (true) {
             for(let room of rooms){
                 room.removeEnnemyConstructionSites();
             }
-            tick('CheckStorage');
+            tick('CheckRemoveOtherConstructions');
         }
 
         tick('Load creeps scripts');
