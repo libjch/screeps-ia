@@ -138,8 +138,8 @@ Creep.prototype.workAttack = function(){
             logger.debug("Enemy Construction site: " + target, classname);
         }
         if(!target){
-            target = this.findEnemyWall();
-            logger.debug("Enemy wall: "+target,classname);
+            //target = this.findEnemyWall();
+            //logger.debug("Enemy wall: "+target,classname);
         }
     }
     logger.debug("Target : "+target+' '+target.pos,classname);
