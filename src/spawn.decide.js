@@ -85,10 +85,10 @@ Room.prototype.spawnDecide = function(){
         }  else if (Memory.attacker.target && attackers.length < 1) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
-        } else if (Memory.attacker.target && healers.length < 1) {
+        } else if (Memory.attacker.target && healers.length < 0) {
             role = 'healer';
             targetroom = Memory.attacker.target;
-        } else if (Memory.attacker.target && attackers.length < 4) {
+        } else if (Memory.attacker.target && attackers.length < 0) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
         } else if (upgraders.length < 1) {
