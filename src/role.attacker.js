@@ -66,6 +66,11 @@ Creep.prototype.findEnemyWall  = function() {
 Creep.prototype.workAttack = function(){
     var target = undefined;
 
+    if(this.memory.sleep>0){
+        this.memory.sleep-=1;
+        return;
+    }
+
     if(!Memory.attacker.ready){
         this.moveTo(Game.flags['attack-meeting']);
         return;
@@ -143,6 +148,7 @@ Creep.prototype.workAttack = function(){
         }
         if(!target){
             this.moveTo(Game.flags['attack-meeting']);
+            this.memory.sleep = 5;
             return;
         }
     }
