@@ -51,7 +51,18 @@ module.exports.loop = function() {
 
         lastCpu = 0;
         logger.trace('CPU usage:' + Game.cpu.getUsed() + ' tickLimit:' + Game.cpu.tickLimit + ' bucket:' + Game.cpu.bucket + ' limit:' + Game.cpu.limit);
-        logger.info(Memory.start);
+
+        if(!Memory.start){
+            Memory.start = true;
+            Memory.extractors = {};
+            Memory.containers = {};
+            Memory.stats = {};
+            Memory.global_id = 1;
+            Memory.attacker = {};
+            Memory.spawner = {};
+            Memory.logger = {};
+
+        }
 
         if(!Memory.extractors){
             Memory.extractors = {};

@@ -102,5 +102,9 @@ function record() {
     Memory.stats["game.cpu.tickLimit"] = Game.cpu.tickLimit;
     Memory.stats["game.cpu.bucket"] = Game.cpu.bucket;
     Memory.stats["game.cpu.use"] = Game.cpu.getUsed();
+    Memory.stats["game.gcl.level"] = Game.gcl.level;
+    Memory.stats["game.gcl.progress"] = Game.gcl.progress;
+    Memory.stats["game.gcl.progressTotal"] = Game.gcl.progressTotal;
+
 
 }
