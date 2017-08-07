@@ -141,6 +141,10 @@ Creep.prototype.workAttack = function(){
             //target = this.findEnemyWall();
             //logger.debug("Enemy wall: "+target,classname);
         }
+        if(!target){
+            this.moveTo(Game.flags['attack-meeting']);
+            return;
+        }
     }
     logger.debug("Target : "+target+' '+target.pos,classname);
 
