@@ -159,7 +159,7 @@ Creep.prototype.workAttack = function(){
 
 Creep.prototype.kill = function(target){
     if (!this.pos.isNearTo(target)) {
-        logger.info("Move "+this.moveTo(target),classname);
+        logger.info("Move "+this.moveToIgnoreCreeps(target),classname);
         logger.info("Attack "+this.attack(target),classname);
     } else {
         logger.info("Attack "+this.attack(target),classname);

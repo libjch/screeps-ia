@@ -19,6 +19,14 @@ Creep.prototype.moveTo = function(x,y){
     }
 }
 
+Creep.prototype.moveToIgnoreCreeps = function (x,y) {
+    if(!this.fatigue){
+        return this._moveTo(x,y,{reusePath: 3,ignoreCreeps: true});
+    }else{
+        return ERR_TIRED;
+    }
+}
+
 
 Room.prototype.findExitTo2 = function(target){
     if(target == 'E82N83'){
