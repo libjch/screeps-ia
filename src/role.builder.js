@@ -67,7 +67,7 @@ Creep.prototype.workBuild = function(){
                     var res = this.build(target);
 
                     if(target.structureType == STRUCTURE_RAMPART && res == OK){
-                        this.memory.role_override = 'repairer';
+                        this.memory.role_override = 'builder-rampart';
                         this.memory.role_override_time = Game.time + 10;
                         this.memory.lastRepairId = target.id;
                         logger.warn('Building rampart for 10 ticks!');
