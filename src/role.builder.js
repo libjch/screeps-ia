@@ -70,7 +70,6 @@ Creep.prototype.workBuild = function(){
                         this.memory.role_override = 'repairer';
                         this.memory.role_override_time = Game.time + 10;
                         this.memory.lastRepairId = target.id;
-                        //this.room.lookForAt(FIND_ target.pos.x,target.pos.y);
                         logger.warn('Building rampart for 10 ticks!');
                     }
 

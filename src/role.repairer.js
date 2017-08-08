@@ -18,7 +18,6 @@ Creep.prototype.repairRoads = function(){
         });
 
         var target = targets[0];
-        var place = target.room.name+'-'+target.pos.x+'-'+target.pos.y;
         logger.log('    target: '+target.pos+' ' + target.hits + '/' + target.hitsMax+ ' '+ this.pos.getRangeTo(target),classname);
         if(this.repair(target) == ERR_NOT_IN_RANGE){
             this.moveTo(target);

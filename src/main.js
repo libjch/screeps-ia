@@ -2,6 +2,7 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
+var roleBuilderRampart = require('role.builder.rampart');
 var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attacker');
 var roleHealer = require('role.healer');
@@ -242,6 +243,9 @@ module.exports.loop = function() {
             }
             else if (role == 'builder' && Game.cpu.bucket > 2200) {
                 creep.workBuild();
+            }
+            else if (role == 'builder-rampart') {
+                creep.workBuildRampart();
             }
             else if (role == 'repairer' && Game.cpu.bucket > 2500) {
                 creep.workRepair();
