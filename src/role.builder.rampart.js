@@ -18,7 +18,7 @@ Creep.prototype.workBuildRampart = function(){
         }
         var targets = this.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
-                return ((structure.structureType == STRUCTURE_RAMPART)  && structure.hits < 2000);
+                return ((structure.structureType == STRUCTURE_RAMPART)  && structure.hits < 5000);
             }
         });
 
