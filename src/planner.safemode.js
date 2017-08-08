@@ -17,7 +17,7 @@ Room.prototype.checkSafeMode = function(){
 
         var hostiles = this.find(FIND_HOSTILE_CREEPS);
 
-        if(hostiles && hostiles.length > 0){
+        if(hostiles && hostiles.length > 2){
             this.controller.activateSafeMode();
         }
     }
