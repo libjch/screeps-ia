@@ -239,6 +239,7 @@ module.exports.loop = function() {
                 if(creep.memory.role_override){
                     say += " "+ creep.memory.role_override;
                 }
+                creep.say(say);
             }
 
 
