@@ -15,6 +15,7 @@ Room.prototype.runTowers = function () {
     if(hostiles && hostiles.length > 0){
         for(let t of towers){
             t.workAttack(hostiles);
+            return;
         }
     }else{
         var repairsTargets = this.find(FIND_STRUCTURES, {
@@ -22,9 +23,18 @@ Room.prototype.runTowers = function () {
                 return (structure.structureType == STRUCTURE_ROAD && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.2));
             }
         });
+
+        if(repairsTargets.length == 0){
+            repairsTargets = this.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_RAMPART && structure.hits < 5000);
+                }
+            });
+        }
         if(repairsTargets && repairsTargets.length > 0){
             for(let t of towers){
                 t.workRepair(repairsTargets);
+                return;
             }
         }
     }
@@ -33,6 +43,7 @@ Room.prototype.runTowers = function () {
     if(myCreeps.length){
         for(let t of towers){
             t.workHeal(myCreeps);
+            return;
         }
     }
 }
