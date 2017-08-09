@@ -195,7 +195,6 @@ module.exports.loop = function() {
         tick('StartCreeps');
         var lastRoom = '';
         for (let creep of creeps) {
-
             if(!creep.memory.number){
                 creep.memory.number = 1;
             }
@@ -234,6 +233,14 @@ module.exports.loop = function() {
             if (creep.ticksToLive < 50) {
                 creep.memory.working = true;
             }
+
+            if(Game.time % 10 == 0){
+                var say = creep.memory.role;
+                if(creep.memory.role_override){
+                    say += " "+ creep.memory.role_override;
+                }
+            }
+
 
             if (role == 'harvester') {
                 creep.workHarvest();
