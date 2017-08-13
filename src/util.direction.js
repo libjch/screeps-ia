@@ -71,6 +71,8 @@ Creep.prototype.findSourceInRoom = function(){
                         targetContainerScore = score;
                         targetContainer = container;
                     }
+                }else{
+                    Memory.extractors[source.id].container = undefined;
                 }
             }
         }
