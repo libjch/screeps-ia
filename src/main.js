@@ -105,7 +105,7 @@ module.exports.loop = function() {
         }
         tick('TowerAttack');
 
-        if (Game.time % 10 == 1 && Game.cpu.bucket > 2000) {
+        if (Game.time % 10 == 1 && Game.cpu.bucket > 1000) {
             Memory.containers = {};
             for(let room of rooms){
                 room.cleanExtractors();
