@@ -5,6 +5,13 @@ var classname = 'TowerAttack';
 
 
 Room.prototype.runTowers = function () {
+    if(!this.memory.idleTower){
+        this.memory.idleTower = Game.time + 5;
+    }
+    if(this.memory.idleTower > Game.time){
+        return;
+    }
+
     //List towers
     var towers = this.find(FIND_MY_STRUCTURES, {
         filter: (s) => s.structureType == STRUCTURE_TOWER
@@ -18,6 +25,8 @@ Room.prototype.runTowers = function () {
             return;
         }
     }else{
+        this.memory.idleTower = Game.time+1;
+
         var repairsTargets = this.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_ROAD && structure.hits > 0 && structure.hits < (structure.hitsMax * 0.2));
@@ -46,6 +55,8 @@ Room.prototype.runTowers = function () {
             return;
         }
     }
+
+    this.memory.idleTower = Game.time +5;
 }
 
 StructureTower.prototype.workAttack = function(targets){
