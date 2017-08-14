@@ -73,6 +73,11 @@ Room.prototype.spawnDecide = function(){
         //     maxEnergy = 3000;
         // }
 
+        var maxEnergyRatio = 1;
+        if(storageEnergy > 100000){
+            maxEnergyRatio = (storageEnergy / 100000);
+        }
+
         if (harvesters.length < sources) {
             role = 'harvester';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
@@ -94,11 +99,11 @@ Room.prototype.spawnDecide = function(){
         } else if (upgraders.length < 1) {
             role = 'upgrader';
             if(storageEnergy < 100000){
-                maxEnergy = maxEnergy > (this.controller.level * 400) ? (this.controller.level * 400) : maxEnergy;
+                maxEnergy = maxEnergy > (this.controller.level * 400 * maxEnergyRatio) ? (this.controller.level * 400 * maxEnergyRatio) : maxEnergy;
             }
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
-            maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+            maxEnergy = maxEnergy > (1200 * maxEnergyRatio)  ? (1200 * maxEnergyRatio) : maxEnergy;
         } else if (Memory.spawner.target && buildersHelpers.length < 2) { //+1
             role = 'builder';
             maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
