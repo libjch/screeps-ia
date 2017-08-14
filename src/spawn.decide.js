@@ -94,7 +94,7 @@ Room.prototype.spawnDecide = function(){
         } else if (upgraders.length < 1) {
             role = 'upgrader';
             if(storageEnergy < 100000){
-                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
+                maxEnergy = maxEnergy > (this.controller.level * 400) ? (this.controller.level * 400) : maxEnergy;
             }
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
@@ -106,11 +106,6 @@ Room.prototype.spawnDecide = function(){
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-        } else if (upgraders.length < sources) {
-            role = 'upgrader';
-            if(storageEnergy < 100000){
-                maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
-            }
         } else if (upgraders.length < (2*sources) && storageEnergy > 300000 && Game.cpu.bucket > 3000) {
             role = 'upgrader';
         }

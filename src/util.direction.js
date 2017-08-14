@@ -72,6 +72,7 @@ Creep.prototype.findSourceInRoom = function(){
                         targetContainer = container;
                     }
                 }else{
+                    logger.warn('Extractor container is not available anymore')
                     Memory.extractors[source.id].container = undefined;
                 }
             }
