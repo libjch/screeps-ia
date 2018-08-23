@@ -22,8 +22,8 @@ Room.prototype.runTowers = function () {
     if(hostiles && hostiles.length > 0){
         for(let t of towers){
             t.workAttack(hostiles);
-            return;
         }
+        return;
     }else{
         this.memory.idleTower = Game.time+1;
 
@@ -43,8 +43,8 @@ Room.prototype.runTowers = function () {
         if(repairsTargets && repairsTargets.length > 0){
             for(let t of towers){
                 t.workRepair(repairsTargets);
-                return;
             }
+            return;
         }
     }
 
@@ -52,8 +52,8 @@ Room.prototype.runTowers = function () {
     if(myCreeps.length){
         for(let t of towers){
             t.workHeal(myCreeps);
-            return;
         }
+        return;
     }
 
     this.memory.idleTower = Game.time +5;
