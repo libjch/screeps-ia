@@ -39,7 +39,7 @@ Room.prototype.findExitTo2 = function(target){
 }
 
 Creep.prototype.moveToRoom = function(targetRoom){
-    logger.info('Move from '+this.room.name+' to '+targetRoom,classname);
+    logger.debug('Move from '+this.room.name+' to '+targetRoom,classname);
     var exitDir = this.room.findExitTo2(targetRoom);
     var exit = this.pos.findClosestByPath(exitDir);
     logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name,classname);
