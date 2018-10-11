@@ -13,7 +13,11 @@ Creep.prototype.workBuild = function(){
 
     if(this.memory.working) {
         if( this.pos.x == 49 || this.pos.y==49 || this.pos.x ==0 || this.pos.y==0){
-            logger.log('escape '+this.moveTo(this.room.controller),classname);
+            var dest = this.room.controller;
+            if(!dest){
+                dest = this.room.getPositionAt(22,22);
+            }
+            logger.log('escape '+this.moveTo(dest),classname);
             return;
         }
 
