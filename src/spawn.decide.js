@@ -87,16 +87,16 @@ Room.prototype.spawnDecide = function(){
         }  else if(extractors.length < sources){
             role = 'extractor';
             maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
-        }  else if (Memory.attacker.target && attackers.length < 1) {
+        }  else if (Memory.attacker.target && attackers.length < 1 && this.name == 'E3S9') {
             role = 'attacker';
             targetroom = Memory.attacker.target;
-        } else if (Memory.attacker.target && healers.length < 0) {
+        } /*else if (Memory.attacker.target && healers.length < 0) {
             role = 'healer';
             targetroom = Memory.attacker.target;
         } else if (Memory.attacker.target && attackers.length < 0) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
-        } else if (upgraders.length < 1) {
+        } */else if (upgraders.length < 1) {
             role = 'upgrader';
             if(storageEnergy < 100000){
                 maxEnergy = maxEnergy > (this.controller.level * 400 * maxEnergyRatio) ? (this.controller.level * 400 * maxEnergyRatio) : maxEnergy;
