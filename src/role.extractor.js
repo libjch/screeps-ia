@@ -100,7 +100,7 @@ Room.prototype.cleanExtractors = function(){
                         Memory.extractors[source.id].containerCS = container.id;
                     }else{
                         //Build Container!
-                        logger.info("Building container for source: "+source.id);
+                        logger.warn("Building container for source: "+source.id);
                         //Find construction site position:
                         var path = this.findPath(source.pos, this.controller.pos,{ignoreCreeps:true});
 
