@@ -59,7 +59,9 @@ Creep.prototype.moveToRoom = function(targetRoom){
         if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,classname);
         }else{
-            logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].getPositionAt(20,20))+' '+targetRoom+' from '+this.room.name,classname);
+            var exitDir = this.room.findExitTo2(targetRoom);
+            var exit = this.pos.findClosestByPath(exitDir);
+            logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,classname);
         }
 
     }
