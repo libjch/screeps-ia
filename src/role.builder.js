@@ -82,7 +82,7 @@ Creep.prototype.workBuild = function(){
             }
         }else{
             //NOT in current room
-            logger.log('get back',classname);
+            logger.log('get back '+this.id+" "+this.pos,classname);
             this.moveToRoom(this.memory.mainroom);
         }
     }
