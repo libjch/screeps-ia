@@ -44,16 +44,18 @@ Creep.prototype.moveToRoom = function(targetRoom){
     if(targetRoom.name == 'E2S9' && this.room.name == 'E3S9'){
         this.moveTo(Game.rooms['E3S10'].getPositionAt(3,21));
     }
-    if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10'){
+    else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10'){
         this.moveTo(Game.rooms['E2S10'].getPositionAt(3,21));
     }
-    if(targetRoom.name == 'E2S9' && this.room.name == 'E2S10'){
+    else if(targetRoom.name == 'E2S9' && this.room.name == 'E2S10'){
         this.moveTo(Game.rooms[targetRoom].controller);
     }
-    if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10' && this.pos.y == 0){
+    else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10' && this.pos.y == 0){
         this.move(BOTTOM);
+    }else{
+        // this.moveTo(Game.rooms[targetRoom].controller);
+        logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,classname);
     }
-    this.moveTo(Game.rooms[targetRoom].controller);
     //var exitDir = this.room.findExitTo2(targetRoom);
     //var exit = this.pos.findClosestByPath(exitDir);
     //logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,classname);
