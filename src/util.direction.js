@@ -56,7 +56,7 @@ Creep.prototype.moveToRoom = function(targetRoom){
         this.move(BOTTOM);
     }else{
         // this.moveTo(Game.rooms[targetRoom].controller);
-        if(Game.rooms[targetRoom].controller){
+        if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,classname);
         }else{
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].getPositionAt(20,20))+' '+targetRoom+' from '+this.room.name,classname);
