@@ -30,7 +30,7 @@ Creep.prototype.moveToIgnoreCreeps = function (x,y) {
 
 Room.prototype.findExitTo2 = function(target){
     if(target == 'E2S9' && this.name == 'E3S9' ){
-        return this.getPositionAt(11,49);
+        return this.getPositionAt(13,49);
     }
     if(target == 'E2S9' && this.name == 'E3S10' ){
         return this.getPositionAt(0,22);
