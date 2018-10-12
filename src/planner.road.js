@@ -16,7 +16,7 @@ Room.prototype.checkRoads = function(){
 
         //Build roads from sources to controller
         for (let source of sources) {
-            var path = this.findPath(source.pos, this.controller.pos, {ignoreCreeps: true});
+            var path = this.findPath(source.pos, this.controller.pos, {ignoreCreeps: true, swampCost: 2});
             for (let i = 0; i < 40 && i < path.length; i++) {
                 var res = this.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
                 if(res != ERR_INVALID_TARGET){
@@ -40,7 +40,7 @@ Room.prototype.checkRoads = function(){
             return;
         }
 
-        var path = this.findPath(roomSpawn.pos, this.controller.pos, {ignoreCreeps: true});
+        var path = this.findPath(roomSpawn.pos, this.controller.pos, {ignoreCreeps: true, swampCost: 2});
         for (let i = 0; i < 40 && i < path.length; i++) {
             var res = this.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD);
             if(res != ERR_INVALID_TARGET){
