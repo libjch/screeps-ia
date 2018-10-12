@@ -87,7 +87,7 @@ Room.prototype.spawnDecide = function(){
         }  else if(extractors.length < sources){
             role = 'extractor';
             maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
-        }  else if (Memory.attacker.target && attackers.length < 1 && this.name == 'E3S9') {
+        }  else if (this.controller.level > 3 && Memory.attacker.target && attackers.length < 1 && this.name == 'E3S9') {
             role = 'attacker';
             targetroom = Memory.attacker.target;
         } /*else if (Memory.attacker.target && healers.length < 0) {
@@ -104,7 +104,7 @@ Room.prototype.spawnDecide = function(){
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
             maxEnergy = maxEnergy > (1200 * maxEnergyRatio)  ? (1200 * maxEnergyRatio) : maxEnergy;
-        } else if (Memory.spawner.target && buildersHelpers.length < 2) { //+1
+        } else if (this.controller.level >= 3 && Memory.spawner.target && buildersHelpers.length < 2) { //+1
             role = 'builder';
             maxEnergy = maxEnergy > 3000 ? 3000 : maxEnergy;
             mainroom = Memory.spawner.target;
