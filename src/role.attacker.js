@@ -123,7 +123,7 @@ Creep.prototype.workAttack = function(){
 
     if(this.room.name != this.memory.targetRoom ){
         this.moveToRoom(this.memory.targetRoom);
-        logger.log("No creep main room "+exit,classname);
+        logger.log("No creep main room ",classname);
         return;
     }
 
