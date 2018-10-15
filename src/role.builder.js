@@ -51,7 +51,7 @@ Creep.prototype.workBuild = function(){
             };
 
             if (targets.length == 0) {
-                this.memory.role_override = 'upgrader';
+                this.memory.role_override = 'harvester';
                 this.memory.role_override_time = Game.time + 300;
                 return;
             } else {
