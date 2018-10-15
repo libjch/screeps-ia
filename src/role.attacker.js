@@ -81,7 +81,7 @@ Creep.prototype.workAttack = function(){
         target = this.findEnemyCreep();
         if(!target){
             this.moveToRoom(this.memory.targetRoom);
-            logger.log("No creep main room "+exit,classname);
+            logger.log("No creep main room "+this.memory.targetRoom,classname);
             return;
         }
     }
