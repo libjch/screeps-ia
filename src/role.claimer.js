@@ -29,7 +29,9 @@ Creep.prototype.workClaim = function(){
             if(res == ERR_NOT_IN_RANGE) {
                 return true;
             }
-            this.attackController(this.room.controller);
+            logger.log("Res: "+res,classname);
+            res = this.attackController(this.room.controller);
+            logger.log("Res2: "+res,classname);
         }
     }
     return false;
