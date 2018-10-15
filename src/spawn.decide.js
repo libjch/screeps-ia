@@ -87,7 +87,7 @@ Room.prototype.spawnDecide = function(){
         }  else if(extractors.length < sources){
             role = 'extractor';
             maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
-        }  else if (this.controller.level > 3 && Memory.attacker.target && attackers.length < 1 && this.name == 'E3S9') {
+        }  else if (this.controller.level > 3 && Memory.attacker.target && attackers.length < 1 && (this.name == 'E3S9' || this.name == 'E4S7' || this.name == 'E3S8')) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
         } /*else if (Memory.attacker.target && healers.length < 0) {
