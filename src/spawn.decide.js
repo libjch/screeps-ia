@@ -19,6 +19,8 @@ Room.prototype.spawnDecide = function(){
         var spawn = spawns[0];//choose best one?
         var sources = this.find(FIND_SOURCES).length;
 
+        var forExtern = spawn.name == 'Spawn4' || spawn.name == 'Spawn5';
+
         var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
         var smallHarvesters = _.filter(harvesters, (creep) => (creep.body.length < 6));
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
@@ -104,13 +106,13 @@ Room.prototype.spawnDecide = function(){
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
             maxEnergy = maxEnergy > (1200 * maxEnergyRatio)  ? (1200 * maxEnergyRatio) : maxEnergy;
-        } else if (this.controller.level >= 5 && Memory.spawner.target && buildersHelpers.length < 2) { //+1
+        } else if (forExtern && this.controller.level >= 5 && Memory.spawner.target && buildersHelpers.length < 2) { //+1
             role = 'builder';
-            maxEnergy = maxEnergy > 1000 ? 1000 : maxEnergy;
+            maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             mainroom = Memory.spawner.target;
-        } else if (this.controller.level >= 5 && Memory.spawner.target2 && buildersHelpers.length < 2) { //+1
+        } else if (forExtern && this.controller.level >= 5 && Memory.spawner.target2 && buildersHelpers.length < 2) { //+1
             role = 'builder';
-            maxEnergy = maxEnergy > 1000 ? 1000 : maxEnergy;
+            maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
             mainroom = Memory.spawner.target2;
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
