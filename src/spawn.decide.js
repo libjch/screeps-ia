@@ -110,13 +110,13 @@ Room.prototype.spawnDecide = function(){
         } else if (constructionsSites.length / 11 > builders.length && builders.length < 1 && Game.cpu.bucket > 2500) {
             role = 'builder';
             maxEnergy = maxEnergy > (1200 * maxEnergyRatio)  ? (1200 * maxEnergyRatio) : maxEnergy;
-        } else if (externHelper && this.controller.level >= 5 && Memory.spawner.target && buildersHelpers.length < 2) { //+1
+        } else if (externHelper && this.controller.level >= 5 && Memory.spawner.target && buildersHelpers.length < 1) { //+1
             role = 'builder';
-            maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+            maxEnergy = maxEnergy > 2500 ? 2500 : maxEnergy;
             mainroom = Memory.spawner.target;
-        } else if (externHelper && this.controller.level >= 5 && Memory.spawner.target2 && buildersHelpers.length < 2) { //+1
+        } else if (externHelper && this.controller.level >= 5 && Memory.spawner.target2 && buildersHelpers.length < 1) { //+1
             role = 'builder';
-            maxEnergy = maxEnergy > 1500 ? 1500 : maxEnergy;
+            maxEnergy = maxEnergy > 2500 ? 2500 : maxEnergy;
             mainroom = Memory.spawner.target2;
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
