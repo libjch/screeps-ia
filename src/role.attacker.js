@@ -77,7 +77,7 @@ Creep.prototype.workAttack = function(){
     }
 
 
-    if(this.room.name == this.memory.mainroom && this.room.name != this.memory.targetRoom ){
+    if( ((this.room.controller && this.room.controller.my) || this.room.memory.defend) && this.room.name != this.memory.targetRoom ){
         target = this.findEnemyCreep();
         if(!target){
             this.moveToRoom(this.memory.targetRoom);
