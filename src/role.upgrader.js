@@ -15,7 +15,7 @@ Creep.prototype.workUpgrade = function(){
     }
 
     if(this.memory.working) {
-        if(this.room.controller.my && this.memory.mainroom == this.room.name){
+        if(this.room.controller && this.room.controller.my && this.memory.mainroom == this.room.name){
             if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
                 this.moveTo(this.room.controller);
             }
