@@ -71,13 +71,13 @@ Creep.prototype.workAttack = function(){
         return;
     }
 
-    if(!Memory.attacker.ready){
+    if(!Memory.attacker.ready && Game.flags['attack-meeting']){
         this.moveTo(Game.flags['attack-meeting']);
         return;
     }
 
 
-    if( ((this.room.controller && this.room.controller.my) || this.room.memory.defend) && this.room.name != this.memory.targetRoom ){
+    if(((this.room.controller && this.room.controller.my) || this.room.memory.defend) && this.room.name != this.memory.targetRoom ){
         target = this.findEnemyCreep();
         if(!target){
             this.moveToRoom(this.memory.targetRoom);
@@ -89,9 +89,10 @@ Creep.prototype.workAttack = function(){
     target = this.findEnemyCreep();
     if(target){
         this.kill(target);
+        return;
     }
 
-    if(Game.flags['attack-target-1']){
+    /*if(Game.flags['attack-target-1']){
         logger.warn("FLAG FOUND!" +Game.flags['attack-target-1']);
         if(this.room.name == this.memory.targetRoom){
             var targets = this.room.lookForAt(LOOK_STRUCTURES,Game.flags['attack-target-1'].pos);
@@ -104,7 +105,7 @@ Creep.prototype.workAttack = function(){
             this.moveToRoom(Game.flags['attack-target-1'].room.name);
             return;
         }
-    }
+    }*/
 
     /*if(Game.flags['attack-target-2']){
         if(this.room.name == Game.flags['attack-target-2'].room.name){
