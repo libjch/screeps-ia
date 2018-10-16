@@ -52,6 +52,9 @@ Creep.prototype.moveToRoom = function(targetRoom){
     else if(targetRoom.name == 'E2S9' && this.room.name == 'E2S10'){
         this.moveTo(Game.rooms[targetRoom].controller);
     }
+    else if(targetRoom.name == 'E2S6' && this.room.name == 'E3S7'){
+        this.moveTo(Game.rooms['E3S6'].controller);
+    }
     else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10' && this.pos.y == 0){
         this.move(BOTTOM);
     }else{
