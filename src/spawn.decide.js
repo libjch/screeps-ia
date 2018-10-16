@@ -19,7 +19,7 @@ Room.prototype.spawnDecide = function(){
         var spawn = spawns[0];//choose best one?
         var sources = this.find(FIND_SOURCES).length;
 
-        if(this.memory.extern == undefined){
+        if(!this.memory.extern){
             this.memory.extern = {};
         }
         var externHelper = this.memory.extern.builder;
