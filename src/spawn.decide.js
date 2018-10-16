@@ -136,8 +136,9 @@ Room.prototype.spawnDecide = function(){
                 body.push(MOVE);
                 body.push(CARRY);
             }else if (role == 'attacker') {
-                var number = Math.floor(maxEnergy / (20+100+240));
-                var rest = maxEnergy % 360;
+                var total = 20+100+240;
+                var number = Math.floor(maxEnergy / (total));
+                var rest = maxEnergy % total;
                 number -= 1;
                 for (var i = 0; i < number; i++) {
                     body.push(TOUGH);
@@ -150,6 +151,9 @@ Room.prototype.spawnDecide = function(){
                 for (var i = 0; i < number; i++) {
                     body.push(ATTACK);
                     body.push(ATTACK);
+                    body.push(ATTACK);
+                }
+                if(rest >= 160){
                     body.push(ATTACK);
                 }
                 if(rest >= 80){
