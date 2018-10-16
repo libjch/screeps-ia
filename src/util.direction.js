@@ -39,7 +39,7 @@ Room.prototype.findExitTo2 = function(target){
 }
 
 Creep.prototype.moveToRoom = function(targetRoom){
-    logger.debug('Move from '+this.room.name+' to '+targetRoom,classname);
+    logger.debug('Move from '+this.room.name+' to '+targetRoom,this.name);
 
     if(targetRoom.name =='E2S6'){
         if(this.room.name == 'E3S8'){
@@ -80,11 +80,11 @@ Creep.prototype.moveToRoom = function(targetRoom){
         }
     }else{
         if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
-            logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,classname);
+            logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,this.name);
         }else{
             var exitDir = this.room.findExitTo2(targetRoom);
             var exit = this.pos.findClosestByPath(exitDir);
-            logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,classname);
+            logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,this.name);
         }
 
     }
@@ -107,7 +107,7 @@ Creep.prototype.findSourceInRoom = function(){
             //logger.debug('Source : '+source.id+' '+Memory.extractors[source.id]+' '+Memory.extractors[source.id].creep,classname);
 
             if(!Memory.extractors[source.id]){
-                logger.error('Unknow source: '+source.id,classname);
+                logger.error('Unknow source: '+source.id,this.name);
             }
             else if(Memory.extractors[source.id].container){
                 //get resource from container:
@@ -140,7 +140,7 @@ Creep.prototype.findSourceInRoom = function(){
             }
         }
     }
-    logger.warn('No sources from extractor',classname);
+    logger.warn('No sources from extractor',this.name);
 
     if(!this.room.controller.my && this.room.controller.owner) {
         var targets = this.room.find(FIND_STRUCTURES, {
@@ -163,7 +163,7 @@ Creep.prototype.findSourceInRoom = function(){
     if(sources.length){
         var sourceNumber = this.memory.number % sources.length;
         var source = sources[sourceNumber];
-        logger.warn('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+this.memory.number+' '+sources.length,classname);
+        logger.warn('SourceNumber: '+sourceNumber+' '+source+' '+sources+' '+this.memory.number+' '+sources.length,this.name);
         if(source.energy < source.energyCapacity * 0.4  && source.pos.getRangeTo(this.pos) > 4){
             sourceNumber = (sourceNumber + 1) % sources.length;
         }
