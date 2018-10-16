@@ -41,24 +41,40 @@ Room.prototype.findExitTo2 = function(target){
 Creep.prototype.moveToRoom = function(targetRoom){
     logger.debug('Move from '+this.room.name+' to '+targetRoom,classname);
 
-    if(targetRoom.name == 'E3S8' && this.room.name == 'E3S9'){
-        this.moveTo(Game.rooms['E3S8'].getPositionAt(3,21));
-    }else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S9'){
-        this.moveTo(Game.rooms['E3S10'].getPositionAt(3,21));
-    }
-    else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10'){
-        this.moveTo(Game.rooms['E2S10'].getPositionAt(3,21));
-    }
-    else if(targetRoom.name == 'E2S9' && this.room.name == 'E2S10'){
-        this.moveTo(Game.rooms[targetRoom].controller);
-    }
-    else if(targetRoom.name == 'E2S6' && this.room.name == 'E3S7'){
-        this.moveTo(Game.rooms['E3S6'].controller);
-    }
-    else if(targetRoom.name == 'E2S9' && this.room.name == 'E3S10' && this.pos.y == 0){
-        this.move(BOTTOM);
+    if(targetRoom.name =='E2S6'){
+        if(this.room.name == 'E3S8'){
+            this.moveToRoom('E4S8');
+            return;
+        }
+        if(this.room.name =='E4S7'){
+            this.moveToRoom('E4S6');
+            return;
+        }
+        if(this.room.name == 'E4S8'){
+            this.moveToRoom('E4S7');
+            return;
+        }
+    } else if(targetRoom.name == 'E3S8'){
+        if(this.room.name == 'E3S9'){
+            this.moveTo(Game.rooms['E3S8'].getPositionAt(3,21));
+            return;
+        }
+    } else if(targetRoom.name =='E2S9'){
+        if(this.room.name == 'E3S9'){
+            this.moveTo(Game.rooms['E3S10'].getPositionAt(3,21));
+            return;
+        }
+        if(this.room.name == 'E3S10') {
+            this.moveTo(Game.rooms['E2S10'].getPositionAt(3, 21));
+            return;
+        }
+        if(this.room.name == 'E3S10' && this.pos.y == 0){
+            this.move(BOTTOM);
+        }
+        if(this.room.name == 'E2S10'){
+            this.moveTo(Game.rooms[targetRoom].controller);
+        }
     }else{
-        // this.moveTo(Game.rooms[targetRoom].controller);
         if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,classname);
         }else{
@@ -68,9 +84,6 @@ Creep.prototype.moveToRoom = function(targetRoom){
         }
 
     }
-    //var exitDir = this.room.findExitTo2(targetRoom);
-    //var exit = this.pos.findClosestByPath(exitDir);
-    //logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,classname);
 }
 
 Creep.prototype.findSourceInRoom = function(){
