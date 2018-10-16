@@ -50,6 +50,10 @@ Creep.prototype.moveToRoom = function(targetRoom){
             this.moveToRoom('E4S6');
             return;
         }
+        if(this.room.name =='E3S7'){
+            this.moveToRoom('E4S7');
+            return;
+        }
         if(this.room.name == 'E4S8'){
             this.moveToRoom('E4S7');
             return;
