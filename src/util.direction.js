@@ -41,29 +41,29 @@ Room.prototype.findExitTo2 = function(target){
 Creep.prototype.moveToRoom = function(targetRoom){
     logger.log('Move from '+this.room.name+' to '+targetRoom,this.name);
 
-    if(targetRoom.name =='E2S6'){
+    if(targetRoom == 'E2S6'){
         if(this.room.name == 'E3S8'){
             this.moveToRoom('E4S8');
             return;
         }
-        if(this.room.name =='E4S7'){
+        if(this.room.name == 'E4S7'){
             this.moveToRoom('E4S6');
             return;
         }
-        if(this.room.name =='E3S7'){
+        if(this.room.name == 'E3S7'){
             this.moveToRoom('E4S7');
             return;
         }
-        if(this.room.name == 'E4S8'){
+        if(this.room.name ==  'E4S8'){
             this.moveToRoom('E4S7');
             return;
         }
-    } else if(targetRoom.name == 'E3S8'){
+    } else if(targetRoom == 'E3S8'){
         if(this.room.name == 'E3S9'){
             this.moveTo(Game.rooms['E3S8'].getPositionAt(3,21));
             return;
         }
-    } else if(targetRoom.name =='E2S9'){
+    } else if(targetRoom =='E2S9'){
         if(this.room.name == 'E3S9'){
             this.moveTo(Game.rooms['E3S10'].getPositionAt(3,21));
             return;
