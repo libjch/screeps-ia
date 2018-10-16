@@ -16,6 +16,11 @@ Creep.prototype.workUpgrade = function(){
 
     if(this.memory.working) {
         if(this.room.controller && this.room.controller.my && this.memory.mainroom == this.room.name){
+            var hostiles = this.room.find(FIND_HOSTILE_CREEPS);
+            if(hostiles && hostiles.length > 0){
+               this.memory.role_override = 'harvester';
+               this.memory.role_override_time = Game.time + 50;
+            }
             if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
                 this.moveTo(this.room.controller);
             }
