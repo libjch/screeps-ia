@@ -25,8 +25,6 @@ Room.prototype.spawnDecide = function(){
         var externHelper = this.memory.extern.builder;
         var externAttacker = this.memory.extern.attacker;
 
-        //spawn.name == 'Spawn4' || spawn.name == 'Spawn5';
-
         var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester' && creep.memory.extern == false && creep.memory.spawnroom == roomName));
         var smallHarvesters = _.filter(harvesters, (creep) => (creep.body.length < 6));
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.extern == false && creep.memory.spawnroom == roomName);
@@ -95,7 +93,7 @@ Room.prototype.spawnDecide = function(){
         }  else if(extractors.length < sources){
             role = 'extractor';
             maxEnergy = maxEnergy > 800 ? 800 : maxEnergy;
-        }  else if (externAttacker && Memory.attacker.target && attackers.length < 1 ) {
+        }  else if (externAttacker && Memory.attacker.target && attackers.length < 2 ) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
         } /*else if (Memory.attacker.target && healers.length < 0) {
