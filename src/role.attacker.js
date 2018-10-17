@@ -4,7 +4,10 @@ var logger = require('logger');
 var classname = 'RoleAttacker';
 
 Creep.prototype.findEnemyCreep = function(){
-    var targets = this.room.find(FIND_HOSTILE_CREEPS);//, {filter: function(enemy){!enemy.my}});
+    var targets = this.room.find(FIND_HOSTILE_CREEPS,{
+        filter:function(enemy)
+            {enemy.owner.username !== 'Source Keeper'}
+        });
     if(targets){
         return this.pos.findClosestByPath(targets);
     }
