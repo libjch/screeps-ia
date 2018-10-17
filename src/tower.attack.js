@@ -17,7 +17,7 @@ Room.prototype.runTowers = function () {
         filter: (s) => s.structureType == STRUCTURE_TOWER
     });
     //1 find hostiles:
-    var hostiles = this.find(FIND_HOSTILE_CREEPS);
+    var hostiles = this.find(FIND_HOSTILE_CREEPS , { filter: (creep) => {return ( creep.pos.x > 0 && creep.pos.y > 0 && creep.pos.x < 49 && creep.pos.y < 49 ); }});
 
     if(hostiles && hostiles.length > 0){
         for(let t of towers){
