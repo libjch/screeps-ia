@@ -74,11 +74,13 @@ Creep.prototype.moveToRoom = function(targetRoom){
         }
         if(this.room.name == 'E3S10' && this.pos.y == 0){
             this.move(BOTTOM);
+            return;
         }
         if(this.room.name == 'E2S10'){
             this.moveTo(Game.rooms[targetRoom].controller);
+            return;
         }
-    }else{
+    }
         if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,this.name);
         }else{
@@ -86,8 +88,6 @@ Creep.prototype.moveToRoom = function(targetRoom){
             var exit = this.pos.findClosestByPath(exitDir);
             logger.debug('Change room other: '+ this.moveTo(exit)+' '+targetRoom+' from '+this.room.name+" exitDir: "+exitDir+" exit:"+exit,this.name);
         }
-
-    }
 }
 
 Creep.prototype.findSourceInRoom = function(){
