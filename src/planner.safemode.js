@@ -17,7 +17,7 @@ Room.prototype.checkSafeMode = function(){
 
         var hostiles = this.find(FIND_HOSTILE_CREEPS);
 
-        if(hostiles && hostiles.length > 0 && (hostiles[0].owner.username == 'FeTiD' || hostiles.length > 2)){
+        if(hostiles && hostiles.length > 1 && (hostiles[0].owner.username != 'Source Keeper' && hostiles[0].owner.username != 'Invader' )){
             this.controller.activateSafeMode();
         }
     }
