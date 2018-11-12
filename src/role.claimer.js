@@ -14,6 +14,7 @@ Creep.prototype.workClaim = function(){
     //Game.rooms['W68S3X'].find(FIND_STRUCTURES).forEach((s) => s.destroy());
 
     //Add builder helper by defining: Memory.spawner.target
+    // Memory.rooms.E5S9.extern.builder = false;
 
     var targetRoom = Game.rooms[this.memory.claimroom];
 
