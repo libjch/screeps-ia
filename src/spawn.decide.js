@@ -96,6 +96,7 @@ Room.prototype.spawnDecide = function(){
         }  else if (externAttacker && Memory.attacker.target && attackers.length < 1 ) {
             role = 'attacker';
             targetroom = Memory.attacker.target;
+            extern = true;
         } /*else if (Memory.attacker.target && healers.length < 0) {
             role = 'healer';
             targetroom = Memory.attacker.target;
@@ -114,10 +115,12 @@ Room.prototype.spawnDecide = function(){
             role = 'builder';
             maxEnergy = maxEnergy > 2500 ? 2500 : maxEnergy;
             mainroom = Memory.spawner.target;
+            extern = true;
         } else if (externHelper && this.controller.level >= 5 && Memory.spawner.target2 && buildersHelpers.length < 1) { //+1
             role = 'builder';
             maxEnergy = maxEnergy > 2500 ? 2500 : maxEnergy;
             mainroom = Memory.spawner.target2;
+            extern = true;
         } else if (repairers.length < 1 && Game.cpu.bucket > 2500) {
             role = 'repairer';
             maxEnergy = maxEnergy > 1200 ? 1200 : maxEnergy;
