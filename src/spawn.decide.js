@@ -224,13 +224,15 @@ Room.prototype.spawnDecide = function(){
                 }
             }
             else {
-                var number = Math.floor(maxEnergy / 200);
+                var total = 250;
+                var number = Math.floor(maxEnergy / total);
 
-                var rest = maxEnergy % 200;
+                var rest = maxEnergy % total;
                 logger.error('number: ' + number + ' ' + rest + ' ' + maxEnergy + ' ' + energy,classname);
                 for (var i = 0; i < number; i++) {
                     body.push(WORK);
                     body.push(CARRY);
+                    body.push(MOVE);
                     body.push(MOVE);
                 }
                 if (rest >= 150) {
