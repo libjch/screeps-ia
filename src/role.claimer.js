@@ -16,6 +16,8 @@ Creep.prototype.workClaim = function(){
     //Add builder helper by defining: Memory.spawner.target
     // Memory.rooms.E5S9.extern.builder = false;
 
+    //Memory.spawner.target = 'E1S9';
+
     var targetRoom = Game.rooms[this.memory.claimroom];
 
     if(!targetRoom || this.room.name !== targetRoom.name){

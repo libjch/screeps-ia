@@ -140,6 +140,7 @@ Room.prototype.spawnDecide = function(){
                 var number = Math.floor(maxEnergy / (total));
                 var rest = maxEnergy % total;
                 number -= 1;
+                number = Math.min(7,number);
                 for (var i = 0; i < number; i++) {
                     body.push(TOUGH);
                     body.push(TOUGH);
