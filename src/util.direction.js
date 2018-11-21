@@ -80,6 +80,11 @@ Creep.prototype.moveToRoom = function(targetRoom){
             this.moveTo(Game.rooms[targetRoom].controller);
             return;
         }
+    } else if(targetRoom == 'E11S9'){
+        if (this.room.name.startsWith('E3') || this.room.name.startsWith('E4')  || this.room.name.startsWith('E5' )){
+            this.moveToRoom('E6S10');
+            return;
+        }
     }
         if(Game.rooms[targetRoom] && Game.rooms[targetRoom].controller){
             logger.debug('Change room other: '+ this.moveTo(Game.rooms[targetRoom].controller)+' '+targetRoom+' from '+this.room.name,this.name);
