@@ -139,29 +139,46 @@ Room.prototype.spawnDecide = function(){
                 body.push(MOVE);
                 body.push(CARRY);
             }else if (role == 'attacker') {
-                var total = 20+100+240;
-                var number = Math.floor(maxEnergy / (total));
-                var rest = maxEnergy % total;
-                number -= 1;
-                number = Math.min(7,number);
-                for (var i = 0; i < number; i++) {
-                    body.push(TOUGH);
-                    body.push(TOUGH);
-                }
-                for (var i = 0; i < number; i++) {
-                    body.push(MOVE);
-                    body.push(MOVE);
-                }
-                for (var i = 0; i < number; i++) {
-                    body.push(ATTACK);
-                    body.push(ATTACK);
-                    body.push(ATTACK);
-                }
-                if(rest >= 160){
-                    body.push(ATTACK);
-                }
-                if(rest >= 80){
-                    body.push(ATTACK);
+                if(maxEnergy > 2500){
+                    var total = 100+160;
+                    var number = Math.floor(maxEnergy / (total));
+                    var rest = maxEnergy % total;
+                    number -= 1;
+                    number = Math.min(10,number);
+                    for (var i = 0; i < number; i++) {
+                        body.push(MOVE);
+                        body.push(MOVE);
+                    }
+                    for (var i = 0; i < number; i++) {
+                        body.push(ATTACK);
+                        body.push(ATTACK);
+                        body.push(ATTACK);
+                    }
+                }else{
+                    var total = 20+100+240;
+                    var number = Math.floor(maxEnergy / (total));
+                    var rest = maxEnergy % total;
+                    number -= 1;
+                    number = Math.min(7,number);
+                    for (var i = 0; i < number; i++) {
+                        body.push(TOUGH);
+                        body.push(TOUGH);
+                    }
+                    for (var i = 0; i < number; i++) {
+                        body.push(MOVE);
+                        body.push(MOVE);
+                    }
+                    for (var i = 0; i < number; i++) {
+                        body.push(ATTACK);
+                        body.push(ATTACK);
+                        body.push(ATTACK);
+                    }
+                    if(rest >= 160){
+                        body.push(ATTACK);
+                    }
+                    if(rest >= 80){
+                        body.push(ATTACK);
+                    }
                 }
             } else if (role == 'healer') {
                 var number = Math.floor(maxEnergy / 580);

@@ -3,6 +3,9 @@ var directionUtil = require('util.direction');
 var logger = require('logger');
 var classname = 'RoleAttacker';
 
+//Memory.attacker.target = 'E3S10';
+//Game.rooms.E3S9.memory.extern.attacker = true;
+
 Creep.prototype.findEnemyCreep = function(){
     var targets = this.room.find(FIND_HOSTILE_CREEPS,{
         filter:function(enemy)
