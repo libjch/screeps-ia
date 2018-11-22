@@ -105,7 +105,7 @@ Room.prototype.cleanExtractors = function(){
                         var path = this.findPath(source.pos, this.controller.pos,{ignoreCreeps:true});
 
                         for(let i = 1;i<4;i++){
-                            if(this.createConstructionSite(path[i].x,path[i].y,STRUCTURE_CONTAINER) == OK){
+                            if(path[i] !== undefined && this.createConstructionSite(path[i].x,path[i].y,STRUCTURE_CONTAINER) == OK){
                                 break;
                             }
                         }
