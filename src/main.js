@@ -278,7 +278,7 @@ module.exports.loop = function() {
 
             tick('Creep ' + creep.name);
         }
-        recorder.record();
+        //recorder.record();
         tick('RecordStats');
     });
 }
