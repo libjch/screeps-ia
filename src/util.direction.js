@@ -96,6 +96,8 @@ Creep.prototype.moveToRoom = function(targetRoom){
 }
 
 Creep.prototype.findSourceInRoom = function(){
+    if(!this.room.controller)
+        return;
     if(this.room.controller.my){
         if(!this.room.memory.sources){
             this.room.memory.sources = [];
