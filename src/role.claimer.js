@@ -8,7 +8,7 @@ var classname = 'RoleClaimer';
 
 Creep.prototype.workClaim = function(){
     //spawn claimer:
-    // Game.spawns.Spawn1.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true, claimroom: 'E27N4' });
+    // Game.spawns.Spawn10.createCreep([CLAIM,MOVE,MOVE], 'Claimer', {role: 'claimer', extern: true, claimroom: 'E11S12' });
 
     //Clean the room:
     //Game.rooms['W68S3X'].find(FIND_STRUCTURES).forEach((s) => s.destroy());

@@ -279,7 +279,8 @@ module.exports.loop = function() {
             tick('Creep ' + creep.name);
         }
         //recorder.record();
-        tick('RecordStats');
+        // tick('RecordStats');
+        logger.warn("Total CPU:"+ Game.cpu.getUsed()+"  Bucket:"+Game.cpu.bucket);
     });
 }
 
