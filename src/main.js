@@ -194,11 +194,15 @@ module.exports.loop = function() {
 
         tick('StartCreeps');
         var lastRoom = '';
+        var roomCpu = Game.cpu.getUsed();
         for (let creep of creeps) {
             if(!creep.memory.number){
                 creep.memory.number = 1;
             }
             if(lastRoom != creep.room.name){
+                var used = Game.cpu.getUsed();
+                logger.log("Room cpu: "+ ( used-roomCpu));
+                roomCpu = used;
                 logger.log("===="+creep.room.name+"====");
                 lastRoom = creep.room.name;
             }
