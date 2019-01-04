@@ -11,7 +11,7 @@ var classname = 'RoadPlanner';
  */
 
 Room.prototype.checkRoads = function(){
-    if (this.controller && this.controller.my) {
+    if (this.controller && this.controller.my && this.controller.level > 1) {
         var sources = this.find(FIND_SOURCES);
 
         //Build roads from sources to controller
